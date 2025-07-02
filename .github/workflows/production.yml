@@ -2,7 +2,7 @@ name: 🚀 Build, Tag & Deploy
 
 on:
   push:
-    branches: [production]
+    branches: [main, production]
   workflow_dispatch:
 
 # Permisos necesarios para GitHub Pages y releases
@@ -81,14 +81,11 @@ jobs:
       - name: 📊 Upload build artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: portfolio-pages
           path: ./dist
 
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: portfolio-pages
 
       - name: 🎉 Create GitHub Release
         uses: actions/create-release@v1
