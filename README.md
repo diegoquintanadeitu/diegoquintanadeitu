@@ -11,7 +11,7 @@
 
 ---
 
-## 🚀 Sobre mí
+## 🧉 Sobre mí
 
 **Desarrollador web** con veteranía en **React** y **Next.js**, actualmente formando parte de un equipo de desarrollo donde combino mi experiencia técnica con mentoreo y liderazgo, enfocandome en soluciones escalables de calidad.
 
