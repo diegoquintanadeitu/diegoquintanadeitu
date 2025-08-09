@@ -2,7 +2,7 @@ name: 🚀 Build, Tag & Deploy
 
 on:
   push:
-    branches: [main, production]
+    branches: [production]
   workflow_dispatch:
 
 # Permisos necesarios para GitHub Pages y releases

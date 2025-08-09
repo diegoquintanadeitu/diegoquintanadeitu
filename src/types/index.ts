@@ -21,7 +21,7 @@ export interface TimelineItem {
   title: string;
   description: string;
   technologies?: string[];
-  achievements?: string;
+  achievements?: string[];
 }
 
 export interface Project {
