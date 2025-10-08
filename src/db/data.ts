@@ -165,17 +165,17 @@ export const data = {
     {
       name: "Mario Kart 64 (Retrogames)",
       url: "46341-mario-kart-64-amped-up-v2-98.html",
-      type: "external"
+      type: "external",
     },
     {
-      name: "Killer Instinct (Retrogames)", 
+      name: "Killer Instinct (Retrogames)",
       url: "17355-killer-instinct-usa.html",
-      type: "external"
+      type: "external",
     },
     {
       name: "🎮 Emulador Local (Sin CORS)",
       url: "/emulator",
-      type: "local"
-    }
+      type: "local",
+    },
   ],
 };

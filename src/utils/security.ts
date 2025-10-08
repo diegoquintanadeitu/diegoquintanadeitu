@@ -5,7 +5,8 @@
 
 export const cspDirectives = {
   "default-src": "'self'",
-  "script-src": "'self' 'unsafe-inline' 'unsafe-eval' https://www.retrogames.cc",
+  "script-src":
+    "'self' 'unsafe-inline' 'unsafe-eval' https://www.retrogames.cc",
   "style-src": "'self' 'unsafe-inline'",
   "img-src": "'self' data: https: blob:",
   "frame-src": "https://www.retrogames.cc",
@@ -15,21 +16,21 @@ export const cspDirectives = {
   "base-uri": "'self'",
   "form-action": "'self'",
   "frame-ancestors": "'none'",
-  "upgrade-insecure-requests": ""
+  "upgrade-insecure-requests": "",
 };
 
 export const cspString = Object.entries(cspDirectives)
   .map(([key, value]) => `${key} ${value}`)
-  .join('; ');
+  .join("; ");
 
 /**
  * Additional security headers recommendations
  */
 export const securityHeaders = {
-  'X-Frame-Options': 'DENY',
-  'X-Content-Type-Options': 'nosniff',
-  'X-XSS-Protection': '1; mode=block',
-  'Referrer-Policy': 'no-referrer-when-downgrade',
-  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
-  'Content-Security-Policy': cspString
+  "X-Frame-Options": "DENY",
+  "X-Content-Type-Options": "nosniff",
+  "X-XSS-Protection": "1; mode=block",
+  "Referrer-Policy": "no-referrer-when-downgrade",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+  "Content-Security-Policy": cspString,
 };
