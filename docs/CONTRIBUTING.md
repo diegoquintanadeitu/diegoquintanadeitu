@@ -3,6 +3,7 @@
 ## 🎯 Areas de Contribución
 
 ### 💻 **Portfolio y Desarrollo General**
+
 Contribuye al desarrollo del portfolio personal y sus funcionalidades.
 
 ---
@@ -14,7 +15,7 @@ Contribuye al desarrollo del portfolio personal y sus funcionalidades.
 ```bash
 # Desarrollo diario
 npm run dev                  # Servidor de desarrollo
-npm run test:full           # Test completo (build + a11y)  
+npm run test:full           # Test completo (build + a11y)
 npm run build               # Build para producción
 
 # Type checking
@@ -62,16 +63,19 @@ diegoquintanadeitu.github.io/
 ## 🎯 Flujos Típicos
 
 ### Desarrollo normal:
+
 ```bash
 npm run dev
 ```
 
 ### Antes de commit:
+
 ```bash
 npm run test:full
 ```
 
 ### Si algo falla:
+
 ```bash
 npm run server:stop
 npm run clean
@@ -82,8 +86,9 @@ npm run dev
 ## 🎨 Sistema de Temas
 
 El portfolio tiene 3 temas que se prueban automáticamente:
+
 - **Light** (por defecto)
-- **Dark** 
+- **Dark**
 - **Print** (para CV)
 
 El test `a11y:quick` verifica accesibilidad WCAG 2.1 AA en los 3 temas.

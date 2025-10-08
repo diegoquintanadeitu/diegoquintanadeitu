@@ -4,7 +4,6 @@
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/diego-daniel-martin-quintana/) [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/diegoquintanadeitu/)
 
-
 ### 💻 Senior Developer
 
 ![Profile Views](https://komarev.com/ghpvc/?username=diegoquintanadeitu&color=blue&style=flat)
@@ -16,7 +15,7 @@
 
 ## 🧉 Sobre mí
 
-**Desarrollador web** con veteranía en **React** y **Next.js**, actualmente formando parte de un equipo de desarrollo ágil, donde combino mi experiencia técnica con liderazgo, enfocandome en soluciones escalables de calidad.
+**Desarrollador web** con veteranía en **React** y **Next.js**, formando parte de equipos de desarrollo ágil, donde combino mi experiencia técnica con liderazgo, enfocándome en soluciones escalables de calidad.
 
 ## 🛠️ Stack tecnológico
 

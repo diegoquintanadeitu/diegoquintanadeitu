@@ -1,6 +1,6 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import {api} from '../../services/api';
+import { api } from "@/services/api";
+import Layout from "@/ui/layouts/Layout.astro";
 
 // Obtener datos
 const profile = await api.getProfile();
@@ -14,10 +14,10 @@ const skillCategories = await api.getSkills();
     /* Estilos específicos para impresión - tipo Google Docs */
     @media print {
       body {
-        font-size: 11px !important;
-        line-height: 1.15 !important;
         margin: 0 !important;
         padding: 0 !important;
+        font-size: 11px !important;
+        line-height: 1.15 !important;
       }
       .print-break {
         page-break-before: always;
@@ -54,121 +54,118 @@ const skillCategories = await api.getSkills();
   </style>
 
   <!-- Navegación y acciones -->
-  <div class='no-print fixed top-16 left-4 flex gap-3 z-40'>
+  <div class="no-print fixed top-16 left-4 flex gap-3 z-40">
     <a
-      href='/'
-      class='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 shadow-lg flex items-center gap-2'
+      href="/"
+      class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 shadow-lg flex items-center gap-2"
     >
       <svg
-        class='w-4 h-4'
-        fill='none'
-        stroke='currentColor'
-        viewBox='0 0 24 24'
+        class="w-4 h-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
       >
         <path
-          stroke-linecap='round'
-          stroke-linejoin='round'
-          stroke-width='2'
-          d='M10 19l-7-7m0 0l7-7m-7 7h18'></path>
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
       </svg>
       Volver al Portfolio
     </a>
 
     <button
-      id='print-btn'
-      class='bg-gray-500 hover:bg-gray-600 text-white p-2 rounded-lg transition-colors duration-200 shadow-lg flex items-center justify-center'
-      title='Imprimir Curriculum Vitae'
+      id="print-btn"
+      class="bg-gray-500 hover:bg-gray-600 text-white p-2 rounded-lg transition-colors duration-200 shadow-lg flex items-center justify-center"
+      title="Imprimir Curriculum Vitae"
     >
       <svg
-        class='w-5 h-5'
-        fill='none'
-        stroke='currentColor'
-        viewBox='0 0 24 24'
+        class="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
       >
         <path
-          stroke-linecap='round'
-          stroke-linejoin='round'
-          stroke-width='2'
-          d='M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z'
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
         ></path>
       </svg>
     </button>
   </div>
 
   <div
-    class='cv-container bg-gray-50 min-h-screen print:bg-white print:min-h-0'
+    class="cv-container bg-gray-50 min-h-screen print:bg-white print:min-h-0"
   >
-    <div class='cv-content'>
+    <div class="cv-content">
       <header
-        class='text-left border-b-2 border-blue-600 pb-6 mb-8 print-avoid-break'
+        class="text-left border-b-2 border-blue-600 pb-6 mb-6 print-avoid-break"
       >
-        <h1 class='text-3xl font-bold text-blue-800 mb-2 print:text-2xl'>
+        <h1 class="text-3xl font-bold text-blue-800 mb-2 print:text-2xl">
           {profile.name}
         </h1>
-        <h2 class='text-xl text-gray-600 mb-2 print:text-base'>
+        <h2 class="text-xl text-gray-600 mb-2 print:text-base">
           {profile.role}
         </h2>
         <div
-          class='flex flex-wrap gap-2 justify-left text-sm text-gray-700 print:text-xs'
+          class="flex flex-col gap-2 justify-left text-sm text-gray-700 print:text-xs"
         >
-          <span class='flex items-center'>
-            <span class='mr-1'>📫 </span>
-            diegoquintanadeitu@gmail.com
-          </span>
-          <span class='flex items-center'>
-            <span class='mr-1'>🔗 </span>
+          <div class="flex flex-row items-center">
+            <span class="mr-1">🔗 </span>
             diegoquintanadeitu.github.io
-          </span>
-          <span class='flex items-center'>
-            <span class='mr-1'>👨🏻‍💻 </span>
-            linkedin.com/in/diego-daniel-martin-quintana
-          </span>
-          <span class='flex items-center'>
-            <span class='mr-1'>🐙 </span>
+          </div>
+          <div class="flex flex-row items-center">
+            <span class="mr-1">🐙 </span>
             github.com/diegoquintanadeitu
-          </span>
+          </div>
+          <div class="flex flex-row items-center">
+            <span class="mr-1">📫 </span>
+            diegoquintanadeitu@gmail.com
+          </div>
+          <div class="flex flex-row items-center">
+            <span class="mr-1">👨🏻‍💻 </span>
+            linkedin.com/in/diego-daniel-martin-quintana
+          </div>
         </div>
       </header>
 
       <!-- Perfil Profesional -->
-      <section class='mb-8 print-avoid-break print:mb-4'>
+      <section
+        class="mb-6 pb-6 border-b-2 border-blue-600 print-avoid-break print:mb-4"
+      >
         <div
-          class='space-y-3 text-sm text-justify leading-relaxed print:space-y-2 print:text-xs'
+          class="space-y-3 text-sm text-justify leading-relaxed print:space-y-2 print:text-xs"
         >
           {profile.bio.map((paragraph) => <p>{paragraph}</p>)}
         </div>
       </section>
 
       <!-- Experiencia Profesional -->
-      <section class='mb-8 print:mb-4'>
-        <h3
-          class='text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2'
-        >
-          Experiencia Profesional
-        </h3>
-        <div class='space-y-5'>
+      <section class="mb-8 print:mb-4">
+        <div class="space-y-5">
           {
             timeline.map((job) => (
-              <div class='print-avoid-break'>
-                <div class='flex justify-between items-baseline mb-1'>
-                  <h4 class='font-bold text-blue-700 print:text-sm'>
+              <div class="print-avoid-break">
+                <div class="flex justify-between items-baseline mb-1">
+                  <h4 class="font-bold text-blue-700 print:text-sm">
                     {job.title}
                   </h4>
-                  <span class='text-sm text-gray-600 font-medium print:text-xs'>
+                  <span class="text-sm text-gray-600 font-medium print:text-xs">
                     {job.period}
                   </span>
                 </div>
-                <p class='text-sm text-justify leading-relaxed mb-2 print:text-xs print:mb-1'>
+                <p class="text-sm text-justify leading-relaxed mb-2 print:text-xs print:mb-1">
                   {job.description}
                 </p>
                 {job.technologies && job.technologies.length > 0 && (
-                  <div class='mb-2 print:mb-1'>
-                    <span class='text-xs font-semibold text-gray-700 mr-2 print:text-xs'>
+                  <div class="mb-2 print:mb-1">
+                    <span class="text-xs font-semibold text-gray-700 mr-2 print:text-xs">
                       Tecnologías:
                     </span>
-                    <div class='inline-flex flex-wrap gap-1'>
+                    <div class="inline-flex flex-wrap gap-1">
                       {job.technologies.map((tech) => (
-                        <span class='bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs border print:px-1 print:py-0 print:text-xs'>
+                        <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs border print:px-1 print:py-0 print:text-xs">
                           {tech}
                         </span>
                       ))}
@@ -176,14 +173,14 @@ const skillCategories = await api.getSkills();
                   </div>
                 )}
                 {job.achievements && (
-                  <div class='text-xs text-gray-600 bg-blue-50 p-2 rounded border-l-2 border-blue-300 print:p-1 print:text-xs'>
-                    <span class='font-semibold'>Logros destacados:</span>{' '}
+                  <div class="text-xs text-gray-600 bg-blue-50 p-2 rounded border-l-2 border-blue-300 print:p-1 print:text-xs">
+                    <span class="font-semibold">Logros destacados:</span>{" "}
                     {job.achievements.map((achievement, index) => (
-                      <span class='block print:inline'>
+                      <span class="block print:inline">
                         {achievement}
                         {job.achievements && index < job.achievements.length - 1
-                          ? ', '
-                          : ''}
+                          ? ", "
+                          : ""}
                       </span>
                     ))}
                   </div>
@@ -195,26 +192,26 @@ const skillCategories = await api.getSkills();
       </section>
 
       <!-- Habilidades Técnicas -->
-      <section class='mb-8 print-avoid-break print:mb-4'>
+      <section class="mb-8 print-avoid-break print:mb-4">
         <h3
-          class='text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2'
+          class="text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2"
         >
           Habilidades Técnicas
         </h3>
-        <div class='grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-3'>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-3">
           <!-- Tecnologías Principales -->
-          <div class='print-avoid-break'>
+          <div class="print-avoid-break">
             <h4
-              class='font-semibold text-blue-700 mb-3 print:text-sm print:mb-2'
+              class="font-semibold text-blue-700 mb-3 print:text-sm print:mb-2"
             >
               Lenguajes y Frameworks
             </h4>
-            <div class='flex flex-wrap gap-2 print:gap-1'>
+            <div class="flex flex-wrap gap-2 print:gap-1">
               {
                 skillCategories.technical
                   .slice(0, 12)
                   .map((skill) => (
-                    <span class='bg-blue-50 text-blue-800 px-3 py-1 rounded-full text-xs border border-blue-200 print:px-2 print:py-0'>
+                    <span class="bg-blue-50 text-blue-800 px-3 py-1 rounded-full text-xs border border-blue-200 print:px-2 print:py-0">
                       {skill}
                     </span>
                   ))
@@ -223,18 +220,18 @@ const skillCategories = await api.getSkills();
           </div>
 
           <!-- Herramientas -->
-          <div class='print-avoid-break'>
+          <div class="print-avoid-break">
             <h4
-              class='font-semibold text-blue-700 mb-3 print:text-sm print:mb-2'
+              class="font-semibold text-blue-700 mb-3 print:text-sm print:mb-2"
             >
               Herramientas y Plataformas
             </h4>
-            <div class='flex flex-wrap gap-2 print:gap-1'>
+            <div class="flex flex-wrap gap-2 print:gap-1">
               {
                 skillCategories.tools
                   .slice(0, 8)
                   .map((tool) => (
-                    <span class='bg-green-50 text-green-800 px-3 py-1 rounded-full text-xs border border-green-200 print:px-2 print:py-0'>
+                    <span class="bg-green-50 text-green-800 px-3 py-1 rounded-full text-xs border border-green-200 print:px-2 print:py-0">
                       {tool}
                     </span>
                   ))
@@ -245,36 +242,36 @@ const skillCategories = await api.getSkills();
       </section>
 
       <!-- Proyectos Destacados -->
-      <section class='mb-8 print:mb-4'>
+      <section class="mb-8 print:mb-4">
         <h3
-          class='text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2'
+          class="text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2"
         >
           Proyectos Destacados
         </h3>
-        <div class='space-y-4 print:space-y-2'>
+        <div class="space-y-4 print:space-y-2">
           {
             projects.slice(0, 3).map((project) => (
-              <div class='print-avoid-break'>
-                <div class='flex justify-between items-baseline mb-1'>
-                  <h4 class='font-bold text-blue-700 print:text-sm'>
+              <div class="print-avoid-break">
+                <div class="flex justify-between items-baseline mb-1">
+                  <h4 class="font-bold text-blue-700 print:text-sm">
                     {project.title}
                   </h4>
                   {project.year && (
-                    <span class='text-sm text-gray-600 print:text-xs'>
+                    <span class="text-sm text-gray-600 print:text-xs">
                       {project.year}
                     </span>
                   )}
                 </div>
-                <p class='text-sm text-justify leading-relaxed mb-2 print:text-xs print:mb-1'>
+                <p class="text-sm text-justify leading-relaxed mb-2 print:text-xs print:mb-1">
                   {project.description}
                 </p>
                 <div>
-                  <span class='text-xs font-semibold text-gray-700 mr-2'>
+                  <span class="text-xs font-semibold text-gray-700 mr-2">
                     Stack técnico:
                   </span>
-                  <div class='inline-flex flex-wrap gap-1'>
+                  <div class="inline-flex flex-wrap gap-1">
                     {project.technologies.map((tech) => (
-                      <span class='bg-purple-50 text-purple-800 px-2 py-1 rounded text-xs border border-purple-200 print:px-1 print:py-0'>
+                      <span class="bg-purple-50 text-purple-800 px-2 py-1 rounded text-xs border border-purple-200 print:px-1 print:py-0">
                         {tech}
                       </span>
                     ))}
@@ -287,22 +284,22 @@ const skillCategories = await api.getSkills();
       </section>
 
       <!-- Habilidades Interpersonales -->
-      <section class='mb-8 print-avoid-break print:mb-4'>
+      <section class="mb-8 print-avoid-break print:mb-4">
         <h3
-          class='text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2'
+          class="text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2"
         >
           Competencias Profesionales
         </h3>
-        <div class='grid grid-cols-1 md:grid-cols-2 gap-4 print:gap-2'>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 print:gap-2">
           {
             Object.entries(skillCategories.soft)
               .slice(0, 6)
               .map(([skillName, description]) => (
-                <div class='print-avoid-break'>
-                  <h4 class='font-semibold text-orange-700 text-sm mb-1 print:text-xs'>
+                <div class="print-avoid-break">
+                  <h4 class="font-semibold text-orange-700 text-sm mb-1 print:text-xs">
                     {skillName}
                   </h4>
-                  <p class='text-xs text-gray-600 leading-relaxed print:text-xs'>
+                  <p class="text-xs text-gray-600 leading-relaxed print:text-xs">
                     {description}
                   </p>
                 </div>
@@ -312,22 +309,22 @@ const skillCategories = await api.getSkills();
       </section>
 
       <!-- Educación y Desarrollo -->
-      <section class='print-avoid-break'>
+      <section class="print-avoid-break">
         <h3
-          class='text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2'
+          class="text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2"
         >
           Educación y Desarrollo Profesional
         </h3>
         <div>
-          <div class='flex justify-between items-baseline mb-1'>
-            <h4 class='font-bold text-blue-700 print:text-sm'>
+          <div class="flex justify-between items-baseline mb-1">
+            <h4 class="font-bold text-blue-700 print:text-sm">
               Autoformación Continua en Tecnologías Web
             </h4>
-            <span class='text-sm text-gray-600 font-medium print:text-xs'
-              >2014 - Presente</span
+            <span class="text-sm text-gray-600 font-medium print:text-xs"
+              >2014 - 2025</span
             >
           </div>
-          <p class='text-sm text-justify leading-relaxed print:text-xs'>
+          <p class="text-sm text-justify leading-relaxed print:text-xs">
             Desarrollo profesional autodidacta enfocado en tecnologías web
             modernas, mejores prácticas de desarrollo y arquitecturas
             escalables. Constante actualización en frameworks, herramientas y
@@ -342,18 +339,18 @@ const skillCategories = await api.getSkills();
   <!-- Script para mejorar la impresión -->
   <script>
     // Auto-impresión al cargar la página por primera vez
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener("DOMContentLoaded", () => {
       // Verificar si es la primera visita usando sessionStorage
-      const hasVisited = sessionStorage.getItem('cv-visited');
+      const hasVisited = sessionStorage.getItem("cv-visited");
 
       if (!hasVisited) {
         // Marcar como visitado para esta sesión
-        sessionStorage.setItem('cv-visited', 'true');
+        sessionStorage.setItem("cv-visited", "true");
 
         // Esperar a que todo se renderice completamente
         setTimeout(() => {
           // Verificar que no hay overlays de error o loading
-          const hasErrors = document.querySelector('vite-error-overlay');
+          const hasErrors = document.querySelector("vite-error-overlay");
           if (!hasErrors) {
             window.print();
           }
@@ -362,19 +359,19 @@ const skillCategories = await api.getSkills();
     });
 
     // Botón de impresión manual
-    const printBtn = document.getElementById('print-btn');
+    const printBtn = document.getElementById("print-btn");
     if (printBtn) {
-      printBtn.addEventListener('click', () => {
+      printBtn.addEventListener("click", () => {
         window.print();
       });
     }
 
     // Optimizar para impresión
-    window.addEventListener('beforeprint', () => {
-      document.body.classList.add('print-mode');
+    window.addEventListener("beforeprint", () => {
+      document.body.classList.add("print-mode");
       // Agregar márgenes tipo Google Docs
-      const style = document.createElement('style');
-      style.id = 'print-styles';
+      const style = document.createElement("style");
+      style.id = "print-styles";
       style.textContent = `
         @page {
           margin: 1.27cm 1.27cm 1.27cm 1.27cm;
@@ -384,25 +381,25 @@ const skillCategories = await api.getSkills();
       document.head.appendChild(style);
     });
 
-    window.addEventListener('afterprint', () => {
-      document.body.classList.remove('print-mode');
+    window.addEventListener("afterprint", () => {
+      document.body.classList.remove("print-mode");
       // Limpiar estilos de impresión
-      const printStyles = document.getElementById('print-styles');
+      const printStyles = document.getElementById("print-styles");
       if (printStyles) {
         printStyles.remove();
       }
     });
 
     // Atajo de teclado para imprimir
-    document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+    document.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "p") {
         e.preventDefault();
         window.print();
       }
     });
 
     // Prevenir scroll involuntario durante la carga
-    window.addEventListener('load', () => {
+    window.addEventListener("load", () => {
       window.scrollTo(0, 0);
     });
   </script>

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@plugin "@midudev/tailwind-animations";
+
 /* Variables de temas */
 :root {
   --bg-primary: #f8fafc;
@@ -30,7 +32,9 @@
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Mejoras de contraste generales - WCAG 2.1 AA compliant */
@@ -72,7 +76,10 @@ body {
   --text-purple-improved: #f3e8ff;
   --text-green-improved: #dcfce7;
   --border-blue-improved: #1e40af;
-  --bg-gradient-primary: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  --bg-gradient-primary: linear-gradient(135deg,
+      #0f172a 0%,
+      #1e293b 50%,
+      #334155 100%);
   --bg-gradient-secondary: linear-gradient(90deg, #334155 0%, #475569 100%);
 }
 
@@ -287,7 +294,9 @@ body {
 }
 
 [data-theme="dark"] .skill-card .bg-gradient-to-br.from-blue-50.to-purple-50 {
-  background: linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+  background: linear-gradient(to bottom right,
+      rgba(59, 130, 246, 0.1),
+      rgba(147, 51, 234, 0.1));
 }
 
 [data-theme="dark"] .bg-slate-800 {

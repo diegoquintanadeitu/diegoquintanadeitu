@@ -1,0 +1,194 @@
+---
+import Layout from "@/ui/layouts/Layout.astro";
+---
+
+<script>
+  if (typeof window !== "undefined") {
+    const isAuthorized = localStorage.getItem("play-access");
+
+    if (isAuthorized !== "true") {
+      document.body.innerHTML =
+        "<div style='display: flex; justify-content: center; align-items: center; height: 100vh; font-size: 1.5rem;'>Redirigiendo...</div>";
+      window.location.replace("/"); // Redirigir inmediatamente antes de renderizar
+    } else {
+      localStorage.removeItem("play-access"); // Eliminar el acceso después de la verificación
+    }
+  }
+</script>
+
+<Layout title="Selecciona tu Juego">
+  <main
+    class="flex flex-col min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 p-4"
+  >
+    <div
+      class="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-6"
+    >
+      <a
+        href="/"
+        class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 hover:animate-squeeze transition-all"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+        Volver
+      </a>
+      <h1
+        class="text-2xl md:text-4xl font-bold text-gray-800 text-center flex-grow mt-4 md:mt-0 animate-pulsing"
+      >
+        Selecciona tu Juego
+      </h1>
+      <div
+        id="user-info"
+        class="w-48 text-xs text-gray-600 space-y-1 text-left md:text-right"
+      >
+        <span id="secret-info">Cargando...</span>
+      </div>
+    </div>
+
+    <iframe
+      id="game-frame"
+      src={"https://www.retrogames.cc"}
+      class="w-full flex-1 border rounded-lg"
+      allowfullscreen="true"
+      sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
+      referrerpolicy="no-referrer-when-downgrade"
+      loading="lazy"
+      title="Juego seleccionado"></iframe>
+  </main>
+</Layout>
+
+<script is:inline>
+  let batteryInfo = "";
+  let weatherInfo = "";
+  let historyInfo = "";
+  let lastBatteryUpdate = 0;
+  let lastWeatherUpdate = 0;
+
+  async function updateBatteryInfo() {
+    if ("getBattery" in navigator) {
+      try {
+        const battery = await navigator.getBattery();
+        const batteryLevel = Math.round(battery.level * 100);
+        const charging = battery.charging ? "🔌" : "🔋";
+        batteryInfo = `${charging} ${batteryLevel}%`;
+      } catch (e) {
+        batteryInfo = "🔋 N/A";
+      }
+    } else {
+      batteryInfo = "🔋 N/A";
+    }
+  }
+
+  async function updateWeatherInfo() {
+    try {
+      // Importar dinámicamente la utilidad de clima
+      const { WeatherEstimator } = await import("/src/utils/weather.ts");
+      const weather = WeatherEstimator.estimateWeather();
+      weatherInfo = WeatherEstimator.formatWeatherString(weather);
+    } catch (e) {
+      weatherInfo = "🌡️ Ubicación desconocida";
+    }
+  }
+
+  function updateHistoryInfo() {
+    try {
+      const historyData = [
+        `⏰ ${new Date().toLocaleTimeString()}`,
+        `📅 ${new Date().toLocaleDateString()}`,
+        `🖱️ Clicks: ${parseInt(localStorage.getItem("clickCount") || "0")}`,
+      ];
+
+      historyInfo =
+        historyData[Math.floor(Date.now() / 4000) % historyData.length];
+    } catch (e) {
+      historyInfo = "📊 Info no disponible";
+    }
+  }
+
+  function updateRotatingInfo() {
+    const now = Date.now();
+
+    // Actualizar batería cada 2 minutos (120000ms)
+    if (now - lastBatteryUpdate > 120000) {
+      updateBatteryInfo();
+      lastBatteryUpdate = now;
+    }
+
+    // Actualizar clima cada 5 minutos (300000ms)
+    if (now - lastWeatherUpdate > 300000) {
+      updateWeatherInfo();
+      lastWeatherUpdate = now;
+    }
+
+    // Actualizar historial cada vez
+    updateHistoryInfo();
+
+    // Rotar entre los datos cada 3 segundos
+    const rotatingData = [batteryInfo, weatherInfo, historyInfo].filter(
+      Boolean,
+    );
+    const currentIndex = Math.floor(Date.now() / 3000) % rotatingData.length;
+
+    document.getElementById("secret-info").textContent =
+      rotatingData[currentIndex] || "Cargando...";
+  }
+
+  // Contador de clicks
+  document.addEventListener("click", () => {
+    const clickCount = parseInt(localStorage.getItem("clickCount") || "0") + 1;
+    localStorage.setItem("clickCount", clickCount.toString());
+  });
+
+  // Suprimir errores de CORS del iframe
+  window.addEventListener('error', (e) => {
+    if (e.message && e.message.includes('cross-origin')) {
+      e.preventDefault();
+      console.warn('CORS error suprimido del iframe externo');
+      return false;
+    }
+  });
+
+  // Suprimir advertencias específicas de TCF API
+  const originalConsoleError = console.error;
+  console.error = function(...args) {
+    const message = args.join(' ');
+    if (message.includes('TCF IFRAME') || 
+        message.includes('__tcfapiLocator') || 
+        message.includes('cross-origin frame')) {
+      return; // Suprimir estos errores específicos
+    }
+    originalConsoleError.apply(console, args);
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Inicializar datos
+    updateBatteryInfo();
+    updateWeatherInfo();
+    updateHistoryInfo();
+
+    // Actualizar cada segundo para la rotación
+    setInterval(updateRotatingInfo, 1000);
+
+    // Configurar manejo seguro del iframe
+    const iframe = document.getElementById('game-frame');
+    if (iframe) {
+      iframe.addEventListener('load', () => {
+        console.log('Iframe cargado de forma segura');
+      });
+      
+      iframe.addEventListener('error', (e) => {
+        console.warn('Error en iframe, pero continuando de forma segura');
+        e.preventDefault();
+      });
+    }
+  });
+</script>

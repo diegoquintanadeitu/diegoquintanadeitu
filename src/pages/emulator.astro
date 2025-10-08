@@ -1,0 +1,300 @@
+---
+import Layout from "@/ui/layouts/Layout.astro";
+import { api } from "@/services/api";
+
+const games = await api.getGames();
+---
+
+<script>
+  if (typeof window !== "undefined") {
+    const isAuthorized = localStorage.getItem("play-access");
+
+    if (isAuthorized !== "true") {
+      document.body.innerHTML =
+        "<div style='display: flex; justify-content: center; align-items: center; height: 100vh; font-size: 1.5rem;'>Redirigiendo...</div>";
+      window.location.replace("/"); // Redirigir inmediatamente antes de renderizar
+    } else {
+      localStorage.removeItem("play-access"); // Eliminar el acceso después de la verificación
+    }
+  }
+</script>
+
+<Layout title="Emulador Local - Sin CORS">
+  <main
+    class="flex flex-col min-h-screen bg-gradient-to-br from-purple-100 to-purple-300 p-4"
+  >
+    <div
+      class="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-6"
+    >
+      <a
+        href="/"
+        class="flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-lg shadow-md hover:bg-purple-700 transition-all"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+        Volver
+      </a>
+      <h1
+        class="text-2xl md:text-4xl font-bold text-purple-800 text-center flex-grow mt-4 md:mt-0"
+      >
+        🎮 Emulador Local
+      </h1>
+      <div class="flex gap-2">
+        <a
+          href="/play"
+          class="px-4 py-2 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition-all"
+        >
+          Ver versión iframe
+        </a>
+        <div
+          id="user-info"
+          class="w-48 text-xs text-purple-600 space-y-1 text-left md:text-right"
+        >
+          <span id="secret-info">Cargando...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Selector de sistema -->
+    <div class="mb-4 flex flex-wrap gap-4 justify-center">
+      <select
+        id="system-selector"
+        class="px-4 py-2 border border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+      >
+        <option value="snes">Super Nintendo (SNES)</option>
+        <option value="n64">Nintendo 64</option>
+        <option value="gba">Game Boy Advance</option>
+        <option value="genesis">Sega Genesis</option>
+        <option value="arcade">Arcade (MAME)</option>
+      </select>
+
+      <select
+        id="game-selector"
+        class="px-4 py-2 border border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+      >
+        <option value="">Selecciona un juego...</option>
+      </select>
+
+      <button
+        id="load-game"
+        class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all disabled:bg-gray-400"
+        disabled
+      >
+        Cargar Juego
+      </button>
+    </div>
+
+    <!-- Estado de carga -->
+    <div id="loading-status" class="text-center mb-4 hidden">
+      <div class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-lg">
+        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Cargando emulador...
+      </div>
+    </div>
+
+    <!-- Contenedor del emulador -->
+    <div 
+      id="emulator-container" 
+      class="w-full flex-1 border-2 border-purple-300 rounded-lg bg-black flex items-center justify-center text-white"
+    >
+      <div class="text-center">
+        <div class="text-6xl mb-4">🎮</div>
+        <h2 class="text-xl mb-2">Emulador Local</h2>
+        <p class="text-gray-300">Selecciona un sistema y juego para comenzar</p>
+        <p class="text-sm text-gray-400 mt-2">Sin CORS • Sin Ads • Sin Problemas</p>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script is:inline>
+  // Configuración de juegos demo/homebrew (legales)
+  const gameLibrary = {
+    snes: [
+      { name: 'Super Boss Gaiden', url: '/roms/snes/super-boss-gaiden.smc', description: 'Homebrew SNES' },
+      { name: 'Demo ROM', url: '/roms/snes/demo.smc', description: 'Demo técnico' }
+    ],
+    n64: [
+      { name: 'Homebrew Demo', url: '/roms/n64/demo.n64', description: 'Demo N64' }
+    ],
+    gba: [
+      { name: 'Goodboy Galaxy', url: '/roms/gba/goodboy.gba', description: 'Indie GBA' },
+      { name: 'Demo GBA', url: '/roms/gba/demo.gba', description: 'Demo técnico' }
+    ],
+    genesis: [
+      { name: 'Homebrew Genesis', url: '/roms/genesis/demo.bin', description: 'Demo Genesis' }
+    ],
+    arcade: [
+      { name: 'Open Liero', url: '/roms/arcade/liero.zip', description: 'Open source' }
+    ]
+  };
+
+  // Configuración de cores
+  const coreConfig = {
+    snes: 'snes9x',
+    n64: 'mupen64plus',
+    gba: 'mgba', 
+    genesis: 'genesis_plus_gx',
+    arcade: 'mame2003'
+  };
+
+  let currentEmulator = null;
+  let weatherInfo = '';
+  let batteryInfo = '';
+  let historyInfo = '';
+
+  // Info rotativa (misma lógica que /play)
+  async function updateBatteryInfo() {
+    if ("getBattery" in navigator) {
+      try {
+        const battery = await navigator.getBattery();
+        const batteryLevel = Math.round(battery.level * 100);
+        const charging = battery.charging ? "🔌" : "🔋";
+        batteryInfo = `${charging} ${batteryLevel}%`;
+      } catch (e) {
+        batteryInfo = "🔋 N/A";
+      }
+    } else {
+      batteryInfo = "🔋 N/A";
+    }
+  }
+
+  async function updateWeatherInfo() {
+    try {
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const city = timezone.split("/").pop().replace("_", " ");
+      const now = new Date();
+      const month = now.getMonth();
+      const temp = 15 + Math.floor(Math.random() * 20); // Temperatura aproximada
+      weatherInfo = `🌡️ ${city} ${temp}°C`;
+    } catch (e) {
+      weatherInfo = "🌡️ Ubicación desconocida";
+    }
+  }
+
+  function updateHistoryInfo() {
+    const historyData = [
+      `⏰ ${new Date().toLocaleTimeString()}`,
+      `📅 ${new Date().toLocaleDateString()}`,
+      `🎮 Emulador local`,
+      `🚀 Sin CORS`,
+    ];
+    historyInfo = historyData[Math.floor(Date.now() / 4000) % historyData.length];
+  }
+
+  function updateRotatingInfo() {
+    updateHistoryInfo();
+    const rotatingData = [batteryInfo, weatherInfo, historyInfo].filter(Boolean);
+    const currentIndex = Math.floor(Date.now() / 3000) % rotatingData.length;
+    document.getElementById("secret-info").textContent = rotatingData[currentIndex] || "Cargando...";
+  }
+
+  function updateGameSelector() {
+    const systemSelector = document.getElementById('system-selector');
+    const gameSelector = document.getElementById('game-selector');
+    const selectedSystem = systemSelector.value;
+    
+    // Limpiar opciones anteriores
+    gameSelector.innerHTML = '<option value="">Selecciona un juego...</option>';
+    
+    // Agregar juegos del sistema seleccionado
+    if (gameLibrary[selectedSystem]) {
+      gameLibrary[selectedSystem].forEach(game => {
+        const option = document.createElement('option');
+        option.value = game.url;
+        option.textContent = `${game.name} - ${game.description}`;
+        gameSelector.appendChild(option);
+      });
+    }
+    
+    // Deshabilitar botón de carga
+    document.getElementById('load-game').disabled = true;
+  }
+
+  function enableLoadButton() {
+    const gameSelector = document.getElementById('game-selector');
+    const loadButton = document.getElementById('load-game');
+    loadButton.disabled = !gameSelector.value;
+  }
+
+  function loadEmulator() {
+    const systemSelector = document.getElementById('system-selector');
+    const gameSelector = document.getElementById('game-selector');
+    const loadingStatus = document.getElementById('loading-status');
+    const container = document.getElementById('emulator-container');
+
+    const selectedSystem = systemSelector.value;
+    const selectedGame = gameSelector.value;
+
+    if (!selectedSystem || !selectedGame) {
+      alert('Por favor selecciona un sistema y juego');
+      return;
+    }
+
+    // Mostrar estado de carga
+    loadingStatus.classList.remove('hidden');
+    
+    // Limpiar contenedor
+    container.innerHTML = '<div id="game" style="width: 100%; height: 100%;"></div>';
+
+    // Configurar EmulatorJS
+    setTimeout(() => {
+      // Configuración del emulador
+      window.EJS_player = '#game';
+      window.EJS_core = coreConfig[selectedSystem];
+      window.EJS_gameUrl = selectedGame;
+      window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
+      window.EJS_startOnLoaded = true;
+      window.EJS_fullscreenOnLoaded = false;
+
+      // Cargar script del emulador
+      const script = document.createElement('script');
+      script.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
+      script.onload = () => {
+        loadingStatus.classList.add('hidden');
+        console.log('✅ Emulador cargado sin problemas de CORS');
+      };
+      script.onerror = () => {
+        loadingStatus.classList.add('hidden');
+        container.innerHTML = `
+          <div class="text-center text-red-400">
+            <div class="text-4xl mb-4">❌</div>
+            <h3 class="text-lg mb-2">Error al cargar emulador</h3>
+            <p class="text-sm">Verifica que el archivo ROM existe en /public/roms/</p>
+          </div>
+        `;
+      };
+      document.head.appendChild(script);
+    }, 1000);
+  }
+
+  // Event listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    // Info rotativa
+    updateBatteryInfo();
+    updateWeatherInfo();
+    updateHistoryInfo();
+    setInterval(updateRotatingInfo, 1000);
+
+    // Emulador
+    document.getElementById('system-selector').addEventListener('change', updateGameSelector);
+    document.getElementById('game-selector').addEventListener('change', enableLoadButton);
+    document.getElementById('load-game').addEventListener('click', loadEmulator);
+
+    // Cargar juegos iniciales
+    updateGameSelector();
+  });
+</script>

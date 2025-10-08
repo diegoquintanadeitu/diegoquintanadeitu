@@ -1,5 +1,5 @@
-import {data} from '../data';
-import type {Profile, SkillCategories, TimelineItem, Project} from '../types';
+import { data } from "@/db/data";
+import type { Profile, SkillCategories, TimelineItem, Project } from "@/types";
 
 export const api = {
   getProfile: async (): Promise<Profile> => {
@@ -20,5 +20,15 @@ export const api = {
   getProjects: async (): Promise<Project[]> => {
     await new Promise((resolve) => setTimeout(resolve, 300));
     return data.projects;
+  },
+
+  getTechEvolution: async (): Promise<string[]> => {
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    return data.techEvolution;
+  },
+
+  getGames: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    return data.games;
   },
 };
