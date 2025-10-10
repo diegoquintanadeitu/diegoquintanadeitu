@@ -1,5 +1,6 @@
 ---
 import Layout from "@/ui/layouts/Layout.astro";
+import BackButton from "@/ui/components/BackButton.astro";
 ---
 
 <script>
@@ -16,36 +17,19 @@ import Layout from "@/ui/layouts/Layout.astro";
   }
 </script>
 
-<Layout title="Selecciona tu Juego">
+<Layout title="Play - Retro Arcade">
   <main
     class="flex flex-col min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 p-4"
   >
     <div
       class="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-6"
     >
-      <a
-        href="/"
-        class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 hover:animate-squeeze transition-all"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="m15 18-6-6 6-6"></path>
-        </svg>
-        Volver
-      </a>
-      <h1
+      <BackButton class="mb-4 md:mb-0 w-full md:w-auto" variant="secondary" />
+      <h2
         class="text-2xl md:text-4xl font-bold text-gray-800 text-center flex-grow mt-4 md:mt-0 animate-pulsing"
       >
-        Selecciona tu Juego
-      </h1>
+        Elegí un juego
+      </h2>
       <div
         id="user-info"
         class="w-48 text-xs text-gray-600 space-y-1 text-left md:text-right"

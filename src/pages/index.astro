@@ -291,9 +291,9 @@ const techEvolution = await api.getTechEvolution();
       keyDisplay.style.zIndex = "1000";
       keyDisplay.style.transition = "transform 0.3s ease, opacity 0.3s ease";
 
-      const existingKeys = document.querySelectorAll(".key-display");
+      const existingKeys = document.querySelectorAll<HTMLElement>(".key-display");
       existingKeys.forEach((key, index) => {
-        key.style.transform = `translateY(-${(index + 1) * 30}px)`;
+          key.style.transform = `translateY(-${(index + 1) * 30}px)`;
       });
 
       keyDisplay.classList.add("key-display");

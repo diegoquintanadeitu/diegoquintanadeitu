@@ -1,0 +1,34 @@
+---
+interface Props {
+  class?: string;
+  variant?: "primary" | "secondary" | "violet";
+}
+
+const { class: className = "", variant = "primary" } = Astro.props;
+
+const variantClasses = {
+  primary: "bg-blue-600 hover:bg-blue-700 text-white",
+  secondary:
+    "bg-white hover:bg-slate-50 text-slate-600 border border-slate-300 hover:border-slate-400",
+  violet: "bg-violet-500 hover:bg-violet-600 text-white",
+};
+---
+
+<a
+  href="/"
+  class={`flex items-center gap-2 px-6 py-3 rounded-lg shadow-md hover:animate-tilt transition-all ${variantClasses[variant]} ${className}`}
+>
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="m15 18-6-6 6-6"></path>
+  </svg>
+  <span>Volver</span>
+</a>
