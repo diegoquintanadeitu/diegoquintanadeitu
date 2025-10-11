@@ -71,6 +71,8 @@ export const data = {
         "Implementación de universal login con Auth0",
         "Automatización de deploys con github actions",
         "Migración de componentes de clase a funcional",
+        "Implementación de pruebas unitarias con Vitest",
+        "Uso del sdk de mercadopago, funcionalidad suscripcciones",
         "Actualización, limpieza de dependencias y disminución de vulnerabilidades",
       ],
     },

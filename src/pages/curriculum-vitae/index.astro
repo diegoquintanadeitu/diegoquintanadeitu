@@ -166,6 +166,56 @@ const skillCategories = await api.getSkills();
           </div>
         </section>
 
+        <!-- Habilidades Técnicas -->
+        <section class="mb-8 print-avoid-break print:mb-4">
+          <h3
+            class="text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2"
+          >
+            Habilidades Técnicas
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-3">
+            <!-- Herramientas -->
+            <div class="print-avoid-break">
+              <h4
+                class="font-semibold text-blue-700 mb-3 print:text-sm print:mb-2"
+              >
+                Herramientas y Plataformas
+              </h4>
+              <div class="flex flex-wrap gap-2 print:gap-1">
+                {
+                  skillCategories.tools
+                    .slice(0, 8)
+                    .map((tool) => (
+                      <span class="bg-green-50 text-green-800 px-3 py-1 rounded-full text-xs border border-green-200 print:px-2 print:py-0">
+                        {tool}
+                      </span>
+                    ))
+                }
+              </div>
+            </div>
+            <!-- Tecnologías Principales -->
+            <div class="print-avoid-break">
+              <h4
+                class="font-semibold text-blue-700 mb-3 print:text-sm print:mb-2"
+              >
+                Lenguajes y Frameworks
+              </h4>
+              <div class="flex flex-wrap gap-2 print:gap-1">
+                {
+                  skillCategories.technical
+                    .slice(0, 12)
+                    .map((skill) => (
+                      <span class="bg-blue-50 text-blue-800 px-3 py-1 rounded-full text-xs border border-blue-200 print:px-2 print:py-0">
+                        {skill}
+                      </span>
+                    ))
+                }
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- Experiencia Profesional -->
         <section class="mb-8 print:mb-4">
           <div class="space-y-5">
@@ -214,56 +264,6 @@ const skillCategories = await api.getSkills();
                 </div>
               ))
             }
-          </div>
-        </section>
-
-        <!-- Habilidades Técnicas -->
-        <section class="mb-8 print-avoid-break print:mb-4">
-          <h3
-            class="text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2"
-          >
-            Habilidades Técnicas
-          </h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-3">
-            <!-- Tecnologías Principales -->
-            <div class="print-avoid-break">
-              <h4
-                class="font-semibold text-blue-700 mb-3 print:text-sm print:mb-2"
-              >
-                Lenguajes y Frameworks
-              </h4>
-              <div class="flex flex-wrap gap-2 print:gap-1">
-                {
-                  skillCategories.technical
-                    .slice(0, 12)
-                    .map((skill) => (
-                      <span class="bg-blue-50 text-blue-800 px-3 py-1 rounded-full text-xs border border-blue-200 print:px-2 print:py-0">
-                        {skill}
-                      </span>
-                    ))
-                }
-              </div>
-            </div>
-
-            <!-- Herramientas -->
-            <div class="print-avoid-break">
-              <h4
-                class="font-semibold text-blue-700 mb-3 print:text-sm print:mb-2"
-              >
-                Herramientas y Plataformas
-              </h4>
-              <div class="flex flex-wrap gap-2 print:gap-1">
-                {
-                  skillCategories.tools
-                    .slice(0, 8)
-                    .map((tool) => (
-                      <span class="bg-green-50 text-green-800 px-3 py-1 rounded-full text-xs border border-green-200 print:px-2 print:py-0">
-                        {tool}
-                      </span>
-                    ))
-                }
-              </div>
-            </div>
           </div>
         </section>
 

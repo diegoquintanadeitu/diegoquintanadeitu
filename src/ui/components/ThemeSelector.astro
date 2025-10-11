@@ -1,23 +1,21 @@
----
-// Componente selector de temas
----
-
-<div class="theme-selector fixed top-4 right-4 z-50 print:hidden">
-  <div class="relative">
+<div class="theme-selector">
+  <div class="theme-selector__container">
     <!-- Botón principal -->
     <button
       id="theme-toggle"
-      class="w-12 h-12 rounded-full bg-transparent
-       backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+      class="theme-selector__toggle"
       title="Cambiar tema"
       aria-label="Selector de tema"
+      aria-expanded="false"
+      aria-haspopup="true"
     >
       <svg
         id="theme-icon"
-        class="w-6 h-6 text-gray-700 group-hover:text-gray-900 transition-colors"
+        class="theme-selector__icon"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
+        aria-hidden="true"
       >
         <path
           stroke-linecap="round"
@@ -31,30 +29,30 @@
     <!-- Menú desplegable -->
     <div
       id="theme-menu"
-      class="absolute top-full right-0 mt-2 bg-white/95 backdrop-blur-sm rounded-lg shadow-xl border border-gray-200 p-2 min-w-[160px] opacity-0 invisible transform scale-95 transition-all duration-200 origin-top-right"
+      class="theme-selector__menu"
+      role="menu"
+      aria-labelledby="theme-toggle"
     >
       <button
         id="theme-light"
-        class="theme-option w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors text-left text-gray-700 hover:text-gray-900"
+        class="theme-selector__option"
         data-theme="light"
+        role="menuitem"
       >
-        <div
-          class="w-4 h-4 rounded-full bg-gradient-to-br from-blue-400 to-cyan-300 border border-blue-500"
-        >
+        <div class="theme-selector__indicator theme-selector__indicator--light">
         </div>
-        <span class="text-sm font-medium">Tema Claro</span>
+        <span class="theme-selector__label">Tema Claro</span>
       </button>
 
       <button
         id="theme-dark"
-        class="theme-option w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors text-left text-gray-700 hover:text-gray-900"
+        class="theme-selector__option"
         data-theme="dark"
+        role="menuitem"
       >
-        <div
-          class="w-4 h-4 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 border border-slate-600"
-        >
+        <div class="theme-selector__indicator theme-selector__indicator--dark">
         </div>
-        <span class="text-sm font-medium">Tema Oscuro</span>
+        <span class="theme-selector__label">Tema Oscuro</span>
       </button>
     </div>
   </div>
@@ -62,16 +60,22 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    type themeType = "light" | "dark";
     const themeToggle = document.getElementById("theme-toggle");
     const themeMenu = document.getElementById("theme-menu");
     const themeIcon = document.getElementById("theme-icon");
-    const themeOptions = document.querySelectorAll(".theme-option");
+    const themeOptions = document.querySelectorAll(".theme-selector__option");
     const body = document.body;
 
     let isMenuOpen = false;
 
+    console.log("🚀 ThemeSelector inicializado");
+    console.log(`📋 Opciones encontradas: ${themeOptions.length}`);
+
     // Cargar tema guardado
-    const savedTheme = localStorage.getItem("portfolio-theme") || "light";
+    const rawTheme = localStorage.getItem("portfolio-theme");
+    const savedTheme: themeType = rawTheme === "dark" ? "dark" : "light";
+    console.log(`💾 Tema guardado: ${rawTheme} -> ${savedTheme}`);
     setTheme(savedTheme);
 
     // Toggle del menú
@@ -93,12 +97,23 @@
     });
 
     // Opciones de tema
-    themeOptions.forEach((option) => {
-      option.addEventListener("click", function () {
-        const theme = this.getAttribute("data-theme");
-        if (theme) {
+    themeOptions.forEach((option, index) => {
+      console.log(`🔧 Configurando opción ${index}:`, option);
+      option.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const target = e.currentTarget as HTMLButtonElement;
+        const theme = target.getAttribute("data-theme") as themeType;
+
+        console.log(`🎨 Click en tema: ${theme}`);
+        console.log(`📍 Target:`, target);
+
+        if (theme === "light" || theme === "dark") {
           setTheme(theme);
           closeMenu();
+        } else {
+          console.error(`❌ Tema inválido: ${theme}`);
         }
       });
     });
@@ -112,25 +127,35 @@
     }
 
     function openMenu() {
+      console.log("📂 Abriendo menú");
       isMenuOpen = true;
-      themeMenu?.classList.remove("opacity-0", "invisible", "scale-95");
-      themeMenu?.classList.add("opacity-100", "visible", "scale-100");
+      themeMenu?.classList.add("is-open");
+      themeToggle?.setAttribute("aria-expanded", "true");
     }
 
     function closeMenu() {
+      console.log("📁 Cerrando menú");
       isMenuOpen = false;
-      themeMenu?.classList.remove("opacity-100", "visible", "scale-100");
-      themeMenu?.classList.add("opacity-0", "invisible", "scale-95");
+      themeMenu?.classList.remove("is-open");
+      themeToggle?.setAttribute("aria-expanded", "false");
     }
+    function setTheme(theme: themeType) {
+      console.log(`🔄 Aplicando tema: ${theme}`);
 
-    function setTheme(theme: string) {
+      // Aplicar el tema al body
       body.setAttribute("data-theme", theme);
+
+      // Guardar en localStorage
       localStorage.setItem("portfolio-theme", theme);
+
+      // Actualizar UI
       updateIcon(theme);
       updateActiveOption(theme);
+
+      console.log(`✅ Tema ${theme} aplicado correctamente`);
     }
 
-    function updateIcon(theme: string) {
+    function updateIcon(theme: themeType) {
       if (!themeIcon) return;
 
       const icons = {
@@ -143,9 +168,9 @@
 
     function updateActiveOption(theme: string) {
       themeOptions.forEach((option) => {
-        option.classList.remove("bg-blue-50", "text-blue-700");
+        option.classList.remove("is-active");
         if (option.getAttribute("data-theme") === theme) {
-          option.classList.add("bg-blue-50", "text-blue-700");
+          option.classList.add("is-active");
         }
       });
     }
@@ -153,11 +178,273 @@
 </script>
 
 <style>
+  /* ===================================================================
+     THEME SELECTOR COMPONENT - Scoped Styles
+     =================================================================== */
+
+  /* Base Component */
   .theme-selector {
-    animation: slideIn 0.3s ease-out;
+    /* Position */
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+
+    /* Animation */
+    animation: slideInFromRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Isolation */
+    isolation: isolate;
   }
 
-  @keyframes slideIn {
+  .theme-selector__container {
+    position: relative;
+  }
+
+  /* ===================================================================
+     TOGGLE BUTTON
+     =================================================================== */
+
+  .theme-selector__toggle {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Size */
+    width: 3rem;
+    height: 3rem;
+
+    /* Visual */
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 50%;
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+    /* Interaction */
+    cursor: pointer;
+    user-select: none;
+
+    /* Transitions */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-selector__toggle:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.05);
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+
+  .theme-selector__toggle:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow:
+      0 0 0 2px var(--bg-primary),
+      0 0 0 4px #3b82f6;
+  }
+
+  .theme-selector__toggle:active {
+    transform: scale(0.95);
+  }
+
+  /* ===================================================================
+     ICON
+     =================================================================== */
+
+  .theme-selector__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #374151;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-selector__toggle:hover .theme-selector__icon {
+    color: #111827;
+    transform: rotate(15deg);
+  }
+
+  /* ===================================================================
+     DROPDOWN MENU
+     =================================================================== */
+
+  .theme-selector__menu {
+    /* Position */
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+
+    /* Visual */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.75rem;
+    box-shadow:
+      0 20px 25px -5px rgb(0 0 0 / 0.1),
+      0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+    /* Layout */
+    padding: 0.5rem;
+    min-width: 10rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    /* Animation States */
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95) translateY(-10px);
+    transform-origin: top right;
+
+    /* Transitions */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-selector__menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) translateY(0);
+  }
+
+  /* ===================================================================
+     MENU OPTIONS
+     =================================================================== */
+
+  .theme-selector__option {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+
+    /* Spacing */
+    padding: 0.75rem;
+
+    /* Visual */
+    background: transparent;
+    border: none;
+    border-radius: 0.5rem;
+    color: #374151;
+    text-align: left;
+
+    /* Interaction */
+    cursor: pointer;
+    user-select: none;
+
+    /* Transitions */
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-selector__option:hover {
+    background: rgba(59, 130, 246, 0.08);
+    color: #1e40af;
+    transform: translateX(2px);
+  }
+
+  .theme-selector__option:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: -2px;
+    background: rgba(59, 130, 246, 0.08);
+  }
+
+  .theme-selector__option.is-active {
+    background: rgba(59, 130, 246, 0.1);
+    color: #1e40af;
+    font-weight: 500;
+  }
+
+  /* ===================================================================
+     THEME INDICATORS
+     =================================================================== */
+
+  .theme-selector__indicator {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-selector__indicator--light {
+    background: linear-gradient(135deg, #60a5fa 0%, #34d399 100%);
+  }
+
+  .theme-selector__indicator--dark {
+    background: linear-gradient(135deg, #374151 0%, #111827 100%);
+  }
+
+  .theme-selector__option:hover .theme-selector__indicator {
+    transform: scale(1.1);
+  }
+
+  /* ===================================================================
+     LABELS
+     =================================================================== */
+
+  .theme-selector__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  /* ===================================================================
+     DARK THEME OVERRIDES
+     =================================================================== */
+
+  :global([data-theme="dark"]) .theme-selector__toggle {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :global([data-theme="dark"]) .theme-selector__toggle:hover {
+    background: rgba(51, 65, 85, 0.9);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+  }
+
+  :global([data-theme="dark"]) .theme-selector__icon {
+    color: #e2e8f0;
+  }
+
+  :global([data-theme="dark"])
+    .theme-selector__toggle:hover
+    .theme-selector__icon {
+    color: #f1f5f9;
+  }
+
+  :global([data-theme="dark"]) .theme-selector__menu {
+    background: rgba(30, 41, 59, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :global([data-theme="dark"]) .theme-selector__option {
+    color: #e2e8f0;
+  }
+
+  :global([data-theme="dark"]) .theme-selector__option:hover {
+    background: rgba(125, 211, 252, 0.1);
+    color: #7dd3fc;
+  }
+
+  :global([data-theme="dark"]) .theme-selector__option.is-active {
+    background: rgba(125, 211, 252, 0.15);
+    color: #7dd3fc;
+  }
+
+  :global([data-theme="dark"]) .theme-selector__toggle:focus {
+    box-shadow:
+      0 0 0 2px var(--bg-primary),
+      0 0 0 4px var(--text-accent);
+  }
+
+  /* ===================================================================
+     ANIMATIONS
+     =================================================================== */
+
+  @keyframes slideInFromRight {
     from {
       transform: translateX(100%);
       opacity: 0;
@@ -168,48 +455,70 @@
     }
   }
 
-  /* Adaptaciones para tema oscuro */
-  [data-theme="dark"] .theme-selector #theme-toggle {
-    background-color: rgba(30, 41, 59, 0.9) !important;
-    border-color: #475569 !important;
-    color: #f1f5f9 !important;
+  /* ===================================================================
+     RESPONSIVE DESIGN
+     =================================================================== */
+
+  @media (max-width: 480px) {
+    .theme-selector {
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+
+    .theme-selector__toggle {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+
+    .theme-selector__icon {
+      width: 1.125rem;
+      height: 1.125rem;
+    }
   }
 
-  [data-theme="dark"] .theme-selector #theme-toggle:hover {
-    background-color: rgba(51, 65, 85, 0.9) !important;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4) !important;
+  /* ===================================================================
+     PRINT STYLES
+     =================================================================== */
+
+  @media print {
+    .theme-selector {
+      display: none;
+    }
   }
 
-  [data-theme="dark"] .theme-selector #theme-toggle svg {
-    color: #e2e8f0 !important;
+  /* ===================================================================
+     REDUCED MOTION SUPPORT
+     =================================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-selector,
+    .theme-selector__toggle,
+    .theme-selector__menu,
+    .theme-selector__option,
+    .theme-selector__icon,
+    .theme-selector__indicator {
+      animation: none;
+      transition: none;
+    }
+
+    .theme-selector__toggle:hover,
+    .theme-selector__option:hover {
+      transform: none;
+    }
   }
 
-  [data-theme="dark"] .theme-selector #theme-toggle:hover svg {
-    color: #f1f5f9 !important;
-  }
+  /* ===================================================================
+     HIGH CONTRAST MODE SUPPORT
+     =================================================================== */
 
-  [data-theme="dark"] .theme-selector #theme-menu {
-    background-color: rgba(30, 41, 59, 0.95) !important;
-    border-color: #475569 !important;
-    backdrop-filter: blur(12px) !important;
-  }
+  @media (prefers-contrast: high) {
+    .theme-selector__toggle,
+    .theme-selector__menu {
+      border-width: 2px;
+    }
 
-  [data-theme="dark"] .theme-selector .theme-option {
-    color: #e2e8f0 !important;
-  }
-
-  [data-theme="dark"] .theme-selector .theme-option:hover {
-    background-color: rgba(51, 65, 85, 0.8) !important;
-    color: #f1f5f9 !important;
-  }
-
-  /* Estado activo que se mantiene consistente */
-  [data-theme="dark"] .theme-selector .theme-option.bg-blue-50 {
-    background-color: rgba(30, 58, 138, 0.3) !important;
-    color: #93c5fd !important;
-  }
-
-  [data-theme="dark"] .theme-selector .theme-option.text-blue-700 {
-    color: #93c5fd !important;
+    .theme-selector__option:focus {
+      outline-width: 3px;
+    }
   }
 </style>
