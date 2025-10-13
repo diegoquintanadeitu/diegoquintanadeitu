@@ -85,9 +85,10 @@ export const data = {
         "Transición hacia tecnologías web modernas, especialización en JavaScript/TypeScript, desarrollo de componentes del design system de importante aerolinea en react y react native",
       technologies: ["JavaScript", "React Native", "React", "Node.js"],
       achievements: [
+        "Presentación de charlas técnicas internas sobre nuevas tecnologías",
         "Migración exitosa de productos legacy a componentes del design system",
-        "Comunicación efectiva con equipos multidisciplinarios para asegurar la calidad y consistencia del producto final durante la adopción o la colaboración en el sistema de diseño",
         "Mentoría de desarrolladores junior y acompañamiento en la implementación de mejores prácticas",
+        "Comunicación efectiva con equipos multidisciplinarios para asegurar la calidad y consistencia del producto final durante la adopción o la colaboración en el sistema de diseño",
       ],
     },
     {
@@ -96,20 +97,11 @@ export const data = {
       company: "Equipo médico de emergencias Chaco SA",
       description:
         "Desarrollo en entorno Microsoft con C# y .NET, gestión de bases de datos SQL Server y mantenimiento de sistemas legacy en Visual Basic 6.",
-      technologies: [
-        "C#",
-        ".NET",
-        "SQL Server",
-        "Visual Basic 6",
-        "Windows Forms",
-        "Javascript",
-        "vuejs",
-      ],
+      technologies: ["C#", ".NET", "SQL Server", "Windows Forms"],
       achievements: [
         "Modernización de sistemas legacy y automatización de procesos",
-        "Migración e integración de módulo nuevo de gestión de caja desde vb6 a vuejs",
+        "Implementación de módulos conectados con procesos de negocio clave",
         "Implementación de nuevas funcionalidades en sistemas existentes, mejorando la eficiencia operativa",
-        "Migración de datos mediante consultas, ante la eventual caida en la conexión de una replica en mssql, que se realizaba desde los servidores de las sucursales hacia el servidor central",
       ],
     },
     {
@@ -123,11 +115,14 @@ export const data = {
         "MS Access",
         "SQL Server",
         "Crystal Reports",
+        "Javascript",
+        "vuejs",
       ],
       achievements: [
         "Desarrollo de módulos críticos para gestión de inventarios",
         "Creación de reportes personalizados para análisis de datos",
         "Manejo e implementación de procedimientos almacenados en SQL Server",
+        "Migración de datos mediante consultas, ante la eventual caida en la conexión de una replica en mssql, que se realizaba desde los servidores de las sucursales hacia el servidor central",
       ],
     },
   ] as TimelineItem[],

@@ -14,8 +14,10 @@
   --text-primary: #1e293b;
   --text-secondary: #64748b;
   --text-accent: #3b82f6;
+  --text-accent-rgb: 59, 130, 246;
   --border-color: #e2e8f0;
   --shadow-color: rgba(0, 0, 0, 0.1);
+  --bg-gradient-primary: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #e2e8f0 100%);
 }
 
 /* Variables Dark Theme */
@@ -26,6 +28,7 @@
   --text-primary: #f8fafc;
   --text-secondary: #e2e8f0;
   --text-accent: #7dd3fc;
+  --text-accent-rgb: 125, 211, 252;
   --border-color: #475569;
   --shadow-color: rgba(0, 0, 0, 0.3);
 

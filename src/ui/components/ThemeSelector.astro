@@ -142,7 +142,14 @@
     function setTheme(theme: themeType) {
       console.log(`🔄 Aplicando tema: ${theme}`);
 
-      // Aplicar el tema al body
+      // Aplicar el tema al html usando la clase dark (para Tailwind)
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+
+      // Mantener data-theme en el body para los estilos del componente
       body.setAttribute("data-theme", theme);
 
       // Guardar en localStorage
@@ -188,6 +195,7 @@
     position: fixed;
     top: 1rem;
     right: 1rem;
+    z-index: 9999;
 
     /* Animation */
     animation: slideInFromRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);

@@ -10,7 +10,11 @@ const projects = await api.getProjects();
 const skillCategories = await api.getSkills();
 ---
 
-<Layout title={`Curriculum Vitae - ${profile.name}`}>
+<Layout
+  title={`Curriculum Vitae - ${profile.name}`}
+  showFooter={false}
+  showThemeSelector={false}
+>
   <style>
     /* Estilos específicos para impresión - tipo Google Docs */
     @media print {
