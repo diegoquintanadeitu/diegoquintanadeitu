@@ -1,0 +1,262 @@
+---
+import Layout from "@/ui/layouts/Layout.astro";
+import BackButton from "@/ui/components/BackButton.astro";
+---
+
+<script>
+  if (typeof window !== "undefined") {
+    const isAuthorized = localStorage.getItem("play-access");
+
+    if (isAuthorized !== "true") {
+      document.body.innerHTML =
+        "<div style='display: flex; justify-content: center; align-items: center; height: 100vh; font-size: 1.5rem;'>Redirigiendo...</div>";
+      window.location.replace("/"); // Redirigir inmediatamente antes de renderizar
+    } else {
+      localStorage.removeItem("play-access"); // Eliminar el acceso después de la verificación
+    }
+  }
+</script>
+
+<Layout title="Play - Retro Arcade">
+  <main
+    class="flex flex-col min-h-screen bg-gradient-to-br from-slate-100 via-blue-100 to-indigo-200 dark:from-purple-900 dark:via-blue-900 dark:to-indigo-900 p-4 md:p-6"
+  >
+    <!-- Botón de regreso arriba -->
+    <div class="w-full mb-4">
+      <BackButton
+        class="transform hover:scale-105 transition-all duration-200"
+        variant="secondary"
+      />
+    </div>
+
+    <!-- Título centrado -->
+    <header class="w-full mb-6 md:mb-8 text-right">
+      <h1
+        class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-2"
+      >
+        Retro Arcade
+      </h1>
+      <p class="text-lg text-gray-600 dark:text-gray-300">
+        Elegí tu juego favorito
+      </p>
+    </header>
+
+    <!-- Contenedor del juego -->
+    <div class="flex-1 mb-4">
+      <div class="relative h-full">
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-xl blur-xl"
+        >
+        </div>
+        <iframe
+          id="game-frame"
+          src={"https://www.retrogames.cc"}
+          class="relative w-full h-full min-h-[350px] md:min-h-[500px] border-2 border-gray-300/30 dark:border-white/20 rounded-xl shadow-2xl backdrop-blur-sm bg-white/20 dark:bg-black/20"
+          allowfullscreen="true"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
+          referrerpolicy="no-referrer-when-downgrade"
+          loading="lazy"
+          title="Juego seleccionado"
+        >
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Info del sistema en el footer -->
+    <footer class="w-full">
+      <div class="flex justify-center">
+        <div
+          class="bg-white/20 dark:bg-black/20 backdrop-blur-sm rounded-lg px-4 py-2 border border-gray-300/30 dark:border-white/20"
+        >
+          <div
+            id="user-info"
+            class="text-xs text-gray-600 dark:text-gray-300 text-center"
+          >
+            <span id="secret-info" class="font-mono">Cargando...</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <style>
+    /* Animación personalizada para el título */
+    @keyframes gradient-shift {
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    h1 {
+      background-size: 200% 200%;
+      animation: gradient-shift 3s ease-in-out infinite;
+    }
+
+    /* Efecto de partículas de fondo */
+    main::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(120, 119, 198, 0.3) 0%,
+          transparent 50%
+        ),
+        radial-gradient(
+          circle at 80% 80%,
+          rgba(255, 119, 198, 0.3) 0%,
+          transparent 50%
+        ),
+        radial-gradient(
+          circle at 40% 40%,
+          rgba(120, 219, 255, 0.3) 0%,
+          transparent 50%
+        );
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Mejora en el backdrop del info panel */
+    #user-info {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  </style>
+</Layout>
+
+<script is:inline>
+  let batteryInfo = "";
+  let weatherInfo = "";
+  let historyInfo = "";
+  let lastBatteryUpdate = 0;
+  let lastWeatherUpdate = 0;
+
+  async function updateBatteryInfo() {
+    if ("getBattery" in navigator) {
+      try {
+        const battery = await navigator.getBattery();
+        const batteryLevel = Math.round(battery.level * 100);
+        const charging = battery.charging ? "🔌" : "🔋";
+        batteryInfo = `${charging} ${batteryLevel}%`;
+      } catch (e) {
+        batteryInfo = "🔋 N/A";
+      }
+    } else {
+      batteryInfo = "🔋 N/A";
+    }
+  }
+
+  async function updateWeatherInfo() {
+    try {
+      // Importar dinámicamente la utilidad de clima
+      const { WeatherEstimator } = await import("/src/utils/weather.ts");
+      const weather = WeatherEstimator.estimateWeather();
+      weatherInfo = WeatherEstimator.formatWeatherString(weather);
+    } catch (e) {
+      weatherInfo = "🌡️ Ubicación desconocida";
+    }
+  }
+
+  function updateHistoryInfo() {
+    try {
+      const historyData = [
+        `⏰ ${new Date().toLocaleTimeString()}`,
+        `📅 ${new Date().toLocaleDateString()}`,
+        `🖱️ Clicks: ${parseInt(localStorage.getItem("clickCount") || "0")}`,
+      ];
+
+      historyInfo =
+        historyData[Math.floor(Date.now() / 4000) % historyData.length];
+    } catch (e) {
+      historyInfo = "📊 Info no disponible";
+    }
+  }
+
+  function updateRotatingInfo() {
+    const now = Date.now();
+
+    // Actualizar batería cada 2 minutos (120000ms)
+    if (now - lastBatteryUpdate > 120000) {
+      updateBatteryInfo();
+      lastBatteryUpdate = now;
+    }
+
+    // Actualizar clima cada 5 minutos (300000ms)
+    if (now - lastWeatherUpdate > 300000) {
+      updateWeatherInfo();
+      lastWeatherUpdate = now;
+    }
+
+    // Actualizar historial cada vez
+    updateHistoryInfo();
+
+    // Rotar entre los datos cada 3 segundos
+    const rotatingData = [batteryInfo, weatherInfo, historyInfo].filter(
+      Boolean,
+    );
+    const currentIndex = Math.floor(Date.now() / 3000) % rotatingData.length;
+
+    document.getElementById("secret-info").textContent =
+      rotatingData[currentIndex] || "Cargando...";
+  }
+
+  // Contador de clicks
+  document.addEventListener("click", () => {
+    const clickCount = parseInt(localStorage.getItem("clickCount") || "0") + 1;
+    localStorage.setItem("clickCount", clickCount.toString());
+  });
+
+  // Suprimir errores de CORS del iframe
+  window.addEventListener("error", (e) => {
+    if (e.message && e.message.includes("cross-origin")) {
+      e.preventDefault();
+      console.warn("CORS error suprimido del iframe externo");
+      return false;
+    }
+  });
+
+  // Suprimir advertencias específicas de TCF API
+  const originalConsoleError = console.error;
+  console.error = function (...args) {
+    const message = args.join(" ");
+    if (
+      message.includes("TCF IFRAME") ||
+      message.includes("__tcfapiLocator") ||
+      message.includes("cross-origin frame")
+    ) {
+      return; // Suprimir estos errores específicos
+    }
+    originalConsoleError.apply(console, args);
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Inicializar datos
+    updateBatteryInfo();
+    updateWeatherInfo();
+    updateHistoryInfo();
+
+    // Actualizar cada segundo para la rotación
+    setInterval(updateRotatingInfo, 1000);
+
+    // Configurar manejo seguro del iframe
+    const iframe = document.getElementById("game-frame");
+    if (iframe) {
+      iframe.addEventListener("load", () => {
+        console.log("Iframe cargado de forma segura");
+      });
+
+      iframe.addEventListener("error", (e) => {
+        console.warn("Error en iframe, pero continuando de forma segura");
+        e.preventDefault();
+      });
+    }
+  });
+</script>

@@ -1,24 +1,34 @@
-import {mockData} from '../mocks/api/data';
-import type {Profile, SkillCategories, TimelineItem, Project} from '../types';
+import { data } from "@/db/data";
+import type { Profile, SkillCategories, TimelineItem, Project } from "@/types";
 
 export const api = {
   getProfile: async (): Promise<Profile> => {
     await new Promise((resolve) => setTimeout(resolve, 300));
-    return mockData.profile;
+    return data.profile;
   },
 
   getSkills: async (): Promise<SkillCategories> => {
     await new Promise((resolve) => setTimeout(resolve, 300));
-    return mockData.skillCategories;
+    return data.skillCategories;
   },
 
   getTimeline: async (): Promise<TimelineItem[]> => {
     await new Promise((resolve) => setTimeout(resolve, 300));
-    return mockData.timeline;
+    return data.timeline;
   },
 
   getProjects: async (): Promise<Project[]> => {
     await new Promise((resolve) => setTimeout(resolve, 300));
-    return mockData.projects;
+    return data.projects;
+  },
+
+  getTechEvolution: async (): Promise<string[]> => {
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    return data.techEvolution;
+  },
+
+  getGames: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    return data.games;
   },
 };

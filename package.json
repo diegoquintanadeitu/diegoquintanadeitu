@@ -1,37 +1,39 @@
 {
-  "name": "@diegoquintanadeitu/portfolio",
+  "name": "diegoquintanadeitu",
   "type": "module",
   "version": "2025.06.13",
   "private": true,
   "scripts": {
+    "astro": "astro",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "a11y": "npm run build && npm run preview & sleep 5 && npx tsx scripts/accessibility-test.ts",
-    "a11y:ci": "npx tsx scripts/accessibility-test.ts",
-    "a11y:quick": "npx tsx scripts/accessibility-test.ts",
+    "a11y": "npm run build && npm run preview & sleep 5 && npx tsx src/scripts/accessibility-test.ts",
+    "a11y:ci": "npx tsx src/scripts/accessibility-test.ts",
+    "a11y:quick": "npx tsx src/scripts/accessibility-test.ts",
     "type-check": "tsc --noEmit",
-    "type-check:scripts": "tsc --project tsconfig.scripts.json --noEmit",
-    "type-check:all": "npm run type-check && npm run type-check:scripts",
+    "type-check:all": "npm run type-check",
     "test:build": "npm run type-check:all && npm run build",
     "test:full": "npm run test:build && npm run preview & sleep 5 && npm run a11y:quick",
     "clean": "rm -rf dist .astro node_modules/.vite"
   },
   "dependencies": {
-    "@tailwindcss/vite": "4.1.7",
-    "astro": "5.7.13",
-    "tailwindcss": "4.1.7"
+    "@midudev/tailwind-animations": "0.2.0",
+    "@tailwindcss/vite": "4.1.13",
+    "astro": "5.13.10",
+    "tailwindcss": "4.1.13"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.10.2",
-    "@tailwindcss/typography": "^0.5.16",
-    "@types/node": "^24.0.0",
-    "axe-core": "^4.10.3",
-    "lighthouse": "^12.6.1",
-    "playwright": "^1.53.0",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.20.0",
-    "typescript": "^5.8.3"
+    "@axe-core/playwright": "4.10.2",
+    "@tailwindcss/typography": "0.5.18",
+    "@types/node": "24.5.2",
+    "axe-core": "4.10.3",
+    "lighthouse": "12.8.2",
+    "playwright": "1.55.1",
+    "prettier": "3.6.2",
+    "prettier-plugin-astro": "0.14.1",
+    "ts-node": "10.9.2",
+    "tsx": "4.20.5",
+    "typescript": "5.9.2"
   }
 }

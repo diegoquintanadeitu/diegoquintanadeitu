@@ -1,0 +1,527 @@
+<div class="theme-selector">
+  <div class="theme-selector__container">
+    <!-- Botón principal -->
+    <button
+      id="theme-toggle"
+      class="theme-selector__toggle btn-scale-animation-full"
+      title="Cambiar tema"
+      aria-label="Selector de tema"
+      aria-expanded="false"
+      aria-haspopup="true"
+    >
+      <svg
+        id="theme-icon"
+        class="theme-selector__icon"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+        ></path>
+      </svg>
+    </button>
+
+    <!-- Menú desplegable -->
+    <div
+      id="theme-menu"
+      class="theme-selector__menu"
+      role="menu"
+      aria-labelledby="theme-toggle"
+    >
+      <button
+        id="theme-light"
+        class="theme-selector__option"
+        data-theme="light"
+        role="menuitem"
+      >
+        <div class="theme-selector__indicator theme-selector__indicator--light">
+        </div>
+        <span class="theme-selector__label">Tema Claro</span>
+      </button>
+
+      <button
+        id="theme-dark"
+        class="theme-selector__option"
+        data-theme="dark"
+        role="menuitem"
+      >
+        <div class="theme-selector__indicator theme-selector__indicator--dark">
+        </div>
+        <span class="theme-selector__label">Tema Oscuro</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    type themeType = "light" | "dark";
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeMenu = document.getElementById("theme-menu");
+    const themeIcon = document.getElementById("theme-icon");
+    const themeOptions = document.querySelectorAll(".theme-selector__option");
+    const body = document.body;
+
+    let isMenuOpen = false;
+
+    console.log("🚀 ThemeSelector inicializado");
+    console.log(`📋 Opciones encontradas: ${themeOptions.length}`);
+
+    // Cargar tema guardado
+    const rawTheme = localStorage.getItem("portfolio-theme");
+    const savedTheme: themeType = rawTheme === "dark" ? "dark" : "light";
+    console.log(`💾 Tema guardado: ${rawTheme} -> ${savedTheme}`);
+    setTheme(savedTheme);
+
+    // Toggle del menú
+    themeToggle?.addEventListener("click", function (e) {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    // Cerrar menú al hacer click fuera
+    document.addEventListener("click", function () {
+      if (isMenuOpen) {
+        closeMenu();
+      }
+    });
+
+    // Prevenir cierre al hacer click en el menú
+    themeMenu?.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+
+    // Opciones de tema
+    themeOptions.forEach((option, index) => {
+      console.log(`🔧 Configurando opción ${index}:`, option);
+      option.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const target = e.currentTarget as HTMLButtonElement;
+        const theme = target.getAttribute("data-theme") as themeType;
+
+        console.log(`🎨 Click en tema: ${theme}`);
+        console.log(`📍 Target:`, target);
+
+        if (theme === "light" || theme === "dark") {
+          setTheme(theme);
+          closeMenu();
+        } else {
+          console.error(`❌ Tema inválido: ${theme}`);
+        }
+      });
+    });
+
+    function toggleMenu() {
+      if (isMenuOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    function openMenu() {
+      console.log("📂 Abriendo menú");
+      isMenuOpen = true;
+      themeMenu?.classList.add("is-open");
+      themeToggle?.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu() {
+      console.log("📁 Cerrando menú");
+      isMenuOpen = false;
+      themeMenu?.classList.remove("is-open");
+      themeToggle?.setAttribute("aria-expanded", "false");
+    }
+    function setTheme(theme: themeType) {
+      console.log(`🔄 Aplicando tema: ${theme}`);
+
+      // Aplicar el tema al html usando la clase dark (para Tailwind)
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+
+      // Mantener data-theme en el body para los estilos del componente
+      body.setAttribute("data-theme", theme);
+
+      // Guardar en localStorage
+      localStorage.setItem("portfolio-theme", theme);
+
+      // Actualizar UI
+      updateIcon(theme);
+      updateActiveOption(theme);
+
+      console.log(`✅ Tema ${theme} aplicado correctamente`);
+    }
+
+    function updateIcon(theme: themeType) {
+      if (!themeIcon) return;
+
+      const icons = {
+        light: `<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z'></path>`,
+        dark: `<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z'></path>`,
+      };
+
+      themeIcon.innerHTML = icons[theme] || icons.light;
+    }
+
+    function updateActiveOption(theme: string) {
+      themeOptions.forEach((option) => {
+        option.classList.remove("is-active");
+        if (option.getAttribute("data-theme") === theme) {
+          option.classList.add("is-active");
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  /* ===================================================================
+     THEME SELECTOR COMPONENT - Scoped Styles
+     =================================================================== */
+
+  /* Base Component */
+  .theme-selector {
+    /* Position */
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+
+    /* Animation */
+    animation: slideInFromRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Isolation */
+    isolation: isolate;
+  }
+
+  .theme-selector__container {
+    position: relative;
+  }
+
+  /* ===================================================================
+     TOGGLE BUTTON
+     =================================================================== */
+
+  .theme-selector__toggle {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Size */
+    width: 3rem;
+    height: 3rem;
+
+    /* Visual */
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 50%;
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+    /* Interaction */
+    cursor: pointer;
+    user-select: none;
+
+    /* Transitions */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-selector__toggle:hover {
+    background: rgba(255, 255, 255, 1);
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+
+  .theme-selector__toggle:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow:
+      0 0 0 2px var(--bg-primary),
+      0 0 0 4px #3b82f6;
+  }
+
+  /* ===================================================================
+     ICON
+     =================================================================== */
+
+  .theme-selector__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #374151;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-selector__toggle:hover .theme-selector__icon {
+    color: #111827;
+    transform: rotate(15deg);
+  }
+
+  /* ===================================================================
+     DROPDOWN MENU
+     =================================================================== */
+
+  .theme-selector__menu {
+    /* Position */
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+
+    /* Visual */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.75rem;
+    box-shadow:
+      0 20px 25px -5px rgb(0 0 0 / 0.1),
+      0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+    /* Layout */
+    padding: 0.5rem;
+    min-width: 10rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    /* Animation States */
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95) translateY(-10px);
+    transform-origin: top right;
+
+    /* Transitions */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-selector__menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) translateY(0);
+  }
+
+  /* ===================================================================
+     MENU OPTIONS
+     =================================================================== */
+
+  .theme-selector__option {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+
+    /* Spacing */
+    padding: 0.75rem;
+
+    /* Visual */
+    background: transparent;
+    border: none;
+    border-radius: 0.5rem;
+    color: #374151;
+    text-align: left;
+
+    /* Interaction */
+    cursor: pointer;
+    user-select: none;
+
+    /* Transitions */
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-selector__option:hover {
+    background: rgba(59, 130, 246, 0.08);
+    color: #1e40af;
+    transform: translateX(2px);
+  }
+
+  .theme-selector__option:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: -2px;
+    background: rgba(59, 130, 246, 0.08);
+  }
+
+  .theme-selector__option.is-active {
+    background: rgba(59, 130, 246, 0.1);
+    color: #1e40af;
+    font-weight: 500;
+  }
+
+  /* ===================================================================
+     THEME INDICATORS
+     =================================================================== */
+
+  .theme-selector__indicator {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-selector__indicator--light {
+    background: linear-gradient(135deg, #60a5fa 0%, #34d399 100%);
+  }
+
+  .theme-selector__indicator--dark {
+    background: linear-gradient(135deg, #374151 0%, #111827 100%);
+  }
+
+  .theme-selector__option:hover .theme-selector__indicator {
+    transform: scale(1.1);
+  }
+
+  /* ===================================================================
+     LABELS
+     =================================================================== */
+
+  .theme-selector__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  /* ===================================================================
+     DARK THEME OVERRIDES
+     =================================================================== */
+
+  :global([data-theme="dark"]) .theme-selector__toggle {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :global([data-theme="dark"]) .theme-selector__toggle:hover {
+    background: rgba(51, 65, 85, 0.9);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+  }
+
+  :global([data-theme="dark"]) .theme-selector__icon {
+    color: #e2e8f0;
+  }
+
+  :global([data-theme="dark"])
+    .theme-selector__toggle:hover
+    .theme-selector__icon {
+    color: #f1f5f9;
+  }
+
+  :global([data-theme="dark"]) .theme-selector__menu {
+    background: rgba(30, 41, 59, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :global([data-theme="dark"]) .theme-selector__option {
+    color: #e2e8f0;
+  }
+
+  :global([data-theme="dark"]) .theme-selector__option:hover {
+    background: rgba(125, 211, 252, 0.1);
+    color: #7dd3fc;
+  }
+
+  :global([data-theme="dark"]) .theme-selector__option.is-active {
+    background: rgba(125, 211, 252, 0.15);
+    color: #7dd3fc;
+  }
+
+  :global([data-theme="dark"]) .theme-selector__toggle:focus {
+    box-shadow:
+      0 0 0 2px var(--bg-primary),
+      0 0 0 4px var(--text-accent);
+  }
+
+  /* ===================================================================
+     ANIMATIONS
+     =================================================================== */
+
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  /* ===================================================================
+     RESPONSIVE DESIGN
+     =================================================================== */
+
+  @media (max-width: 480px) {
+    .theme-selector {
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+
+    .theme-selector__toggle {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+
+    .theme-selector__icon {
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+  }
+
+  /* ===================================================================
+     PRINT STYLES
+     =================================================================== */
+
+  @media print {
+    .theme-selector {
+      display: none;
+    }
+  }
+
+  /* ===================================================================
+     REDUCED MOTION SUPPORT
+     =================================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-selector,
+    .theme-selector__toggle,
+    .theme-selector__menu,
+    .theme-selector__option,
+    .theme-selector__icon,
+    .theme-selector__indicator {
+      animation: none;
+      transition: none;
+    }
+
+    .theme-selector__toggle:hover,
+    .theme-selector__option:hover {
+      transform: none;
+    }
+  }
+
+  /* ===================================================================
+     HIGH CONTRAST MODE SUPPORT
+     =================================================================== */
+
+  @media (prefers-contrast: high) {
+    .theme-selector__toggle,
+    .theme-selector__menu {
+      border-width: 2px;
+    }
+
+    .theme-selector__option:focus {
+      outline-width: 3px;
+    }
+  }
+</style>

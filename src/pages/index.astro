@@ -1,55 +1,45 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ThemeSelector from '../components/ThemeSelector.astro';
-import ConstructionBanner from '../components/ui/ConstructionBanner/ConstructionBanner.astro';
-import {api} from '../services/api';
+import {api} from '@/services/api';
+import Layout from '@/ui/layouts/Layout.astro';
 
 // Obtener datos
 const profile = await api.getProfile();
-const skillCategories = await api.getSkills();
 const timeline = await api.getTimeline();
 const projects = await api.getProjects();
+const skillCategories = await api.getSkills();
+const techEvolution = await api.getTechEvolution();
 ---
 
 <Layout title={profile.name}>
-  <!-- Banner de construcción -->
-  <ConstructionBanner />
 
-  <ThemeSelector />
   <main
-    class='min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-12'
-  >
-    <!-- Hero Section -->
-    <section class='relative py-12 px-4'>
-      <div class='container mx-auto text-center'>
-        <div class='relative inline-block mb-6'>
+    class='flex flex-col justify-center min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50'
+  > 
+    <section class='relative mx-auto max-w-7xl'>
+      <div class='w-full h-full p-8 md:pt-12 text-left'>
+        <div class='relative inline-block'>
           <h1
-            class='text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent leading-tight'
-            style='padding-bottom: 0.2em;'
+            class='text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent leading-tight pb-1'
           >
             {profile.name}
           </h1>
-          <div
-            class='absolute -top-2 -right-2 w-4 h-4 bg-blue-500 rounded-full animate-pulse'
-          >
-          </div>
         </div>
 
-        <p class='text-2xl text-slate-600 mb-8 font-medium'>{profile.role}</p>
+        <p class='text-md md:text-2xl text-slate-600 mb-4 md:mb-6 font-medium'>{profile.role}</p>
 
-        <div class='max-w-3xl mx-auto space-y-4'>
+        <div class='bg-white rounded-2xl shadow-lg p-6 border border-slate-100 hover:shadow-xl transition-all duration-300 relative text-left space-y-4 mb-6 md:mb-8'>
           {
             profile.bio.map((paragraph) => (
-              <p class='text-lg text-slate-600 leading-relaxed'>{paragraph}</p>
+              <p class='text-md md:text-lg text-slate-600 leading-relaxed'>{paragraph}</p>
             ))
           }
         </div>
 
-        <!-- CV Button - Prioritario para recruiters -->
-        <div class='mt-12 mb-8'>
+        <div class='flex flex-wrap md:justify-start justify-center gap-4'>
+          <!-- CV Button - Prioritario para recruiters -->
           <a
             href='/curriculum-vitae'
-            class='inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl transition-all duration-300 font-bold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 hover:scale-105'
+            class='w-full md:w-auto inline-flex justify-center items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl btn-scale-animation'
           >
             <svg
               class='w-6 h-6 mr-3'
@@ -64,359 +54,31 @@ const projects = await api.getProjects();
                 d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
               ></path>
             </svg>
-            📄 Ver Curriculum Vitae
+            Curriculum Vitae
+          </a>
+
+          <!-- Botón para ir a la página de juegos -->
+          <a
+            id='game-button' style='display: none;'
+            href='/play'
+            class='w-full md:w-auto inline-flex justify-center items-center px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl btn-scale-animation'
+          >
+            <svg
+              class='w-6 h-6 mr-3'
+              xmlns='http://www.w3.org/2000/svg'
+              fill='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path d='M6.5 3C5.67 3 5 3.67 5 4.5S5.67 6 6.5 6 8 5.33 8 4.5 7.33 3 6.5 3zM17.5 3c-.83 0-1.5.67-1.5 1.5S16.67 6 17.5 6 19 5.33 19 4.5 18.33 3 17.5 3zM12 7c-2.21 0-4 1.79-4 4v1H7v2h1v1c0 2.21 1.79 4 4 4s4-1.79 4-4v-1h1v-2h-1v-1c0-2.21-1.79-4-4-4zm-2 5h4v1h-4v-1z'/>
+            </svg>
+            Play
           </a>
         </div>
       </div>
     </section>
-
-    <!-- Skills Section -->
-    <section class='py-8 px-4'>
+  
+    <section class='relative mx-auto max-w-7xl pr-4 md:pr-0'>
       <div class='container mx-auto'>
-        <h2 class='text-4xl font-bold text-center mb-4 text-slate-800'>
-          Habilidades
-        </h2>
-        <p class='text-center text-slate-600 mb-8 max-w-2xl mx-auto'>
-          Evolución continua desde Visual Basic 6 hasta tecnologías modernas
-        </p>
-        <div
-          class='w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-12 rounded-full'
-        >
-        </div>
-
-        <!-- Línea de evolución tecnológica -->
-        <div
-          class='mb-12 bg-white rounded-2xl shadow-lg p-6 border border-slate-100'
-        >
-          <h3 class='text-xl font-semibold text-center mb-6 text-slate-800'>
-            Evolución Tecnológica
-          </h3>
-          <div class='flex flex-wrap justify-center items-center gap-3 text-sm'>
-            <span
-              class='px-3 py-1 bg-red-50 text-red-700 rounded-full border border-red-200'
-              >VB6</span
-            >
-            <svg
-              class='w-4 h-4 text-slate-400'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
-                d='M9 5l7 7-7 7'></path>
-            </svg>
-            <span
-              class='px-3 py-1 bg-orange-50 text-orange-700 rounded-full border border-orange-200'
-              >C#</span
-            >
-            <svg
-              class='w-4 h-4 text-slate-400'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
-                d='M9 5l7 7-7 7'></path>
-            </svg>
-            <span
-              class='px-3 py-1 bg-yellow-50 text-yellow-700 rounded-full border border-yellow-200'
-              >SQL</span
-            >
-            <svg
-              class='w-4 h-4 text-slate-400'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
-                d='M9 5l7 7-7 7'></path>
-            </svg>
-            <span
-              class='px-3 py-1 bg-green-50 text-green-700 rounded-full border border-green-200'
-              >JavaScript</span
-            >
-            <svg
-              class='w-4 h-4 text-slate-400'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
-                d='M9 5l7 7-7 7'></path>
-            </svg>
-            <span
-              class='px-3 py-1 bg-blue-50 text-blue-700 rounded-full border border-blue-200'
-              >React Native</span
-            >
-            <svg
-              class='w-4 h-4 text-slate-400'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
-                d='M9 5l7 7-7 7'></path>
-            </svg>
-            <span
-              class='px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-200'
-              >TypeScript</span
-            >
-            <svg
-              class='w-4 h-4 text-slate-400'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
-                d='M9 5l7 7-7 7'></path>
-            </svg>
-            <span
-              class='px-3 py-1 bg-purple-50 text-purple-700 rounded-full border border-purple-200'
-              >Vercel</span
-            >
-            <svg
-              class='w-4 h-4 text-slate-400'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
-                d='M9 5l7 7-7 7'></path>
-            </svg>
-            <span
-              class='px-3 py-1 bg-pink-50 text-slate-800 rounded-full border border-pink-200 ring-2 ring-pink-300 animate-pulse'
-              >Astro</span
-            >
-          </div>
-        </div>
-
-        <div class='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
-          <!-- Technical Skills -->
-          <div
-            class='bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-slate-100'
-          >
-            <div class='flex items-center mb-6'>
-              <div
-                class='w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4'
-              >
-                <svg
-                  class='w-6 h-6 text-blue-600'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4'></path>
-                </svg>
-              </div>
-              <h3 class='text-xl font-semibold text-slate-800'>Tecnologías</h3>
-            </div>
-            <div class='flex flex-wrap gap-2'>
-              {
-                skillCategories.technical.map((skill) => (
-                  <span class='px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-100 transition-colors'>
-                    {skill}
-                  </span>
-                ))
-              }
-            </div>
-          </div>
-
-          <!-- Frameworks -->
-          <div
-            class='bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-slate-100'
-          >
-            <div class='flex items-center mb-6'>
-              <div
-                class='w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4'
-              >
-                <svg
-                  class='w-6 h-6 text-purple-600'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10'
-                  ></path>
-                </svg>
-              </div>
-              <h3 class='text-xl font-semibold text-slate-800'>Frameworks</h3>
-            </div>
-            <div class='flex flex-wrap gap-2'>
-              {
-                skillCategories.frameworks.map((skill) => (
-                  <span class='px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-sm font-medium hover:bg-purple-100 transition-colors'>
-                    {skill}
-                  </span>
-                ))
-              }
-            </div>
-          </div>
-
-          <!-- Tools -->
-          <div
-            class='bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-slate-100'
-          >
-            <div class='flex items-center mb-6'>
-              <div
-                class='w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4'
-              >
-                <svg
-                  class='w-6 h-6 text-green-600'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z'
-                  ></path>
-                  <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'></path>
-                </svg>
-              </div>
-              <h3 class='text-xl font-semibold text-slate-800'>Herramientas</h3>
-            </div>
-            <div class='flex flex-wrap gap-2'>
-              {
-                skillCategories.tools.map((skill) => (
-                  <span class='px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm font-medium hover:bg-green-100 transition-colors'>
-                    {skill}
-                  </span>
-                ))
-              }
-            </div>
-          </div>
-        </div>
-
-        <!-- Soft Skills -->
-        <div
-          class='mt-12 bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-8'
-        >
-          <h3 class='text-2xl font-bold text-center mb-8 text-slate-800'>
-            Competencias Profesionales
-          </h3>
-          <p class='text-center text-slate-600 mb-8 max-w-2xl mx-auto text-sm'>
-            Habilidades interpersonales y competencias desarrolladas a lo largo de mi trayectoria profesional
-          </p>
-          <div class='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
-            {
-              Object.entries(skillCategories.soft).map(
-                ([skill, description], index) => {
-                  // Iconos específicos para cada skill
-                  const icons = {
-                    'Liderazgo técnico': 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
-                    'Comunicación efectiva': 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
-                    'Resolución de problemas': 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
-                    'Trabajo en equipo': 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m3 5.197v1a2 2 0 11-4 0v-1m4 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v8.059',
-                    'Mentoring': 'M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z',
-                    'Gestión de proyectos': 'M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
-                    'Pensamiento analítico': 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
-                    'Adaptabilidad': 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15'
-                  };
-                  
-                  // Niveles más realistas
-                  const levels = ['Intermedio', 'Avanzado', 'Experto', 'Senior'];
-                  const level = levels[index % levels.length];
-                  
-                  // Colores específicos para cada skill
-                  const colorClasses = [
-                    'from-blue-500 to-blue-600',
-                    'from-green-500 to-green-600', 
-                    'from-purple-500 to-purple-600',
-                    'from-orange-500 to-orange-600',
-                    'from-red-500 to-red-600',
-                    'from-indigo-500 to-indigo-600',
-                    'from-teal-500 to-teal-600',
-                    'from-pink-500 to-pink-600'
-                  ];
-                  
-                  return (
-                    <div class='skill-card group relative bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300' tabindex='0' role='article' aria-label={`Habilidad: ${skill}`}>
-                      <div class='relative p-6'>
-                        <!-- Header con icono y título -->
-                        <div class='flex items-start gap-4 mb-3'>
-                          <div class={`flex-shrink-0 w-10 h-10 bg-gradient-to-br ${colorClasses[index]} rounded-lg flex items-center justify-center shadow-sm`} aria-hidden='true'>
-                            <svg class='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d={icons[skill as keyof typeof icons] || icons['Adaptabilidad']} />
-                            </svg>
-                          </div>
-                          <div class='flex-1 min-w-0'>
-                            <h4 class='text-base font-semibold text-slate-800 leading-tight mb-2'>
-                              {skill}
-                            </h4>
-                            <!-- Texto que se expande suavemente en el mismo lugar -->
-                            <div class='skill-text-container'>
-                              <p class='text-sm text-slate-600 leading-relaxed line-clamp-2 group-hover:line-clamp-none group-focus:line-clamp-none transition-all duration-500 ease-out'>
-                                {description}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <!-- Badge de nivel -->
-                        <div class='mt-3 flex items-center justify-between'>
-                          <div class='flex items-center gap-2'>
-                            <span class='text-xs text-slate-600 font-medium'>Nivel:</span>
-                            <span class='text-xs text-slate-700 font-semibold'>{level}</span>
-                          </div>
-                          <!-- Indicador visual sutil -->
-                          <div class='w-2 h-2 bg-slate-300 rounded-full group-hover:bg-slate-400 group-focus:bg-slate-400 transition-colors duration-200' aria-hidden='true'></div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                }
-              )
-            }
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Timeline Section -->
-    <section class='py-16 px-4 bg-white'>
-      <div class='container mx-auto'>
-        <h2 class='text-4xl font-bold text-center mb-16 text-slate-800'>
-          Experiencia
-          <div
-            class='w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full'
-          >
-          </div>
-        </h2>
 
         <div class='relative'>
           <!-- Línea central del timeline (desktop) -->
@@ -446,10 +108,15 @@ const projects = await api.getProjects();
                   </div>
                   
                   <!-- Card del contenido -->
-                  <div class='bg-white rounded-2xl shadow-lg p-6 border border-slate-100 hover:shadow-xl transition-all duration-300 relative z-20'>
-                    <h3 class='text-xl font-bold text-slate-800 mb-2'>
+                  <div class='bg-white rounded-2xl shadow-lg p-6 border border-slate-100 hover:shadow-xl transition-all duration-300 relative'>
+                    <h3 class='text-xl font-bold text-slate-800 mb-1'>
                       {item.title}
                     </h3>
+                    {item.company && (
+                      <p class='text-blue-600 font-medium text-sm mb-3'>
+                        {item.company}
+                      </p>
+                    )}
                     <p class='text-slate-600 mb-4'>{item.description}</p>
                     {item.technologies && (
                       <div class='flex flex-wrap gap-2'>
@@ -467,10 +134,12 @@ const projects = await api.getProjects();
           }
         </div>
       </div>
+
+
+
     </section>
 
-    <!-- Projects Section -->
-    <section class='py-16 px-4 bg-gradient-to-br from-slate-50 to-blue-50'>
+    <section class='py-16 px-4 bg-gradient-to-br from-slate-50 to-blue-50' style="display: none;">
       <div class='container mx-auto'>
         <h2 class='text-4xl font-bold text-center mb-16 text-slate-800'>
           Proyectos
@@ -531,18 +200,13 @@ const projects = await api.getProjects();
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class='py-16 px-4 bg-slate-800'>
+    <section class='py-16 px-4 bg-slate-800' style="display: none;">
       <div class='container mx-auto text-center'>
-        <h2 class='text-4xl font-bold mb-8 text-white'>Contacto</h2>
-        <p class='text-xl text-slate-300 mb-12 max-w-2xl mx-auto'>
-          ¿Tienes un proyecto en mente? ¡Hablemos y hagámoslo realidad!
-        </p>
 
         <div class='flex flex-wrap justify-center gap-4'>
           <a
             href='mailto:diegoquintanadeitu@gmail.com'
-            class='flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium'
+            class='flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium btn-scale-animation'
           >
             <svg
               class='w-5 h-5 mr-2'
@@ -562,7 +226,7 @@ const projects = await api.getProjects();
 
           <a
             href='https://linkedin.com/in/diego-daniel-martin-quintana'
-            class='flex items-center px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors font-medium'
+            class='flex items-center px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-medium btn-scale-animation'
             target='_blank'
             rel='noopener noreferrer'
           >
@@ -576,7 +240,7 @@ const projects = await api.getProjects();
 
           <a
             href='https://github.com/diegoquintanadeitu'
-            class='flex items-center px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors font-medium'
+            class='flex items-center px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-medium btn-scale-animation'
             target='_blank'
             rel='noopener noreferrer'
           >
@@ -591,4 +255,57 @@ const projects = await api.getProjects();
       </div>
     </section>
   </main>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === konamiCode[konamiIndex]) {
+            konamiIndex++;
+            if (konamiIndex === konamiCode.length) {
+              const gameButton = document.getElementById('game-button');
+              if (gameButton) {
+                localStorage.setItem("play-access", "true"); // Agregar flag en localStorage
+                gameButton.style.display = 'flex';
+              }
+              konamiIndex = 0; // Reset the sequence
+            }
+          } else {
+            konamiIndex = 0; // Reset if the sequence is broken
+          }
+        });
+      });
+
+    document.addEventListener("keydown", function (event) {
+      const keyDisplay = document.createElement("div");
+      keyDisplay.textContent = event.key;
+      keyDisplay.style.position = "fixed";
+      keyDisplay.style.bottom = "10px";
+      keyDisplay.style.right = "10px";
+      keyDisplay.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+      keyDisplay.style.color = "white";
+      keyDisplay.style.padding = "5px 10px";
+      keyDisplay.style.borderRadius = "5px";
+      keyDisplay.style.zIndex = "1000";
+      keyDisplay.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+
+      const existingKeys = document.querySelectorAll<HTMLElement>(".key-display");
+      existingKeys.forEach((key, index) => {
+          key.style.transform = `translateY(-${(index + 1) * 30}px)`;
+      });
+
+      keyDisplay.classList.add("key-display");
+      document.body.appendChild(keyDisplay);
+
+      setTimeout(() => {
+        keyDisplay.style.opacity = "0";
+        keyDisplay.addEventListener("transitionend", () => {
+          keyDisplay.remove();
+        });
+      }, 1000);
+    });
+  </script>
 </Layout>

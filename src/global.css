@@ -1,6 +1,12 @@
 @import "tailwindcss";
 
-/* Variables de temas */
+@plugin "@midudev/tailwind-animations";
+
+/* ===================================================================
+   VARIABLES DE TEMAS
+   =================================================================== */
+
+/* Variables Light Theme (por defecto) */
 :root {
   --bg-primary: #f8fafc;
   --bg-secondary: #ffffff;
@@ -8,30 +14,61 @@
   --text-primary: #1e293b;
   --text-secondary: #64748b;
   --text-accent: #3b82f6;
+  --text-accent-rgb: 59, 130, 246;
   --border-color: #e2e8f0;
   --shadow-color: rgba(0, 0, 0, 0.1);
+  --bg-gradient-primary: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #e2e8f0 100%);
 }
 
+/* Variables Dark Theme */
 [data-theme="dark"] {
   --bg-primary: #0f172a;
   --bg-secondary: #1e293b;
   --bg-accent: #334155;
   --text-primary: #f8fafc;
-  /* Mejorado de #f1f5f9 a #f8fafc para mejor contraste */
   --text-secondary: #e2e8f0;
-  /* Mejorado de #cbd5e1 a #e2e8f0 para mejor contraste */
   --text-accent: #7dd3fc;
-  /* Mejorado de #60a5fa a #7dd3fc para mejor contraste */
+  --text-accent-rgb: 125, 211, 252;
   --border-color: #475569;
   --shadow-color: rgba(0, 0, 0, 0.3);
+
+  /* Variables específicas para tema oscuro */
+  --bg-pink-50: #1e1b4b;
+  --text-on-pink-50: #ffffff;
+  --bg-blue-600: #1e3a8a;
+  --text-on-blue-600: #ffffff;
+  --bg-purple-50: #6b21a8;
+  --text-on-purple-50: #f3e8ff;
+  --bg-green-50: #14532d;
+  --text-on-green-50: #dcfce7;
+  --bg-blue-50: #1e3a8a;
+  --text-on-blue-50: #bfdbfe;
+  --text-blue-improved: #93c5fd;
+  --text-purple-improved: #f3e8ff;
+  --text-green-improved: #dcfce7;
+  --border-blue-improved: #1e40af;
+  --bg-gradient-primary: linear-gradient(135deg,
+      #0f172a 0%,
+      #1e293b 50%,
+      #334155 100%);
+  --bg-gradient-secondary: linear-gradient(90deg, #334155 0%, #475569 100%);
 }
 
-/* Estilos base */
+/* ===================================================================
+   ESTILOS BASE
+   =================================================================== */
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
+
+/* ===================================================================
+   LIGHT THEME - ESTILOS ESPECÍFICOS
+   =================================================================== */
 
 /* Mejoras de contraste generales - WCAG 2.1 AA compliant */
 .bg-pink-50 {
@@ -55,26 +92,11 @@ body {
   border-color: var(--border-blue-improved);
 }
 
-/* Tema oscuro - Mejoras de accesibilidad y variables CSS customizadas */
-[data-theme="dark"] {
-  /* Variables específicas para tema oscuro */
-  --bg-pink-50: #1e1b4b;
-  --text-on-pink-50: #ffffff;
-  --bg-blue-600: #1e3a8a;
-  --text-on-blue-600: #ffffff;
-  --bg-purple-50: #6b21a8;
-  --text-on-purple-50: #f3e8ff;
-  --bg-green-50: #14532d;
-  --text-on-green-50: #dcfce7;
-  --bg-blue-50: #1e3a8a;
-  --text-on-blue-50: #bfdbfe;
-  --text-blue-improved: #93c5fd;
-  --text-purple-improved: #f3e8ff;
-  --text-green-improved: #dcfce7;
-  --border-blue-improved: #1e40af;
-  --bg-gradient-primary: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-  --bg-gradient-secondary: linear-gradient(90deg, #334155 0%, #475569 100%);
-}
+/* ===================================================================
+   DARK THEME - ESTILOS ESPECÍFICOS
+   =================================================================== */
+
+/* Estilos generales para dark theme */
 
 [data-theme="dark"] .bg-gradient-to-br {
   background: var(--bg-gradient-primary);
@@ -208,87 +230,9 @@ body {
   background: var(--bg-gradient-secondary);
 }
 
-/* Estilos para cards de soft skills */
-.skill-card {
-  min-height: 140px;
-  transition: all 0.3s ease;
-}
-
-.skill-card:hover {
-  transform: translateY(-4px);
-  min-height: auto;
-}
-
-.skill-card .skill-text-container {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Utilidad para limitar líneas de texto */
-.line-clamp-2 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  line-height: 1.5;
-  max-height: calc(1.5em * 2);
-}
-
-.line-clamp-none {
-  overflow: visible;
-  display: block;
-  -webkit-line-clamp: unset;
-  line-clamp: unset;
-  max-height: none;
-}
-
-/* Mejorar accesibilidad y contraste */
-.skill-card:focus-within {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
-}
-
-/* Asegurar suficiente contraste en hover */
-.skill-card:hover h4 {
-  color: #1e40af;
-}
-
-/* Responsive mobile improvements */
-@media (max-width: 640px) {
-  .skill-card {
-    min-height: 140px;
-  }
-
-  .skill-card:hover {
-    transform: translateY(-4px) scale(1.01);
-  }
-}
-
-/* Estilos para tema oscuro - Cards de soft skills */
-[data-theme="dark"] .skill-card {
-  background-color: #1e293b;
-  border-color: #334155;
-}
-
-[data-theme="dark"] .skill-card .text-slate-800 {
-  color: #f1f5f9;
-}
-
-[data-theme="dark"] .skill-card .text-slate-600 {
-  color: #cbd5e1;
-}
-
-[data-theme="dark"] .skill-card .text-slate-700 {
-  color: #e2e8f0;
-}
-
-[data-theme="dark"] .skill-card .border-slate-100 {
-  border-color: #334155;
-}
-
-[data-theme="dark"] .skill-card .bg-gradient-to-br.from-blue-50.to-purple-50 {
-  background: linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
-}
+/* ===================================================================
+   COMPONENTE STYLES - Se importan desde archivos separados
+   =================================================================== */
 
 [data-theme="dark"] .bg-slate-800 {
   background-color: #0f172a;
@@ -326,7 +270,63 @@ body {
   display: block;
 }
 
-/* Estilos de impresión optimizados */
+/* ===================================================================
+   UTILIDADES GENERALES (ambos temas)
+   =================================================================== */
+
+/* Animación unificada para botones */
+.btn-scale-animation {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-scale-animation:hover {
+  transform: scale(1.05);
+}
+
+.btn-scale-animation:active {
+  transform: scale(0.95);
+}
+
+/* Versión con transición completa para botones complejos */
+.btn-scale-animation-full {
+  transition:
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-scale-animation-full:hover {
+  transform: scale(1.05);
+}
+
+.btn-scale-animation-full:active {
+  transform: scale(0.95);
+}
+
+/* Utilidad para limitar líneas de texto */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  line-height: 1.5;
+  max-height: calc(1.5em * 2);
+}
+
+.line-clamp-none {
+  overflow: visible;
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  max-height: none;
+}
+
+
+
+/* ===================================================================
+   ESTILOS DE IMPRESIÓN
+   =================================================================== */
 @media print {
 
   .print\:hidden,

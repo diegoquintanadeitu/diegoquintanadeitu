@@ -8,14 +8,13 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@/components/*": ["src/components/*"],
-      "@/ui/*": ["src/components/ui/*"],
-      "@/layouts/*": ["src/layouts/*"],
+      "@/components/*": ["src/ui/components/*"],
+      "@/layouts/*": ["src/ui/layouts/*"],
       "@/pages/*": ["src/pages/*"],
       "@/services/*": ["src/services/*"],
       "@/types/*": ["src/types/*"],
-      "@/assets/*": ["src/assets/*"],
-      "@/mocks/*": ["src/mocks/*"]
+      "@/mocks/*": ["src/mocks/*"],
+      "@/db/*": ["src/db/*"]
     }
   }
 }
