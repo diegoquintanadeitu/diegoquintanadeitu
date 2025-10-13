@@ -100,7 +100,7 @@ const skillCategories = await api.getSkills();
 
         <button
           id="print-btn"
-          class="bg-violet-800 hover:animate-tilt hover:bg-violet-600 text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2 justify-center sm:justify-start cursor-pointer"
+          class="bg-violet-800 hover:bg-violet-600 text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2 justify-center sm:justify-start cursor-pointer btn-scale-animation"
           title="Imprimir Curriculum Vitae"
         >
           <svg
@@ -166,56 +166,6 @@ const skillCategories = await api.getSkills();
           </div>
         </section>
 
-        <!-- Habilidades Técnicas -->
-        <section class="mb-8 print-avoid-break print:mb-4">
-          <h3
-            class="text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2"
-          >
-            Habilidades Técnicas
-          </h3>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-3">
-            <!-- Herramientas -->
-            <div class="print-avoid-break">
-              <h4
-                class="font-semibold text-blue-700 mb-3 print:text-sm print:mb-2"
-              >
-                Herramientas y Plataformas
-              </h4>
-              <div class="flex flex-wrap gap-2 print:gap-1">
-                {
-                  skillCategories.tools
-                    .slice(0, 8)
-                    .map((tool) => (
-                      <span class="bg-green-50 text-green-800 px-3 py-1 rounded-full text-xs border border-green-200 print:px-2 print:py-0">
-                        {tool}
-                      </span>
-                    ))
-                }
-              </div>
-            </div>
-            <!-- Tecnologías Principales -->
-            <div class="print-avoid-break">
-              <h4
-                class="font-semibold text-blue-700 mb-3 print:text-sm print:mb-2"
-              >
-                Lenguajes y Frameworks
-              </h4>
-              <div class="flex flex-wrap gap-2 print:gap-1">
-                {
-                  skillCategories.technical
-                    .slice(0, 12)
-                    .map((skill) => (
-                      <span class="bg-blue-50 text-blue-800 px-3 py-1 rounded-full text-xs border border-blue-200 print:px-2 print:py-0">
-                        {skill}
-                      </span>
-                    ))
-                }
-              </div>
-            </div>
-          </div>
-        </section>
-
         <!-- Experiencia Profesional -->
         <section class="mb-8 print:mb-4">
           <div class="space-y-5">
@@ -230,6 +180,11 @@ const skillCategories = await api.getSkills();
                       {job.period}
                     </span>
                   </div>
+                  {job.company && (
+                    <p class="text-sm text-gray-600 font-medium mb-2 print:text-xs print:mb-1">
+                      {job.company}
+                    </p>
+                  )}
                   <p class="text-sm text-justify leading-relaxed mb-2 print:text-xs print:mb-1">
                     {job.description}
                   </p>
@@ -267,6 +222,81 @@ const skillCategories = await api.getSkills();
           </div>
         </section>
 
+        <!-- Habilidades Técnicas -->
+        <section class="mb-8 print-avoid-break print:mb-4">
+          <h3
+            class="text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2"
+          >
+            Habilidades Técnicas
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-3">
+            <!-- Herramientas -->
+            <div class="print-avoid-break">
+              <h4
+                class="font-semibold text-blue-700 mb-3 print:text-sm print:mb-2"
+              >
+                Herramientas y Plataformas
+              </h4>
+              <div class="flex flex-wrap gap-2 print:gap-1">
+                {
+                  skillCategories.tools
+                    .slice(0, 8)
+                    .map((tool) => (
+                      <span class="bg-slate-50 text-slate-700 px-3 py-1 rounded-full text-xs border border-slate-200 print:px-2 print:py-0">
+                        {tool}
+                      </span>
+                    ))
+                }
+              </div>
+            </div>
+            <!-- Tecnologías Principales -->
+            <div class="print-avoid-break">
+              <h4
+                class="font-semibold text-blue-700 mb-3 print:text-sm print:mb-2"
+              >
+                Lenguajes y Frameworks
+              </h4>
+              <div class="flex flex-wrap gap-2 print:gap-1">
+                {
+                  skillCategories.technical
+                    .slice(0, 12)
+                    .map((skill) => (
+                      <span class="bg-blue-50 text-blue-800 px-3 py-1 rounded-full text-xs border border-blue-200 print:px-2 print:py-0">
+                        {skill}
+                      </span>
+                    ))
+                }
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Habilidades Interpersonales -->
+        <section class="mb-8 print-avoid-break print:mb-4">
+          <h3
+            class="text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2"
+          >
+            Competencias Profesionales
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 print:gap-2">
+            {
+              Object.entries(skillCategories.soft)
+                .slice(0, 6)
+                .map(([skillName, description]) => (
+                  <div class="print-avoid-break">
+                    <h4 class="font-semibold text-orange-700 text-sm mb-1 print:text-xs">
+                      {skillName}
+                    </h4>
+                    <p class="text-xs text-gray-600 leading-relaxed print:text-xs">
+                      {description}
+                    </p>
+                  </div>
+                ))
+            }
+          </div>
+        </section>
+
         <!-- Proyectos Destacados -->
         <section class="mb-8 print:mb-4">
           <h3
@@ -297,7 +327,7 @@ const skillCategories = await api.getSkills();
                     </span>
                     <div class="inline-flex flex-wrap gap-1">
                       {project.technologies.map((tech) => (
-                        <span class="bg-purple-50 text-purple-800 px-2 py-1 rounded text-xs border border-purple-200 print:px-1 print:py-0">
+                        <span class="bg-slate-50 text-slate-700 px-2 py-1 rounded text-xs border border-slate-200 print:px-1 print:py-0">
                           {tech}
                         </span>
                       ))}
@@ -305,31 +335,6 @@ const skillCategories = await api.getSkills();
                   </div>
                 </div>
               ))
-            }
-          </div>
-        </section>
-
-        <!-- Habilidades Interpersonales -->
-        <section class="mb-8 print-avoid-break print:mb-4">
-          <h3
-            class="text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2"
-          >
-            Competencias Profesionales
-          </h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 print:gap-2">
-            {
-              Object.entries(skillCategories.soft)
-                .slice(0, 6)
-                .map(([skillName, description]) => (
-                  <div class="print-avoid-break">
-                    <h4 class="font-semibold text-orange-700 text-sm mb-1 print:text-xs">
-                      {skillName}
-                    </h4>
-                    <p class="text-xs text-gray-600 leading-relaxed print:text-xs">
-                      {description}
-                    </p>
-                  </div>
-                ))
             }
           </div>
         </section>

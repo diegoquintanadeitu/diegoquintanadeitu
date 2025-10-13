@@ -7,7 +7,10 @@ interface Props {
 const { class: className = "", variant = "primary" } = Astro.props;
 ---
 
-<a href="/" class={`back-button back-button--${variant} ${className}`}>
+<a
+  href="/"
+  class={`back-button back-button--${variant} btn-scale-animation-full ${className}`}
+>
   <svg
     width="16"
     height="16"
@@ -63,7 +66,6 @@ const { class: className = "", variant = "primary" } = Astro.props;
 
   /* Hover & Focus States */
   .back-button:hover {
-    transform: translateY(-2px);
     box-shadow:
       0 10px 15px -3px rgb(0 0 0 / 0.1),
       0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -75,10 +77,6 @@ const { class: className = "", variant = "primary" } = Astro.props;
     box-shadow:
       0 0 0 2px var(--bg-primary),
       0 0 0 4px #3b82f6;
-  }
-
-  .back-button:active {
-    transform: translateY(0);
   }
 
   /* Icon & Text Styling */

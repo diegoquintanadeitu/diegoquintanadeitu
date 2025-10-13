@@ -57,8 +57,9 @@ export const data = {
     {
       period: "2022 - 2025",
       title: "Web Developer",
+      company: "Ualá",
       description:
-        "Formo parte de un equipo de desarrollo ágil, multidisciplinario, donde colaboro en la creación de aplicaciones web modernas y escalables. Mi enfoque está en la implementación de soluciones eficientes utilizando TypeScript + Next.js, asegurando un alto rendimiento y la excelencia en la experiencia de usuario. Este es el 3er equipo en el que participo, y he contribuido significativamente a la mejora de procesos (CI/CD) y la adopción de nuevas tecnologías.",
+        "Formé parte de un equipo de desarrollo ágil, multidisciplinario, donde colaboré en la creación de aplicaciones web modernas y escalables. Mi enfoque está en la implementación de soluciones eficientes utilizando TypeScript + Next.js, asegurando un alto rendimiento y la excelencia en la experiencia de usuario. Este es el 3er equipo en el que participo, y he contribuido significativamente a la mejora de procesos (CI/CD) y la adopción de nuevas tecnologías.",
       technologies: [
         "TypeScript",
         "React",
@@ -79,6 +80,7 @@ export const data = {
     {
       period: "2020 - 2022",
       title: "Frontend Developer",
+      company: "Globant",
       description:
         "Transición hacia tecnologías web modernas, especialización en JavaScript/TypeScript, desarrollo de componentes del design system de importante aerolinea en react y react native",
       technologies: ["JavaScript", "React Native", "React", "Node.js"],
@@ -91,6 +93,7 @@ export const data = {
     {
       period: "2018 - 2020",
       title: "Desarrollador de Aplicaciones Empresariales",
+      company: "Equipo médico de emergencias Chaco SA",
       description:
         "Desarrollo en entorno Microsoft con C# y .NET, gestión de bases de datos SQL Server y mantenimiento de sistemas legacy en Visual Basic 6.",
       technologies: [
@@ -112,6 +115,7 @@ export const data = {
     {
       period: "2017 - 2018",
       title: "Programador Junior",
+      company: "INNEW",
       description:
         "Inicio profesional desarrollando aplicaciones de gestión empresarial en Visual Basic 6, bases de datos Access y primeros pasos en SQL Server.",
       technologies: [

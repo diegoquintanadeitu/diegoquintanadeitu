@@ -19,6 +19,7 @@ export interface SkillCategories {
 export interface TimelineItem {
   period: string;
   title: string;
+  company?: string;
   description: string;
   technologies?: string[];
   achievements?: string[];

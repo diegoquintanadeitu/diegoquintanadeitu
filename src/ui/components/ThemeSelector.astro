@@ -3,7 +3,7 @@
     <!-- Botón principal -->
     <button
       id="theme-toggle"
-      class="theme-selector__toggle"
+      class="theme-selector__toggle btn-scale-animation-full"
       title="Cambiar tema"
       aria-label="Selector de tema"
       aria-expanded="false"
@@ -233,7 +233,6 @@
 
   .theme-selector__toggle:hover {
     background: rgba(255, 255, 255, 1);
-    transform: scale(1.05);
     box-shadow:
       0 10px 15px -3px rgb(0 0 0 / 0.1),
       0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -245,10 +244,6 @@
     box-shadow:
       0 0 0 2px var(--bg-primary),
       0 0 0 4px #3b82f6;
-  }
-
-  .theme-selector__toggle:active {
-    transform: scale(0.95);
   }
 
   /* ===================================================================

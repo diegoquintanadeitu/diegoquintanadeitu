@@ -271,6 +271,35 @@ body {
    UTILIDADES GENERALES (ambos temas)
    =================================================================== */
 
+/* Animación unificada para botones */
+.btn-scale-animation {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-scale-animation:hover {
+  transform: scale(1.05);
+}
+
+.btn-scale-animation:active {
+  transform: scale(0.95);
+}
+
+/* Versión con transición completa para botones complejos */
+.btn-scale-animation-full {
+  transition:
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-scale-animation-full:hover {
+  transform: scale(1.05);
+}
+
+.btn-scale-animation-full:active {
+  transform: scale(0.95);
+}
+
 /* Utilidad para limitar líneas de texto */
 .line-clamp-2 {
   overflow: hidden;
