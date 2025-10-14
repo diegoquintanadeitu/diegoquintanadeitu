@@ -157,7 +157,7 @@ import BackButton from "@/ui/components/BackButton.astro";
   async function updateWeatherInfo() {
     try {
       // Importar dinámicamente la utilidad de clima
-      const { WeatherEstimator } = await import("/src/utils/weather.ts");
+      const { WeatherEstimator } = await import("../../utils/weather.ts");
       const weather = WeatherEstimator.estimateWeather();
       weatherInfo = WeatherEstimator.formatWeatherString(weather);
     } catch (e) {
