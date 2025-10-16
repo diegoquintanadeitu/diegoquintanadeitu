@@ -141,20 +141,20 @@ const skillCategories = await api.getSkills();
             class="flex flex-col gap-2 justify-left text-sm text-gray-700 print:text-xs"
           >
             <div class="flex flex-row items-center">
-              <span class="mr-1">🔗 </span>
-              diegoquintanadeitu.github.io
+              <span class="mr-1">📫 </span>
+              diegoquintanadeitu@gmail.com
             </div>
             <div class="flex flex-row items-center">
               <span class="mr-1">🐙 </span>
               github.com/diegoquintanadeitu
             </div>
             <div class="flex flex-row items-center">
-              <span class="mr-1">📫 </span>
-              diegoquintanadeitu@gmail.com
-            </div>
-            <div class="flex flex-row items-center">
               <span class="mr-1">👨🏻‍💻 </span>
               linkedin.com/in/diego-daniel-martin-quintana
+            </div>
+            <div class="flex flex-row items-center">
+              <span class="mr-1">🔗 </span>
+              diegoquintanadeitu.github.io/diegoquintanadeitu
             </div>
           </div>
         </header>
@@ -208,15 +208,11 @@ const skillCategories = await api.getSkills();
                   )}
                   {job.achievements && (
                     <div class="text-xs text-gray-600 bg-blue-50 p-2 rounded border-l-2 border-blue-300 print:p-1 print:text-xs">
-                      <span class="font-semibold">Logros destacados:</span>{" "}
-                      {job.achievements.map((achievement, index) => (
-                        <span class="block print:inline">
-                          {achievement}
-                          {job.achievements &&
-                          index < job.achievements.length - 1
-                            ? ", "
-                            : ""}
-                        </span>
+                      <span class="font-semibold block mb-1">
+                        Logros destacados:
+                      </span>
+                      {job.achievements.map((achievement) => (
+                        <span class="block">- {achievement}</span>
                       ))}
                     </div>
                   )}
