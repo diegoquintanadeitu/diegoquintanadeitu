@@ -59,14 +59,16 @@ export const data = {
       title: "Web Developer",
       company: "Ualá",
       description:
-        "Formé parte de un equipo de desarrollo ágil, multidisciplinario, donde colaboré en la creación de aplicaciones web modernas y escalables. Mi enfoque está en la implementación de soluciones eficientes utilizando TypeScript + Next.js, asegurando un alto rendimiento y la excelencia en la experiencia de usuario. Este es el 3er equipo en el que participo, y he contribuido significativamente a la mejora de procesos (CI/CD) y la adopción de nuevas tecnologías.",
+        "Formé parte de un equipo de desarrollo ágil, multidisciplinario, donde colaboré en la creación de aplicaciones web modernas y escalables. Mi enfoque está en la implementación de soluciones eficientes utilizando TypeScript + Next.js, asegurando un alto rendimiento y la excelencia en la experiencia de usuario. Este es el 3er equipo en el que participé dentro de Ualá, y he contribuido significativamente a la mejora de procesos (CI/CD) y la adopción de nuevas tecnologías.",
       technologies: [
         "TypeScript",
         "React",
-        "Vercel",
-        "Github actions",
+        "Redux",
+        "Zustand",
         "tailwind",
+        "Vercel",
         "Next.js",
+        "Github actions",
       ],
       achievements: [
         "Implementación de universal login con Auth0",

@@ -44,7 +44,7 @@ npm run test:full        # Test completo
 ### 📁 **Estructura del Proyecto**
 
 ```
-diegoquintanadeitu.github.io/
+diegoquintanadeitu.github.io/diegoquintanadeitu/
 ├── src/
 │   ├── components/      # Componentes Astro
 │   ├── layouts/         # Layouts base
