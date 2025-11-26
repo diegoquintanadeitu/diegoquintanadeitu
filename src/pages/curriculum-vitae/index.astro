@@ -8,6 +8,7 @@ const profile = await api.getProfile();
 const timeline = await api.getTimeline();
 const projects = await api.getProjects();
 const skillCategories = await api.getSkills();
+const education = await api.getEducation();
 ---
 
 <Layout
@@ -346,22 +347,29 @@ const skillCategories = await api.getSkills();
           >
             Educación y Desarrollo Profesional
           </h3>
-          <div>
-            <div class="flex justify-between items-baseline mb-1">
-              <h4 class="font-bold text-blue-700 print:text-sm">
-                Autoformación Continua en Tecnologías Web
-              </h4>
-              <span class="text-sm text-gray-600 font-medium print:text-xs"
-                >2014 - 2025</span
-              >
-            </div>
-            <p class="text-sm text-justify leading-relaxed print:text-xs">
-              Desarrollo profesional autodidacta enfocado en tecnologías web
-              modernas, mejores prácticas de desarrollo y arquitecturas
-              escalables. Constante actualización en frameworks, herramientas y
-              metodologías de la industria a través de cursos online,
-              documentación oficial y proyectos prácticos.
-            </p>
+          <div class="space-y-4 print:space-y-2">
+            {
+              education.map((edu) => (
+                <div class="print-avoid-break">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <h4 class="font-bold text-blue-700 print:text-sm">
+                      {edu.title}
+                    </h4>
+                    <span class="text-sm text-gray-600 font-medium print:text-xs">
+                      {edu.period}
+                    </span>
+                  </div>
+                  {edu.institution && (
+                    <p class="text-sm text-gray-600 font-medium mb-2 print:text-xs print:mb-1">
+                      {edu.institution}
+                    </p>
+                  )}
+                  <p class="text-sm text-justify leading-relaxed mb-2 print:text-xs print:mb-1">
+                    {edu.description}
+                  </p>
+                </div>
+              ))
+            }
           </div>
         </section>
       </div>
