@@ -1,4 +1,10 @@
-import type { Profile, SkillCategories, TimelineItem, Project } from "@/types";
+import type {
+  Profile,
+  SkillCategories,
+  TimelineItem,
+  Project,
+  Education,
+} from "@/types";
 
 export type Theme = "light" | "dark";
 
@@ -139,6 +145,22 @@ export const data = {
       year: 2025,
     },
   ] as Project[],
+
+  education: [
+    {
+      period: "2016 - 2025",
+      title: "Autoformación Continua en Tecnologías Web",
+      description:
+        "Desarrollo profesional autodidacta enfocado en tecnologías web modernas, mejores prácticas de desarrollo y arquitecturas escalables. Constante actualización en frameworks, herramientas y metodologías de la industria a través de cursos online, documentación oficial y proyectos prácticos.",
+    },
+    {
+      period: "2010 - 2018",
+      title: "Licenciatura en Sistemas de Información",
+      institution: "Universidad Nacional del Nordeste",
+      description:
+        "Formación técnica integral en fundamentos de programación, análisis de sistemas y desarrollo de software. Énfasis en lógica de programación, estructuras de datos y metodologías de desarrollo.",
+    },
+  ] as Education[],
 
   techEvolution: [
     "VB6",

@@ -32,3 +32,10 @@ export interface Project {
   link?: string;
   year?: number;
 }
+
+export interface Education {
+  period: string;
+  title: string;
+  institution?: string;
+  description: string;
+}
