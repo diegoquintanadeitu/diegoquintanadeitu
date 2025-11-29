@@ -21,8 +21,8 @@ export const data = {
     name: "Diego Daniel Martin Quintana",
     role: "Desarrollador Full Stack",
     bio: [
-      "Sólida experiencia en evolución tecnológica continua. Mi trayectoria abarca desde Visual Basic 6 y C# hasta tecnologías modernas como TypeScript, React y Astro, adaptándome constantemente a las mejores prácticas del desarrollo actual.",
-      "Me especializo en crear soluciones eficientes y escalables, optimizando el rendimiento de aplicaciones y manteniendo un enfoque profesional en cada proyecto. Mi experiencia incluye tanto desarrollo backend como frontend, con dominio en bases de datos y deployment moderno.",
+      "**8+ años de evolución tecnológica continua**. Mi trayectoria abarca desde Visual Basic 6 y C# hasta tecnologías modernas como **TypeScript, React y Astro**, adaptándome constantemente a las mejores prácticas del desarrollo actual.",
+      "Me especializo en **crear soluciones eficientes y escalables**, optimizando el rendimiento de aplicaciones y manteniendo un enfoque profesional en cada proyecto. Mi experiencia incluye tanto **desarrollo backend como frontend**, con dominio en bases de datos y **deployment moderno**.",
     ],
   } as Profile,
 
@@ -65,7 +65,7 @@ export const data = {
       title: "Web Developer",
       company: "Ualá",
       description:
-        "Formé parte de un equipo de desarrollo ágil, multidisciplinario, donde colaboré en la creación de aplicaciones web modernas y escalables. Mi enfoque está en la implementación de soluciones eficientes utilizando TypeScript + Next.js, asegurando un alto rendimiento y la excelencia en la experiencia de usuario. Este es el 3er equipo en el que participé dentro de Ualá, y he contribuido significativamente a la mejora de procesos (CI/CD) y la adopción de nuevas tecnologías.",
+        "**3 años de crecimiento continuo** en Ualá, participando en **3 equipos diferentes** y evolucionando como profesional. Formé parte de equipos de desarrollo ágil, multidisciplinarios, donde colaboré en la creación de **aplicaciones web modernas y escalables**. Mi enfoque está en la implementación de soluciones eficientes utilizando **TypeScript + Next.js**, asegurando **alto rendimiento** y la **excelencia en UX**. He contribuido **significativamente** a la mejora de procesos **(CI/CD)** y la adopción de nuevas tecnologías.",
       technologies: [
         "TypeScript",
         "React",
@@ -77,12 +77,12 @@ export const data = {
         "Github actions",
       ],
       achievements: [
-        "Implementación de universal login con Auth0",
-        "Automatización de deploys con github actions",
-        "Migración de componentes de clase a funcional",
-        "Implementación de pruebas unitarias con Vitest",
-        "Uso del sdk de mercadopago, funcionalidad suscripcciones",
-        "Actualización, limpieza de dependencias y disminución de vulnerabilidades",
+        "**Implementación completa** de universal login con **Auth0** - mejorando la seguridad y UX",
+        "**Automatización total** de deploys con **GitHub Actions** - reduciendo tiempo de release",
+        "**Migración exitosa** de componentes de clase a funcional - modernizando la codebase",
+        "**Implementación estratégica** de pruebas unitarias con **Vitest** - aumentando confiabilidad",
+        "**Integración avanzada** del SDK de MercadoPago - funcionalidad de **suscripciones**",
+        "**Optimización crítica**: limpieza de dependencias y **reducción significativa de vulnerabilidades**",
       ],
     },
     {
@@ -90,13 +90,13 @@ export const data = {
       title: "Frontend Developer",
       company: "Globant",
       description:
-        "Transición hacia tecnologías web modernas, especialización en JavaScript/TypeScript, desarrollo de componentes del design system de importante aerolinea en react y react native",
+        "**Transición exitosa** hacia tecnologías web modernas, **especialización avanzada** en JavaScript/TypeScript. Desarrollo de componentes del **design system** de importante aerolínea internacional en **React y React Native** - impactando millones de usuarios.",
       technologies: ["JavaScript", "React Native", "React", "Node.js"],
       achievements: [
-        "Presentación de charlas técnicas internas sobre nuevas tecnologías",
-        "Migración exitosa de productos legacy a componentes del design system",
-        "Mentoría de desarrolladores junior y acompañamiento en la implementación de mejores prácticas",
-        "Comunicación efectiva con equipos multidisciplinarios para asegurar la calidad y consistencia del producto final durante la adopción o la colaboración en el sistema de diseño",
+        "**Liderazgo técnico**: presentación de charlas internas sobre nuevas tecnologías",
+        "**Migración exitosa** de productos legacy al design system - mejorando consistencia",
+        "**Mentoría efectiva** de desarrolladores junior - implementando mejores prácticas",
+        "**Comunicación estratégica** con equipos multidisciplinarios - asegurando calidad y consistencia en el **design system** de alcance internacional",
       ],
     },
     {
@@ -104,12 +104,12 @@ export const data = {
       title: "Desarrollador de Aplicaciones Empresariales",
       company: "Equipo médico de emergencias Chaco SA",
       description:
-        "Desarrollo en entorno Microsoft con C# y .NET, gestión de bases de datos SQL Server y mantenimiento de sistemas legacy en Visual Basic 6.",
+        "**Desarrollo empresarial robusto** en entorno Microsoft con **C# y .NET**, gestión avanzada de bases de datos **SQL Server** y **modernización crítica** de sistemas legacy en Visual Basic 6.",
       technologies: ["C#", ".NET", "SQL Server", "Windows Forms"],
       achievements: [
-        "Modernización de sistemas legacy y automatización de procesos",
-        "Implementación de módulos conectados con procesos de negocio clave",
-        "Implementación de nuevas funcionalidades en sistemas existentes, mejorando la eficiencia operativa",
+        "**Modernización** de sistemas legacy y **automatización estratégica** de procesos críticos",
+        "**Implementación exitosa** de módulos integrados con **procesos de negocio clave**",
+        "**Desarrollo de funcionalidades innovadoras** - **mejorando significativamente** la eficiencia operativa",
       ],
     },
     {
@@ -127,9 +127,9 @@ export const data = {
         "vuejs",
       ],
       achievements: [
-        "Desarrollo de módulos críticos para gestión de inventarios",
-        "Creación de reportes personalizados para análisis de datos",
-        "Manejo e implementación de procedimientos almacenados en SQL Server",
+        "Desarrollo de módulos críticos para **gestión de inventarios**",
+        "Creación de reportes personalizados para **análisis de datos**",
+        "Manejo e implementación de **procedimientos almacenados** en SQL Server",
         "Migración de datos mediante consultas, ante la eventual caida en la conexión de una replica en mssql, que se realizaba desde los servidores de las sucursales hacia el servidor central",
       ],
     },
@@ -156,7 +156,7 @@ export const data = {
     {
       period: "2010 - 2018",
       title: "Licenciatura en Sistemas de Información",
-      institution: "Universidad Nacional del Nordeste",
+      institution: "**Universidad Nacional del Nordeste**",
       description:
         "Formación técnica integral en fundamentos de programación, análisis de sistemas y desarrollo de software. Énfasis en lógica de programación, estructuras de datos y metodologías de desarrollo.",
     },
