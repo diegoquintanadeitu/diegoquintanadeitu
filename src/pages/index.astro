@@ -6,8 +6,13 @@ import Layout from '@/ui/layouts/Layout.astro';
 const profile = await api.getProfile();
 const timeline = await api.getTimeline();
 const projects = await api.getProjects();
-const skillCategories = await api.getSkills();
-const techEvolution = await api.getTechEvolution();
+
+// Helper para procesar markdown simple
+const processMarkdown = (text: string) => {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+};
 ---
 
 <Layout title={profile.name}>
@@ -28,11 +33,12 @@ const techEvolution = await api.getTechEvolution();
         <p class='text-md md:text-2xl text-slate-600 mb-4 md:mb-6 font-medium'>{profile.role}</p>
 
         <div class='bg-white rounded-2xl shadow-lg p-6 border border-slate-100 hover:shadow-xl transition-all duration-300 relative text-left space-y-4 mb-6 md:mb-8'>
-          {
-            profile.bio.map((paragraph) => (
-              <p class='text-md md:text-lg text-slate-600 leading-relaxed'>{paragraph}</p>
-            ))
-          }
+          {profile.bio.map((paragraph) => (
+            <p 
+              class='text-md md:text-lg text-slate-600 leading-relaxed'
+              set:html={processMarkdown(paragraph)}
+            />
+          ))}
         </div>
 
         <div class='flex flex-wrap md:justify-start justify-center gap-4'>
@@ -117,7 +123,10 @@ const techEvolution = await api.getTechEvolution();
                         {item.company}
                       </p>
                     )}
-                    <p class='text-slate-600 mb-4'>{item.description}</p>
+                    <p 
+                      class='text-slate-600 mb-4'
+                      set:html={processMarkdown(item.description)}
+                    ></p>
                     {item.technologies && (
                       <div class='flex flex-wrap gap-2'>
                         {item.technologies.map((tech) => (
