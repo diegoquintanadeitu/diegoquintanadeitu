@@ -5,6 +5,7 @@ import type {
   TimelineItem,
   Project,
   Education,
+  RoadmapProject,
 } from "@/types";
 
 export const api = {
@@ -31,6 +32,11 @@ export const api = {
   getEducation: async (): Promise<Education[]> => {
     await new Promise((resolve) => setTimeout(resolve, 300));
     return data.education;
+  },
+
+  getRoadmap: async (): Promise<RoadmapProject[]> => {
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    return data.roadmap;
   },
 
   getTechEvolution: async (): Promise<string[]> => {

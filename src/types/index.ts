@@ -38,4 +38,28 @@ export interface Education {
   title: string;
   institution?: string;
   description: string;
+  type: 'formal' | 'autodidactic' | 'certification' | 'course';
+  achievements?: string[];
+}
+
+export interface RoadmapProject {
+  id: string;
+  title: string;
+  description: string;
+  category: 'audio' | 'web' | 'mobile' | 'desktop' | 'ai' | 'infrastructure';
+  technologies: string[];
+  status: 'not-started' | 'in-progress' | 'completed' | 'paused';
+  priority: 'low' | 'medium' | 'high';
+  estimatedDuration: string;
+  startDate?: string;
+  endDate?: string;
+  repository?: string;
+  learningGoals: string[];
+  dependencies?: string[];
+  milestones?: {
+    title: string;
+    description: string;
+    completed: boolean;
+    dueDate?: string;
+  }[];
 }
