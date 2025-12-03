@@ -167,9 +167,17 @@ export const data = {
     {
       id: "vst-eq-caraduras-v2",
       title: "EQ Caraduras v2.0 - Advanced Features",
-      description: "Expansión del plugin VST3 actual con características avanzadas: filtros adicionales, presets, análisis de espectro en tiempo real y optimizaciones de performance.",
+      description:
+        "Expansión del plugin VST3 actual con características avanzadas: filtros adicionales, presets, análisis de espectro en tiempo real y optimizaciones de performance.",
       category: "audio",
-      technologies: ["Rust", "nih-plug", "Vizia", "DSP", "JUCE (research)", "CLAP"],
+      technologies: [
+        "Rust",
+        "nih-plug",
+        "Vizia",
+        "DSP",
+        "JUCE (research)",
+        "CLAP",
+      ],
       status: "in-progress",
       priority: "high",
       estimatedDuration: "3-4 meses",
@@ -180,39 +188,40 @@ export const data = {
         "Implementar análisis FFT en tiempo real",
         "Optimización de performance para low-latency",
         "Sistema de presets y persistencia",
-        "Interfaz gráfica más compleja con Vizia"
+        "Interfaz gráfica más compleja con Vizia",
       ],
       milestones: [
         {
           title: "Sistema de Presets",
           description: "Implementar guardado/carga de configuraciones de EQ",
           completed: false,
-          dueDate: "2025-02-01"
+          dueDate: "2025-02-01",
         },
         {
           title: "Filtros Adicionales",
           description: "Agregar filtros high-pass, low-pass y notch",
           completed: false,
-          dueDate: "2025-02-15"
+          dueDate: "2025-02-15",
         },
         {
           title: "Analizador de Espectro",
           description: "Visualización FFT en tiempo real",
           completed: false,
-          dueDate: "2025-03-15"
+          dueDate: "2025-03-15",
         },
         {
           title: "Optimización Performance",
           description: "Reducir latencia y uso de CPU",
           completed: false,
-          dueDate: "2025-04-01"
-        }
-      ]
+          dueDate: "2025-04-01",
+        },
+      ],
     },
     {
       id: "vst-synthesizer",
       title: "Sintetizador VST3 - Caraduras Synth",
-      description: "Desarrollo de un sintetizador virtual desde cero con osciladores, filtros, envolventes ADSR y efectos. Expandir conocimientos de síntesis de audio.",
+      description:
+        "Desarrollo de un sintetizador virtual desde cero con osciladores, filtros, envolventes ADSR y efectos. Expandir conocimientos de síntesis de audio.",
       category: "audio",
       technologies: ["Rust", "nih-plug", "Vizia", "DSP", "MIDI"],
       status: "not-started",
@@ -225,41 +234,50 @@ export const data = {
         "Procesamiento MIDI en tiempo real",
         "Envolventes ADSR y modulación",
         "Arquitectura de sintetizadores",
-        "Efectos de audio (reverb, delay, chorus)"
+        "Efectos de audio (reverb, delay, chorus)",
       ],
       milestones: [
         {
           title: "Osciladores Básicos",
-          description: "Implementar formas de onda: sine, saw, square, triangle",
+          description:
+            "Implementar formas de onda: sine, saw, square, triangle",
           completed: false,
-          dueDate: "2025-05-01"
+          dueDate: "2025-05-01",
         },
         {
           title: "Filtros y Envolventes",
           description: "Sistema ADSR y filtros resonantes",
           completed: false,
-          dueDate: "2025-06-01"
+          dueDate: "2025-06-01",
         },
         {
           title: "Procesamiento MIDI",
           description: "Manejo completo de eventos MIDI",
           completed: false,
-          dueDate: "2025-07-01"
+          dueDate: "2025-07-01",
         },
         {
           title: "Efectos Integrados",
           description: "Reverb, delay y modulación",
           completed: false,
-          dueDate: "2025-08-15"
-        }
-      ]
+          dueDate: "2025-08-15",
+        },
+      ],
     },
     {
       id: "audio-workstation",
       title: "Mini DAW - Estación de Audio Web",
-      description: "Aplicación web para grabación, edición y mezcla de audio usando Web Audio API. Integrar conocimientos de audio con desarrollo web avanzado.",
+      description:
+        "Aplicación web para grabación, edición y mezcla de audio usando Web Audio API. Integrar conocimientos de audio con desarrollo web avanzado.",
       category: "web",
-      technologies: ["TypeScript", "React", "Web Audio API", "WebRTC", "Tauri", "Rust"],
+      technologies: [
+        "TypeScript",
+        "React",
+        "Web Audio API",
+        "WebRTC",
+        "Tauri",
+        "Rust",
+      ],
       status: "not-started",
       priority: "medium",
       estimatedDuration: "5-6 meses",
@@ -270,35 +288,42 @@ export const data = {
         "WebRTC para colaboración en tiempo real",
         "Tauri para aplicaciones desktop híbridas",
         "Manejo de archivos de audio grandes",
-        "Sincronización de audio precisa"
+        "Sincronización de audio precisa",
       ],
       milestones: [
         {
           title: "Reproductor/Grabador Básico",
           description: "Funcionalidad core de audio",
           completed: false,
-          dueDate: "2025-10-01"
+          dueDate: "2025-10-01",
         },
         {
           title: "Editor de Forma de Onda",
           description: "Visualización y edición de audio",
           completed: false,
-          dueDate: "2025-11-01"
+          dueDate: "2025-11-01",
         },
         {
           title: "Mezclador Virtual",
           description: "Múltiples tracks y efectos",
           completed: false,
-          dueDate: "2025-12-01"
-        }
-      ]
+          dueDate: "2025-12-01",
+        },
+      ],
     },
     {
       id: "ai-audio-assistant",
       title: "Asistente IA para Producción Musical",
-      description: "Sistema de IA que analiza audio y sugiere ajustes de EQ, compresión y efectos. Combinar machine learning con processing de audio.",
+      description:
+        "Sistema de IA que analiza audio y sugiere ajustes de EQ, compresión y efectos. Combinar machine learning con processing de audio.",
       category: "ai",
-      technologies: ["Python", "TensorFlow", "librosa", "FastAPI", "Rust (FFI)"],
+      technologies: [
+        "Python",
+        "TensorFlow",
+        "librosa",
+        "FastAPI",
+        "Rust (FFI)",
+      ],
       status: "not-started",
       priority: "medium",
       estimatedDuration: "6-8 meses",
@@ -309,33 +334,34 @@ export const data = {
         "Procesamiento de señales con Python",
         "Modelos de deep learning para música",
         "APIs REST para servicios de IA",
-        "Integración Rust-Python (FFI)"
+        "Integración Rust-Python (FFI)",
       ],
       milestones: [
         {
           title: "Análisis de Frecuencias",
           description: "Modelo para detectar características tonales",
           completed: false,
-          dueDate: "2026-03-01"
+          dueDate: "2026-03-01",
         },
         {
           title: "Sugerencias de EQ",
           description: "IA que recomienda ajustes de ecualización",
           completed: false,
-          dueDate: "2026-05-01"
+          dueDate: "2026-05-01",
         },
         {
           title: "API de Servicios",
           description: "Backend para integración con DAWs",
           completed: false,
-          dueDate: "2026-07-01"
-        }
-      ]
+          dueDate: "2026-07-01",
+        },
+      ],
     },
     {
       id: "cross-platform-vst",
       title: "VST Cross-Platform Suite",
-      description: "Suite completa de plugins VST3/AU/CLAP para Windows, macOS y Linux. Distribución comercial y open-source.",
+      description:
+        "Suite completa de plugins VST3/AU/CLAP para Windows, macOS y Linux. Distribución comercial y open-source.",
       category: "audio",
       technologies: ["Rust", "JUCE", "CMake", "GitHub Actions", "Installer"],
       status: "not-started",
@@ -348,29 +374,29 @@ export const data = {
         "Distribución y packaging comercial",
         "Testing automatizado en múltiples OS",
         "Optimización para diferentes arquitecturas",
-        "Documentación y marketing técnico"
+        "Documentación y marketing técnico",
       ],
       milestones: [
         {
           title: "Windows + Linux Support",
           description: "Builds automatizados para múltiples plataformas",
           completed: false,
-          dueDate: "2026-10-01"
+          dueDate: "2026-10-01",
         },
         {
           title: "Instaladores Automáticos",
           description: "Setup.exe, .pkg, .deb packages",
           completed: false,
-          dueDate: "2026-11-01"
+          dueDate: "2026-11-01",
         },
         {
           title: "Release Commercial",
           description: "Primera versión comercial",
           completed: false,
-          dueDate: "2026-12-15"
-        }
-      ]
-    }
+          dueDate: "2026-12-15",
+        },
+      ],
+    },
   ] as RoadmapProject[],
 
   techEvolution: [
@@ -419,9 +445,17 @@ export const data = {
     {
       id: "vst-eq-caraduras-v2",
       title: "EQ Caraduras v2.0 - Advanced Features",
-      description: "Expansión del plugin VST3 actual con características avanzadas: filtros adicionales, presets, análisis de espectro en tiempo real y optimizaciones de performance.",
+      description:
+        "Expansión del plugin VST3 actual con características avanzadas: filtros adicionales, presets, análisis de espectro en tiempo real y optimizaciones de performance.",
       category: "audio",
-      technologies: ["Rust", "nih-plug", "Vizia", "DSP", "JUCE (research)", "CLAP"],
+      technologies: [
+        "Rust",
+        "nih-plug",
+        "Vizia",
+        "DSP",
+        "JUCE (research)",
+        "CLAP",
+      ],
       status: "in-progress",
       priority: "high",
       estimatedDuration: "3-4 meses",
@@ -432,39 +466,40 @@ export const data = {
         "Implementar análisis FFT en tiempo real",
         "Optimización de performance para low-latency",
         "Sistema de presets y persistencia",
-        "Interfaz gráfica más compleja con Vizia"
+        "Interfaz gráfica más compleja con Vizia",
       ],
       milestones: [
         {
           title: "Sistema de Presets",
           description: "Implementar guardado/carga de configuraciones de EQ",
           completed: false,
-          dueDate: "2025-02-01"
+          dueDate: "2025-02-01",
         },
         {
           title: "Filtros Adicionales",
           description: "Agregar filtros high-pass, low-pass y notch",
           completed: false,
-          dueDate: "2025-02-15"
+          dueDate: "2025-02-15",
         },
         {
           title: "Analizador de Espectro",
           description: "Visualización FFT en tiempo real",
           completed: false,
-          dueDate: "2025-03-15"
+          dueDate: "2025-03-15",
         },
         {
           title: "Optimización Performance",
           description: "Reducir latencia y uso de CPU",
           completed: false,
-          dueDate: "2025-04-01"
-        }
-      ]
+          dueDate: "2025-04-01",
+        },
+      ],
     },
     {
       id: "vst-synthesizer",
       title: "Sintetizador VST3 - Caraduras Synth",
-      description: "Desarrollo de un sintetizador virtual desde cero con osciladores, filtros, envolventes ADSR y efectos. Expandir conocimientos de síntesis de audio.",
+      description:
+        "Desarrollo de un sintetizador virtual desde cero con osciladores, filtros, envolventes ADSR y efectos. Expandir conocimientos de síntesis de audio.",
       category: "audio",
       technologies: ["Rust", "nih-plug", "Vizia", "DSP", "MIDI"],
       status: "not-started",
@@ -477,41 +512,50 @@ export const data = {
         "Procesamiento MIDI en tiempo real",
         "Envolventes ADSR y modulación",
         "Arquitectura de sintetizadores",
-        "Efectos de audio (reverb, delay, chorus)"
+        "Efectos de audio (reverb, delay, chorus)",
       ],
       milestones: [
         {
           title: "Osciladores Básicos",
-          description: "Implementar formas de onda: sine, saw, square, triangle",
+          description:
+            "Implementar formas de onda: sine, saw, square, triangle",
           completed: false,
-          dueDate: "2025-05-01"
+          dueDate: "2025-05-01",
         },
         {
           title: "Filtros y Envolventes",
           description: "Sistema ADSR y filtros resonantes",
           completed: false,
-          dueDate: "2025-06-01"
+          dueDate: "2025-06-01",
         },
         {
           title: "Procesamiento MIDI",
           description: "Manejo completo de eventos MIDI",
           completed: false,
-          dueDate: "2025-07-01"
+          dueDate: "2025-07-01",
         },
         {
           title: "Efectos Integrados",
           description: "Reverb, delay y modulación",
           completed: false,
-          dueDate: "2025-08-15"
-        }
-      ]
+          dueDate: "2025-08-15",
+        },
+      ],
     },
     {
       id: "audio-workstation",
       title: "Mini DAW - Estación de Audio Web",
-      description: "Aplicación web para grabación, edición y mezcla de audio usando Web Audio API. Integrar conocimientos de audio con desarrollo web avanzado.",
+      description:
+        "Aplicación web para grabación, edición y mezcla de audio usando Web Audio API. Integrar conocimientos de audio con desarrollo web avanzado.",
       category: "web",
-      technologies: ["TypeScript", "React", "Web Audio API", "WebRTC", "Tauri", "Rust"],
+      technologies: [
+        "TypeScript",
+        "React",
+        "Web Audio API",
+        "WebRTC",
+        "Tauri",
+        "Rust",
+      ],
       status: "not-started",
       priority: "medium",
       estimatedDuration: "5-6 meses",
@@ -522,35 +566,42 @@ export const data = {
         "WebRTC para colaboración en tiempo real",
         "Tauri para aplicaciones desktop híbridas",
         "Manejo de archivos de audio grandes",
-        "Sincronización de audio precisa"
+        "Sincronización de audio precisa",
       ],
       milestones: [
         {
           title: "Reproductor/Grabador Básico",
           description: "Funcionalidad core de audio",
           completed: false,
-          dueDate: "2025-10-01"
+          dueDate: "2025-10-01",
         },
         {
           title: "Editor de Forma de Onda",
           description: "Visualización y edición de audio",
           completed: false,
-          dueDate: "2025-11-01"
+          dueDate: "2025-11-01",
         },
         {
           title: "Mezclador Virtual",
           description: "Múltiples tracks y efectos",
           completed: false,
-          dueDate: "2025-12-01"
-        }
-      ]
+          dueDate: "2025-12-01",
+        },
+      ],
     },
     {
       id: "ai-audio-assistant",
       title: "Asistente IA para Producción Musical",
-      description: "Sistema de IA que analiza audio y sugiere ajustes de EQ, compresión y efectos. Combinar machine learning con processing de audio.",
+      description:
+        "Sistema de IA que analiza audio y sugiere ajustes de EQ, compresión y efectos. Combinar machine learning con processing de audio.",
       category: "ai",
-      technologies: ["Python", "TensorFlow", "librosa", "FastAPI", "Rust (FFI)"],
+      technologies: [
+        "Python",
+        "TensorFlow",
+        "librosa",
+        "FastAPI",
+        "Rust (FFI)",
+      ],
       status: "not-started",
       priority: "medium",
       estimatedDuration: "6-8 meses",
@@ -561,33 +612,34 @@ export const data = {
         "Procesamiento de señales con Python",
         "Modelos de deep learning para música",
         "APIs REST para servicios de IA",
-        "Integración Rust-Python (FFI)"
+        "Integración Rust-Python (FFI)",
       ],
       milestones: [
         {
           title: "Análisis de Frecuencias",
           description: "Modelo para detectar características tonales",
           completed: false,
-          dueDate: "2026-03-01"
+          dueDate: "2026-03-01",
         },
         {
           title: "Sugerencias de EQ",
           description: "IA que recomienda ajustes de ecualización",
           completed: false,
-          dueDate: "2026-05-01"
+          dueDate: "2026-05-01",
         },
         {
           title: "API de Servicios",
           description: "Backend para integración con DAWs",
           completed: false,
-          dueDate: "2026-07-01"
-        }
-      ]
+          dueDate: "2026-07-01",
+        },
+      ],
     },
     {
       id: "cross-platform-vst",
       title: "VST Cross-Platform Suite",
-      description: "Suite completa de plugins VST3/AU/CLAP para Windows, macOS y Linux. Distribución comercial y open-source.",
+      description:
+        "Suite completa de plugins VST3/AU/CLAP para Windows, macOS y Linux. Distribución comercial y open-source.",
       category: "audio",
       technologies: ["Rust", "JUCE", "CMake", "GitHub Actions", "Installer"],
       status: "not-started",
@@ -600,28 +652,28 @@ export const data = {
         "Distribución y packaging comercial",
         "Testing automatizado en múltiples OS",
         "Optimización para diferentes arquitecturas",
-        "Documentación y marketing técnico"
+        "Documentación y marketing técnico",
       ],
       milestones: [
         {
           title: "Windows + Linux Support",
           description: "Builds automatizados para múltiples plataformas",
           completed: false,
-          dueDate: "2026-10-01"
+          dueDate: "2026-10-01",
         },
         {
           title: "Instaladores Automáticos",
           description: "Setup.exe, .pkg, .deb packages",
           completed: false,
-          dueDate: "2026-11-01"
+          dueDate: "2026-11-01",
         },
         {
           title: "Release Commercial",
           description: "Primera versión comercial",
           completed: false,
-          dueDate: "2026-12-15"
-        }
-      ]
-    }
+          dueDate: "2026-12-15",
+        },
+      ],
+    },
   ] as RoadmapProject[],
 };
