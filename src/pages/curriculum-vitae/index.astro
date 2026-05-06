@@ -18,6 +18,10 @@ const processMarkdown = (text: string) => {
 };
 ---
 
+<script is:inline>
+  localStorage.setItem("portfolio-theme", "light");
+</script>
+
 <Layout
   title={`Curriculum Vitae - ${profile.name}`}
   showFooter={false}
@@ -43,7 +47,7 @@ const processMarkdown = (text: string) => {
   <div class="bg-[#f5f5f5] min-h-screen pb-8 max-md:px-2">
     <!-- Navegación y acciones -->
     <div
-      class="print:hidden sticky top-0 left-0 right-0 z-40 bg-[rgba(245,245,245,0.95)] backdrop-blur-[10px] border-b border-black p-4 mb-8 max-md:p-3 max-md:mb-4"
+      class="print:hidden sticky top-0 left-0 right-0 z-40 bg-[rgba(245,245,245,0.95)] backdrop-blur-[10px] border-b border-gray-300 p-4 mb-8 max-md:p-3 max-md:mb-4"
     >
       <div class="flex flex-col sm:flex-row gap-3 max-w-6xl mx-auto">
         <BackButton variant="secondary" />
@@ -73,11 +77,11 @@ const processMarkdown = (text: string) => {
     </div>
 
     <div
-      class="max-w-[21cm] min-h-[29.7cm] mx-auto p-[1.27cm] shadow-[0_4px_20px_rgba(0,0,0,0.15)] bg-white rounded-[4px] print:shadow-none print:mx-[1.27cm] print:max-w-none print:bg-white print:rounded-none max-md:mx-0 max-md:shadow-[0_2px_8px_rgba(0,0,0,0.1)] max-md:rounded-none"
+      class="max-w-[21cm] min-h-[29.7cm] mx-auto p-4 shadow-[0_4px_20px_rgba(0,0,0,0.15)] bg-white rounded-[4px] print:shadow-none print:mx-[1.27cm] print:max-w-none print:bg-white print:rounded-none max-md:mx-0 max-md:shadow-[0_2px_8px_rgba(0,0,0,0.1)] max-md:rounded-none"
     >
       <div>
         <header
-          class="text-left border-b-2 border-blue-600 pb-6 mb-6 print-avoid-break"
+          class="text-left border-b-2 border-blue-600 pb-2 mb-6 print-avoid-break"
         >
           <h1 class="text-3xl font-bold text-blue-800 mb-2 print:text-2xl">
             {profile.name}
