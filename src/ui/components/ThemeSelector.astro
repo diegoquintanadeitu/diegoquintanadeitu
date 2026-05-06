@@ -76,8 +76,8 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    type themeType = "light" | "dark" | "sepia";
     const validThemes = ["dark", "light", "sepia"] as const;
+    type themeType = (typeof validThemes)[number];
     const defaultTheme: themeType = "dark";
 
     const isValidTheme = (value: string | null): value is themeType =>
@@ -132,17 +132,20 @@
         e.stopPropagation();
 
         const target = e.currentTarget as HTMLButtonElement;
-        const theme = normalizeTheme(target.getAttribute("data-theme"));
+        const rawTheme = target.getAttribute("data-theme");
+
+        if (!isValidTheme(rawTheme)) {
+          console.error(`❌ Tema inválido: ${rawTheme}`);
+          return;
+        }
+
+        const theme: themeType = rawTheme;
 
         console.log(`🎨 Click en tema: ${theme}`);
         console.log(`📍 Target:`, target);
 
-        if (isValidTheme(target.getAttribute("data-theme"))) {
-          setTheme(theme);
-          closeMenu();
-        } else {
-          console.error(`❌ Tema inválido: ${theme}`);
-        }
+        setTheme(theme);
+        closeMenu();
       });
     });
 
