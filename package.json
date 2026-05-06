@@ -21,13 +21,13 @@
   "dependencies": {
     "@midudev/tailwind-animations": "0.2.0",
     "@tailwindcss/vite": "4.1.13",
-    "astro": "5.13.10",
+    "astro": "^5.18.1",
     "tailwindcss": "4.1.13"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.2",
     "@tailwindcss/typography": "0.5.18",
-    "@types/node": "24.5.2",
+    "@types/node": "^24.5.2",
     "axe-core": "4.10.3",
     "lighthouse": "12.8.2",
     "playwright": "1.55.1",
