@@ -42,16 +42,17 @@ import BackButton from "@/ui/components/BackButton.astro";
     </header>
 
     <!-- Contenedor del juego -->
-    <div class="flex-1 mb-4">
-      <div class="relative h-full">
+    <div class="flex-1 mb-4 flex flex-col md:flex-row gap-4">
+      <!-- Iframe: lado izquierdo -->
+      <div class="relative flex-1">
         <div
-          class="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-xl blur-xl"
+          class="absolute inset-0 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-xl blur-xl"
         >
         </div>
         <iframe
           id="game-frame"
           src={"https://www.retrogames.cc"}
-          class="relative w-full h-full min-h-[350px] md:min-h-[500px] border-2 border-gray-300/30 dark:border-white/20 rounded-xl shadow-2xl backdrop-blur-sm bg-white/20 dark:bg-black/20"
+          class="relative w-full h-full min-h-[350px] md:min-h-[500px] border-2 border-gray-300 dark:border-white rounded-xl shadow-2xl backdrop-blur-sm bg-white dark:bg-black"
           allowfullscreen="true"
           sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
           referrerpolicy="no-referrer-when-downgrade"
@@ -60,13 +61,142 @@ import BackButton from "@/ui/components/BackButton.astro";
         >
         </iframe>
       </div>
+
+      <!-- Panel derecho: ilustración retro -->
+      <div
+        class="hidden md:flex md:w-64 lg:w-80 flex-col items-center justify-center gap-6 bg-white dark:bg-black backdrop-blur-sm rounded-xl border-2 border-gray-300 dark:border-white p-6"
+      >
+        <!-- Game Boy SVG -->
+        <svg
+          viewBox="0 0 160 240"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-40 drop-shadow-2xl"
+        >
+          <!-- Cuerpo -->
+          <rect
+            x="10"
+            y="10"
+            width="140"
+            height="220"
+            rx="20"
+            ry="20"
+            fill="#c8b4e8"></rect>
+          <rect
+            x="14"
+            y="14"
+            width="132"
+            height="212"
+            rx="17"
+            ry="17"
+            fill="#b89fd8"></rect>
+          <!-- Pantalla exterior -->
+          <rect x="25" y="25" width="110" height="90" rx="8" ry="8" fill="#444"
+          ></rect>
+          <!-- Pantalla interior (verde como Game Boy original) -->
+          <rect
+            x="30"
+            y="30"
+            width="100"
+            height="80"
+            rx="4"
+            ry="4"
+            fill="#8bac0f"></rect>
+          <!-- Pixel art simple en pantalla: marciano -->
+          <g fill="#0f380f">
+            <rect x="55" y="45" width="8" height="8"></rect>
+            <rect x="97" y="45" width="8" height="8"></rect>
+            <rect x="63" y="53" width="8" height="8"></rect>
+            <rect x="89" y="53" width="8" height="8"></rect>
+            <rect x="55" y="61" width="50" height="8"></rect>
+            <rect x="63" y="69" width="8" height="8"></rect>
+            <rect x="89" y="69" width="8" height="8"></rect>
+            <rect x="71" y="77" width="8" height="8"></rect>
+            <rect x="55" y="69" width="8" height="8"></rect>
+            <rect x="97" y="69" width="8" height="8"></rect>
+          </g>
+          <!-- D-pad -->
+          <rect x="28" y="140" width="14" height="40" rx="3" fill="#2d2d2d"
+          ></rect>
+          <rect x="21" y="147" width="28" height="14" rx="3" fill="#2d2d2d"
+          ></rect>
+          <circle cx="35" cy="160" r="5" fill="#555"></circle>
+          <!-- Botones A y B -->
+          <circle cx="118" cy="155" r="10" fill="#e84040"></circle>
+          <circle cx="100" cy="163" r="10" fill="#4040e8"></circle>
+          <text
+            x="116"
+            y="159"
+            font-size="10"
+            fill="white"
+            text-anchor="middle"
+            font-family="monospace"
+            font-weight="bold">A</text
+          >
+          <text
+            x="98"
+            y="167"
+            font-size="10"
+            fill="white"
+            text-anchor="middle"
+            font-family="monospace"
+            font-weight="bold">B</text
+          >
+          <!-- Select / Start -->
+          <rect x="52" y="185" width="22" height="7" rx="3" fill="#555"></rect>
+          <rect x="86" y="185" width="22" height="7" rx="3" fill="#555"></rect>
+          <text
+            x="63"
+            y="191"
+            font-size="5"
+            fill="#aaa"
+            text-anchor="middle"
+            font-family="monospace">SELECT</text
+          >
+          <text
+            x="97"
+            y="191"
+            font-size="5"
+            fill="#aaa"
+            text-anchor="middle"
+            font-family="monospace">START</text
+          >
+          <!-- Altavoz -->
+          <g stroke="#9980c8" stroke-width="2" stroke-linecap="round">
+            <line x1="105" y1="200" x2="105" y2="215"></line>
+            <line x1="111" y1="198" x2="111" y2="217"></line>
+            <line x1="117" y1="200" x2="117" y2="215"></line>
+            <line x1="123" y1="202" x2="123" y2="213"></line>
+            <line x1="129" y1="205" x2="129" y2="210"></line>
+          </g>
+        </svg>
+
+        <div class="text-center">
+          <p
+            class="text-sm font-bold text-purple-300 tracking-widest uppercase mb-1"
+          >
+            Retro Arcade
+          </p>
+          <p class="text-xs text-gray-400">Insert coin to play</p>
+        </div>
+
+        <!-- Blink cursor -->
+        <div class="flex gap-1 items-center">
+          <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+          <span
+            class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse [animation-delay:0.3s]"
+          ></span>
+          <span
+            class="w-2 h-2 rounded-full bg-pink-400 animate-pulse [animation-delay:0.6s]"
+          ></span>
+        </div>
+      </div>
     </div>
 
     <!-- Info del sistema en el footer -->
     <footer class="w-full">
       <div class="flex justify-center">
         <div
-          class="bg-white/20 dark:bg-black/20 backdrop-blur-sm rounded-lg px-4 py-2 border border-gray-300/30 dark:border-white/20"
+          class="bg-white dark:bg-black backdrop-blur-sm rounded-lg px-4 py-2 border border-gray-300 dark:border-white"
         >
           <div
             id="user-info"
@@ -80,7 +210,7 @@ import BackButton from "@/ui/components/BackButton.astro";
   </main>
 
   <style>
-    /* Animación personalizada para el título */
+    /* Custom keyframe animation for gradient title */
     @keyframes gradient-shift {
       0%,
       100% {
@@ -96,7 +226,7 @@ import BackButton from "@/ui/components/BackButton.astro";
       animation: gradient-shift 3s ease-in-out infinite;
     }
 
-    /* Efecto de partículas de fondo */
+    /* Background particle effect via pseudo-element */
     main::before {
       content: "";
       position: absolute;
@@ -124,7 +254,7 @@ import BackButton from "@/ui/components/BackButton.astro";
       z-index: -1;
     }
 
-    /* Mejora en el backdrop del info panel */
+    /* backdrop-filter for info panel */
     #user-info {
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);

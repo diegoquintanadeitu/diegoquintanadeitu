@@ -18,7 +18,7 @@ npm install @docusaurus/theme-mermaid
 const config = {
   title: 'Diego Quintana - Design System',
   tagline: 'Portfolio Design System Documentation',
-  url: 'https://diegoquintanadeitu.github.io/diegoquintanadeitu',
+  url: 'https://diegoquintanadeitu.github.io',
   baseUrl: '/design-system/',
   
   presets: [

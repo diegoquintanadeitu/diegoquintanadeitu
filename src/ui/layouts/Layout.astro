@@ -19,30 +19,17 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="m-0 w-full h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="generator" content={Astro.generator} />
     <meta name="viewport" content="width=device-width" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/diegoquintanadeitu/favicon.svg"
-    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
+  <body class="m-0 w-full h-full">
+    <slot />
+    {showFooter && <Footer showSpotify={showSpotify} />}
+    {showThemeSelector && <ThemeSelector />}
+  </body>
 </html>
-<body>
-  <slot />
-  {showFooter && <Footer showSpotify={showSpotify} />}
-  {showThemeSelector && <ThemeSelector />}
-</body>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>

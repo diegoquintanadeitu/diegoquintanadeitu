@@ -1,61 +1,42 @@
 @import "tailwindcss";
 
+@import './styles/light.css';
+@import './styles/dark.css';
+@import './styles/sepia.css';
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@custom-variant sepia (&:where([data-theme="sepia"], [data-theme="sepia"] *));
+
 @plugin "@midudev/tailwind-animations";
 
-/* ===================================================================
-   VARIABLES DE TEMAS
-   =================================================================== */
+@layer utilities {
+  .bg-theme-primary {
+    background-color: var(--bg-primary);
+  }
 
-/* Variables Light Theme (por defecto) */
-:root {
-  --bg-primary: #f8fafc;
-  --bg-secondary: #ffffff;
-  --bg-accent: #eff6ff;
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --text-accent: #3b82f6;
-  --text-accent-rgb: 59, 130, 246;
-  --border-color: #e2e8f0;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --bg-gradient-primary: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #e2e8f0 100%);
-}
+  .bg-theme-surface {
+    background-color: var(--bg-secondary);
+  }
 
-/* Variables Dark Theme */
-[data-theme="dark"] {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-accent: #334155;
-  --text-primary: #f8fafc;
-  --text-secondary: #e2e8f0;
-  --text-accent: #7dd3fc;
-  --text-accent-rgb: 125, 211, 252;
-  --border-color: #475569;
-  --shadow-color: rgba(0, 0, 0, 0.3);
+  .text-theme-primary {
+    color: var(--text-primary);
+  }
 
-  /* Variables específicas para tema oscuro */
-  --bg-pink-50: #1e1b4b;
-  --text-on-pink-50: #ffffff;
-  --bg-blue-600: #1e3a8a;
-  --text-on-blue-600: #ffffff;
-  --bg-purple-50: #6b21a8;
-  --text-on-purple-50: #f3e8ff;
-  --bg-green-50: #14532d;
-  --text-on-green-50: #dcfce7;
-  --bg-blue-50: #1e3a8a;
-  --text-on-blue-50: #bfdbfe;
-  --text-blue-improved: #93c5fd;
-  --text-purple-improved: #f3e8ff;
-  --text-green-improved: #dcfce7;
-  --border-blue-improved: #1e40af;
-  --bg-gradient-primary: linear-gradient(135deg,
-      #0f172a 0%,
-      #1e293b 50%,
-      #334155 100%);
-  --bg-gradient-secondary: linear-gradient(90deg, #334155 0%, #475569 100%);
+  .text-theme-secondary {
+    color: var(--text-secondary);
+  }
+
+  .text-theme-accent {
+    color: var(--text-accent);
+  }
+
+  .border-theme {
+    border-color: var(--border-color);
+  }
 }
 
 /* ===================================================================
-   ESTILOS BASE
+   ESTILOS BASE COMUNES
    =================================================================== */
 
 body {
@@ -67,201 +48,208 @@ body {
 }
 
 /* ===================================================================
-   LIGHT THEME - ESTILOS ESPECÍFICOS
+   PALETA GLOBAL Y CONTRASTE PARA UTILIDADES FRECUENTES
+   Nota: en @layer utilities para competir con clases Tailwind por especificidad
+   y no por orden de cascada (no-layered siempre gana a layered).
    =================================================================== */
 
-/* Mejoras de contraste generales - WCAG 2.1 AA compliant */
-.bg-pink-50 {
-  --bg-pink-50: #fdf2f8;
-  --text-on-pink-50: #000000;
-  background-color: var(--bg-pink-50);
-  color: var(--text-on-pink-50);
+@layer utilities {
+  .bg-white {
+    background-color: var(--bg-secondary);
+  }
+
+  .bg-slate-50,
+  .bg-gray-50 {
+    background-color: var(--surface-subtle);
+  }
+
+  .bg-slate-100,
+  .bg-gray-100 {
+    background-color: var(--surface-muted);
+  }
+
+  .bg-blue-50 {
+    background-color: var(--surface-info);
+  }
+
+  .hover\:bg-blue-50:hover,
+  .hover\:bg-blue-100:hover {
+    background-color: var(--surface-info-hover);
+  }
+
+  .text-slate-800,
+  .text-slate-700,
+  .text-gray-800,
+  .text-gray-700 {
+    color: var(--text-primary);
+  }
+
+  .text-slate-600,
+  .text-gray-600 {
+    color: var(--text-secondary);
+  }
+
+  .text-slate-500,
+  .text-gray-500,
+  .text-gray-400 {
+    color: var(--text-muted);
+  }
+
+  .text-blue-600,
+  .hover\:text-blue-600:hover {
+    color: var(--text-accent);
+  }
+
+  .hover\:text-blue-800:hover,
+  .hover\:text-slate-700:hover,
+  .hover\:text-blue-700:hover {
+    color: var(--text-accent-hover);
+  }
+
+  .bg-slate-100.text-slate-600,
+  .bg-slate-100.text-slate-700,
+  span.bg-slate-100,
+  span.bg-slate-50 {
+    background-color: var(--tag-bg);
+    color: var(--tag-text);
+  }
+
+  .border-slate-100,
+  .border-slate-200,
+  .border-gray-100,
+  .border-gray-200 {
+    border-color: var(--border-color);
+  }
+
+  .border-blue-200 {
+    border-color: var(--border-blue-improved, var(--border-color));
+  }
+
+  .bg-blue-50.text-blue-800,
+  .bg-blue-50.text-gray-600,
+  .bg-blue-50.text-slate-600,
+  .border-blue-200.text-blue-800,
+  .border-blue-200.text-gray-600,
+  .border-blue-200.text-slate-600 {
+    color: var(--text-on-blue-50, var(--text-secondary));
+  }
+
+  .bg-pink-50,
+  .bg-purple-50,
+  .bg-green-50,
+  .bg-emerald-50,
+  .bg-yellow-50,
+  .bg-orange-50,
+  .bg-red-50 {
+    color: var(--text-primary);
+  }
+
+  /* Gradientes de texto: neutralizar en dark/sepia */
+  [data-theme="dark"] .bg-clip-text.text-transparent,
+  [data-theme="dark"] .bg-clip-text,
+  [data-theme="sepia"] .bg-clip-text.text-transparent,
+  [data-theme="sepia"] .bg-clip-text {
+    background: none;
+    color: var(--text-accent);
+    -webkit-text-fill-color: currentColor;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+  }
+
+  [data-theme="dark"] .after\:bg-gradient-to-r::after,
+  [data-theme="sepia"] .after\:bg-gradient-to-r::after {
+    background: currentColor;
+  }
 }
 
-.bg-pink-50 *,
-.bg-pink-50 .text-gray-600,
-.bg-pink-50 .text-slate-600,
-.bg-pink-50 span,
-.bg-pink-50 .text-sm {
-  color: var(--text-on-pink-50);
+/* Mejoras de scrollbar para ambos temas */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-/* Mejoras específicas para elementos con border-blue-200 */
-.border-blue-200 {
-  --border-blue-improved: #3b82f6;
-  border-color: var(--border-blue-improved);
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
 }
 
-/* ===================================================================
-   DARK THEME - ESTILOS ESPECÍFICOS
-   =================================================================== */
-
-/* Estilos generales para dark theme */
-
-[data-theme="dark"] .bg-gradient-to-br {
-  background: var(--bg-gradient-primary);
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
 }
 
-[data-theme="dark"] .bg-white {
-  background-color: var(--bg-secondary);
-  border-color: var(--border-color);
-  color: var(--text-primary);
-}
-
-[data-theme="dark"] .text-slate-600,
-[data-theme="dark"] .text-gray-600 {
-  color: #cbd5e1;
-}
-
-[data-theme="dark"] .text-slate-800,
-[data-theme="dark"] .text-gray-800 {
-  color: var(--text-primary);
-}
-
-[data-theme="dark"] .text-slate-700 {
-  color: #e2e8f0;
-}
-
-[data-theme="dark"] .shadow-lg,
-[data-theme="dark"] .shadow-xl {
-  box-shadow: 0 10px 25px var(--shadow-color);
-}
-
-/* Mejoras específicas para skills con mejor contraste */
-[data-theme="dark"] .bg-blue-50 {
-  background-color: var(--bg-blue-50);
-  color: var(--text-on-blue-50);
-}
-
-[data-theme="dark"] .text-blue-600,
-[data-theme="dark"] .text-blue-700 {
-  color: var(--text-blue-improved);
-}
-
-[data-theme="dark"] .bg-purple-50 {
-  background-color: var(--bg-purple-50);
-  color: var(--text-on-purple-50);
-}
-
-[data-theme="dark"] .text-purple-700 {
-  color: var(--text-purple-improved);
-}
-
-[data-theme="dark"] .bg-green-50 {
-  background-color: var(--bg-green-50);
-  color: var(--text-on-green-50);
-}
-
-[data-theme="dark"] .text-green-700 {
-  color: var(--text-green-improved);
-}
-
-/* Corregir fondos claros en tema oscuro */
-[data-theme="dark"] .bg-pink-50 {
-  background-color: var(--bg-pink-50);
-  color: var(--text-on-pink-50);
-}
-
-[data-theme="dark"] .bg-pink-50,
-[data-theme="dark"] .bg-pink-50 *,
-[data-theme="dark"] .bg-pink-50 .text-gray-600,
-[data-theme="dark"] .bg-pink-50 .text-slate-600 {
-  color: var(--text-on-pink-50);
-}
-
-[data-theme="dark"] .bg-gray-50,
-[data-theme="dark"] .bg-slate-50 {
-  background-color: #334155;
-  color: #f1f5f9;
-}
-
-[data-theme="dark"] .bg-slate-100 {
-  background-color: #475569;
-  color: #f8fafc;
-}
-
-[data-theme="dark"] .bg-gray-50 .text-gray-600,
-[data-theme="dark"] .bg-slate-50 .text-slate-600 {
-  color: #f1f5f9;
-}
-
-[data-theme="dark"] .bg-slate-100 .text-gray-600,
-[data-theme="dark"] .bg-slate-100 .text-slate-600 {
-  color: #f8fafc;
-}
-
-/* Elementos específicos con mejor especificidad */
-[data-theme="dark"] .px-2.rounded.text-xs {
-  background-color: #334155;
-  color: #e2e8f0;
-  border: 1px solid #475569;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
 }
 
 /* Corregir borders y elementos azules en tema oscuro */
-[data-theme="dark"] .border-blue-200 {
-  border-color: var(--border-blue-improved);
-  background-color: var(--bg-blue-50);
-  color: var(--text-on-blue-50);
-}
+@layer utilities {
+  [data-theme="dark"] .border-blue-200 {
+    border-color: var(--border-blue-improved);
+    background-color: var(--bg-blue-50);
+    color: var(--text-on-blue-50);
+  }
 
-[data-theme="dark"] .hover\:bg-blue-100 {
-  background-color: var(--bg-blue-50);
-}
+  [data-theme="dark"] .hover\:bg-blue-100 {
+    background-color: var(--bg-blue-50);
+  }
 
-[data-theme="dark"] .hover\:bg-blue-100:hover {
-  background-color: var(--border-blue-improved);
-}
+  [data-theme="dark"] .hover\:bg-blue-100:hover {
+    background-color: var(--border-blue-improved);
+  }
 
-/* Solución específica para bg-blue-600 - WCAG 2.1 AA Compliance */
-[data-theme="dark"] .bg-blue-600 {
-  background-color: var(--bg-blue-600);
-  color: var(--text-on-blue-600);
-}
+  /* Solución específica para bg-blue-600 - WCAG 2.1 AA Compliance */
+  [data-theme="dark"] .bg-blue-600 {
+    background-color: var(--bg-blue-600);
+    color: var(--text-on-blue-600);
+  }
 
-[data-theme="dark"] .bg-blue-600 *,
-[data-theme="dark"] .bg-blue-600 span,
-[data-theme="dark"] .bg-blue-600 .text-white,
-[data-theme="dark"] .bg-blue-600 .font-medium {
-  color: var(--text-on-blue-600);
-}
+  [data-theme="dark"] .bg-blue-600 *,
+  [data-theme="dark"] .bg-blue-600 span,
+  [data-theme="dark"] .bg-blue-600 .text-white,
+  [data-theme="dark"] .bg-blue-600 .font-medium {
+    color: var(--text-on-blue-600);
+  }
 
-/* Mejoras específicas para soft skills en tema oscuro */
-[data-theme="dark"] .bg-gradient-to-r.from-blue-50.to-purple-50 {
-  background: var(--bg-gradient-secondary);
-}
+  /* Mejoras específicas para soft skills en tema oscuro */
+  [data-theme="dark"] .bg-gradient-to-r.from-blue-50.to-purple-50 {
+    background: var(--bg-gradient-secondary);
+  }
 
-/* ===================================================================
-   COMPONENTE STYLES - Se importan desde archivos separados
-   =================================================================== */
+  /* ===================================================================
+     COMPONENTE STYLES - Se importan desde archivos separados
+     =================================================================== */
 
-[data-theme="dark"] .bg-slate-800 {
-  background-color: #0f172a;
-  color: #f1f5f9;
-}
+  [data-theme="dark"] .bg-slate-800 {
+    background-color: #0f172a;
+    color: #f1f5f9;
+  }
 
-/* Mejorar contraste de tooltips en tema oscuro */
-[data-theme="dark"] .bg-gray-900 {
-  background-color: #111827;
-  border-color: #374151;
-}
+  [data-theme="dark"] .bg-gray-900 {
+    background-color: #111827;
+    border-color: #374151;
+  }
 
-[data-theme="dark"] .border-t-gray-900 {
-  border-top-color: #111827;
-}
+  [data-theme="dark"] .border-t-gray-900 {
+    border-top-color: #111827;
+  }
 
-[data-theme="dark"] .group:hover .bg-gray-900,
-[data-theme="dark"] .group:focus .bg-gray-900 {
-  background-color: #111827;
-  color: #f9fafb;
-}
+  [data-theme="dark"] .group:hover .bg-gray-900,
+  [data-theme="dark"] .group:focus .bg-gray-900 {
+    background-color: #111827;
+    color: #f9fafb;
+  }
 
-[data-theme="dark"] .hover\:bg-blue-700:hover {
-  background-color: #2563eb;
-}
+  [data-theme="dark"] .hover\:bg-blue-700:hover {
+    background-color: #2563eb;
+  }
 
-/* Mejoras de accesibilidad para focus */
-[data-theme="dark"] .focus\:ring-blue-500:focus {
-  --tw-ring-color: #60a5fa;
+  [data-theme="sepia"] .hover\:bg-blue-700:hover {
+    background-color: #8b5a17;
+  }
+
+  [data-theme="dark"] .focus\:ring-blue-500:focus {
+    --tw-ring-color: #60a5fa;
+  }
 }
 
 /* Asegurar que los tooltips sean legibles en todos los temas */
@@ -301,6 +289,27 @@ body {
 
 .btn-scale-animation-full:active {
   transform: scale(0.95);
+}
+
+/* Legibilidad de texto sobre superficies coloreadas */
+.bg-blue-50 .text-blue-800,
+.bg-blue-50 .text-gray-600,
+.bg-blue-50 .text-slate-600,
+.bg-pink-50 .text-gray-600,
+.bg-pink-50 .text-slate-600,
+.bg-purple-50 .text-gray-600,
+.bg-purple-50 .text-slate-600,
+.bg-green-50 .text-gray-600,
+.bg-green-50 .text-slate-600,
+.bg-emerald-50 .text-gray-600,
+.bg-emerald-50 .text-slate-600,
+.bg-yellow-50 .text-gray-600,
+.bg-yellow-50 .text-slate-600,
+.bg-orange-50 .text-gray-600,
+.bg-orange-50 .text-slate-600,
+.bg-red-50 .text-gray-600,
+.bg-red-50 .text-slate-600 {
+  color: var(--text-primary);
 }
 
 /* Utilidad para limitar líneas de texto */

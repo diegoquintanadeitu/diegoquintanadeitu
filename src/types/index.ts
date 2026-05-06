@@ -1,7 +1,14 @@
+export interface TechBadge {
+  name: string;
+  color: string;
+  textColor: string;
+}
+
 export interface Profile {
   name: string;
   role: string;
   bio: string[];
+  techStack: TechBadge[];
 }
 
 export interface Skill {

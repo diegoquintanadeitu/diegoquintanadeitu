@@ -1,8 +1,10 @@
 import animations from "@midudev/tailwind-animations";
+import plugin from "tailwindcss/plugin";
 
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -45,5 +47,10 @@ export default {
       },
     },
   },
-  plugins: [animations],
+  plugins: [
+    animations,
+    plugin(function ({ addVariant }) {
+      addVariant("sepia", '[data-theme="sepia"] &');
+    }),
+  ],
 };

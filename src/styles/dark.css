@@ -1,0 +1,248 @@
+/* ===================================================================
+   DARK THEME - VARIABLES Y ESTILOS
+   =================================================================== */
+
+[data-theme="dark"] {
+  /* ─── Colores Base ─── */
+  --bg-primary: #020617;
+  --bg-secondary: #0f172a;
+  --bg-accent: #1e293b;
+
+  /* ─── Texto ─── */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-accent: #7dd3fc;
+  --text-accent-hover: #bae6fd;
+  --text-accent-rgb: 125, 211, 252;
+
+  /* ─── Superficies utilitarias ─── */
+  --surface-subtle: #132033;
+  --surface-muted: #1e293b;
+  --surface-info: #0c4a6e;
+  --surface-info-hover: #075985;
+  --surface-positive: #14532d;
+  --surface-warning: #713f12;
+  --surface-danger: #7f1d1d;
+  --tag-bg: #1e293b;
+  --tag-text: #e2e8f0;
+
+  /* ─── Bordes y Sombras ─── */
+  --border-color: #334155;
+  --shadow-color: rgba(2, 6, 23, 0.42);
+
+  /* ─── Gradientes ─── */
+  --bg-gradient-primary: linear-gradient(135deg, #020617 0%, #0f172a 58%, #0b2942 100%);
+  --bg-gradient-secondary: linear-gradient(90deg, #0f172a 0%, #1d4f73 100%);
+
+  /* ─── Variables Específicas para Mejora de Contraste ─── */
+  --bg-pink-50: #4a044e;
+  --text-on-pink-50: #ffffff;
+  --bg-blue-600: #1d4ed8;
+  --text-on-blue-600: #ffffff;
+  --bg-purple-50: #581c87;
+  --text-on-purple-50: #f5f3ff;
+  --bg-green-50: #14532d;
+  --text-on-green-50: #ecfdf5;
+  --bg-blue-50: #0c4a6e;
+  --text-on-blue-50: #e0f2fe;
+  --text-blue-improved: #bae6fd;
+  --text-purple-improved: #f5f3ff;
+  --text-green-improved: #ecfdf5;
+  --border-blue-improved: #38bdf8;
+}
+
+/* ===================================================================
+   DARK THEME - ESTILOS ESPECÍFICOS
+   En @layer utilities para competir con Tailwind por especificidad,
+   no por orden de cascada. [data-theme="dark"] .class = (0,1,1) vs
+   .dark\:class envuelto también en [data-theme="dark"] = (0,1,1):
+   dentro del mismo layer, Tailwind (importado después) gana → dark: funciona.
+   =================================================================== */
+
+@layer utilities {
+  [data-theme="dark"] .bg-pink-50 {
+    background-color: var(--bg-pink-50);
+    color: var(--text-on-pink-50);
+  }
+
+  [data-theme="dark"] .bg-pink-50 *,
+  [data-theme="dark"] .bg-pink-50 .text-gray-600,
+  [data-theme="dark"] .bg-pink-50 .text-slate-600,
+  [data-theme="dark"] .bg-pink-50 span,
+  [data-theme="dark"] .bg-pink-50 .text-sm {
+    color: var(--text-on-pink-50);
+  }
+
+  [data-theme="dark"] .border-blue-200 {
+    border-color: var(--border-blue-improved);
+  }
+
+  [data-theme="dark"] input,
+  [data-theme="dark"] textarea,
+  [data-theme="dark"] select {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+  }
+
+  [data-theme="dark"] input:focus,
+  [data-theme="dark"] textarea:focus,
+  [data-theme="dark"] select:focus {
+    outline-color: var(--text-accent);
+    border-color: var(--text-accent);
+  }
+
+  [data-theme="dark"] a {
+    color: var(--text-accent);
+  }
+
+  [data-theme="dark"] a:hover {
+    opacity: 0.8;
+  }
+
+  /* ─── Fondos blancos y claros → oscuros ─── */
+  [data-theme="dark"] .bg-white {
+    background-color: var(--bg-secondary);
+  }
+
+  [data-theme="dark"] .bg-slate-50,
+  [data-theme="dark"] .bg-gray-50 {
+    background-color: #1e293b;
+  }
+
+  [data-theme="dark"] .bg-slate-100,
+  [data-theme="dark"] .bg-gray-100 {
+    background-color: #334155;
+  }
+
+  [data-theme="dark"] .bg-slate-200,
+  [data-theme="dark"] .bg-gray-200 {
+    background-color: #475569;
+  }
+
+  [data-theme="dark"] .bg-slate-800 {
+    background-color: #0f172a;
+  }
+
+  /* ─── Fondos de colores semánticos ─── */
+  [data-theme="dark"] .bg-blue-50 {
+    background-color: #1e3a5f;
+  }
+
+  [data-theme="dark"] .bg-indigo-50 {
+    background-color: #1e1b4b;
+  }
+
+  [data-theme="dark"] .bg-purple-50 {
+    background-color: #3b0764;
+  }
+
+  [data-theme="dark"] .bg-pink-50 {
+    background-color: #4a044e;
+  }
+
+  [data-theme="dark"] .bg-green-50 {
+    background-color: #14532d;
+  }
+
+  [data-theme="dark"] .bg-emerald-50 {
+    background-color: #064e3b;
+  }
+
+  [data-theme="dark"] .bg-yellow-50 {
+    background-color: #422006;
+  }
+
+  [data-theme="dark"] .bg-red-50 {
+    background-color: #450a0a;
+  }
+
+  [data-theme="dark"] .bg-orange-50 {
+    background-color: #431407;
+  }
+
+  /* ─── Gradientes ─── */
+  [data-theme="dark"] .bg-gradient-to-br.from-slate-50,
+  [data-theme="dark"] .bg-gradient-to-br.from-white {
+    background: var(--bg-gradient-primary);
+  }
+
+  /* ─── Bordes ─── */
+  [data-theme="dark"] .border-slate-100,
+  [data-theme="dark"] .border-slate-200,
+  [data-theme="dark"] .border-gray-100,
+  [data-theme="dark"] .border-gray-200 {
+    border-color: var(--border-color);
+  }
+
+  /* ─── Textos sobre fondos claros ─── */
+  [data-theme="dark"] .bg-slate-50 .text-gray-600,
+  [data-theme="dark"] .bg-gray-50 .text-gray-600,
+  [data-theme="dark"] .bg-slate-50 .text-slate-600,
+  [data-theme="dark"] .bg-gray-50 .text-slate-600 {
+    color: var(--text-secondary);
+  }
+
+  [data-theme="dark"] .bg-slate-100 .text-slate-600,
+  [data-theme="dark"] .bg-slate-100 .text-gray-600 {
+    color: var(--text-primary);
+  }
+
+  /* ─── Cards: sombra con glow cian ─── */
+  [data-theme="dark"] .rounded-2xl.shadow-lg {
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(125, 211, 252, 0.06);
+  }
+
+  [data-theme="dark"] .rounded-2xl.shadow-lg:hover,
+  [data-theme="dark"] .rounded-2xl.hover\:shadow-xl:hover {
+    box-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(125, 211, 252, 0.18),
+      0 0 20px rgba(125, 211, 252, 0.08);
+  }
+
+  /* ─── Timeline line: glow neón ─── */
+  [data-theme="dark"] .bg-gradient-to-b.from-blue-500.to-purple-500 {
+    background: linear-gradient(to bottom, #38bdf8, #818cf8);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+  }
+
+  /* ─── Punto central del timeline ─── */
+  [data-theme="dark"] .rounded-full.bg-white {
+    background-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+  }
+
+  /* ─── Gradiente del hero ─── */
+  [data-theme="dark"] .bg-gradient-to-br.from-slate-50.via-white {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f2035 100%);
+  }
+
+  /* ─── Badge/tag en dark ─── */
+  [data-theme="dark"] span.bg-slate-100 {
+    background-color: var(--tag-bg);
+    color: var(--tag-text);
+  }
+}
+
+/* Scrollbar styling para dark theme */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}

@@ -1,0 +1,272 @@
+/* ===================================================================
+   SEPIA THEME - VARIABLES Y ESTILOS
+   Estética: vintage / parchment / cálido dorado
+   =================================================================== */
+
+[data-theme="sepia"] {
+  /* ─── Colores Base ─── */
+  --bg-primary: #f7f1e4;
+  --bg-secondary: #fffaf0;
+  --bg-accent: #eadcc2;
+
+  /* ─── Texto ─── */
+  --text-primary: #2f2418;
+  --text-secondary: #5f4a34;
+  --text-muted: #7a6042;
+  --text-accent: #6b3f00;
+  --text-accent-hover: #4f2d00;
+  --text-accent-rgb: 107, 63, 0;
+
+  /* ─── Superficies utilitarias ─── */
+  --surface-subtle: #f0e6d4;
+  --surface-muted: #e4d3b5;
+  --surface-info: #efe4c8;
+  --surface-info-hover: #e6d6ae;
+  --surface-positive: #dfe8cf;
+  --surface-warning: #f5e5bb;
+  --surface-danger: #efd4c7;
+  --tag-bg: #e4d3b5;
+  --tag-text: #4a3522;
+
+  /* ─── Bordes y Sombras ─── */
+  --border-color: #cfb188;
+  --shadow-color: rgba(91, 60, 30, 0.16);
+
+  /* ─── Gradientes ─── */
+  --bg-gradient-primary: linear-gradient(135deg, #fffaf0 0%, #f7f1e4 58%, #eadcc2 100%);
+  --bg-gradient-secondary: linear-gradient(90deg, #f0e6d4 0%, #e4d3b5 100%);
+
+  /* ─── Variables Específicas ─── */
+  --bg-pink-50: #f1dfd2;
+  --text-on-pink-50: #4a2c18;
+  --bg-blue-50: #efe4c8;
+  --text-on-blue-50: #43311d;
+  --bg-purple-50: #eadccf;
+  --text-on-purple-50: #4a3018;
+  --bg-green-50: #dfe8cf;
+  --text-on-green-50: #31441f;
+  --border-blue-improved: #b07a35;
+}
+
+/* ===================================================================
+   SEPIA THEME - FONDOS → PARCHMENT
+   En @layer utilities: [data-theme="sepia"] .class tiene especificidad
+   (0,1,1) que gana a .class base (0,0,1), y sepia: de Tailwind tiene
+   la misma (0,1,1) pero viene después → sepia: gana si se usa explícitamente.
+   =================================================================== */
+
+[data-theme="sepia"] body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+@layer utilities {
+  [data-theme="sepia"] .bg-white {
+    background-color: var(--bg-secondary);
+  }
+
+  [data-theme="sepia"] .bg-slate-50,
+  [data-theme="sepia"] .bg-gray-50 {
+    background-color: #f0e6cf;
+  }
+
+  [data-theme="sepia"] .bg-slate-100,
+  [data-theme="sepia"] .bg-gray-100 {
+    background-color: #e8d5b0;
+  }
+
+  [data-theme="sepia"] .bg-slate-200,
+  [data-theme="sepia"] .bg-gray-200 {
+    background-color: #dcc49a;
+  }
+
+  [data-theme="sepia"] .bg-slate-800 {
+    background-color: #5c3d1e;
+  }
+
+  /* ─── Fondos de colores semánticos → tonos cálidos ─── */
+  [data-theme="sepia"] .bg-blue-50 {
+    background-color: #ede8d4;
+  }
+
+  [data-theme="sepia"] .bg-indigo-50 {
+    background-color: #ece6d8;
+  }
+
+  [data-theme="sepia"] .bg-purple-50 {
+    background-color: #f0e6d8;
+  }
+
+  [data-theme="sepia"] .bg-pink-50 {
+    background-color: #f5e6d3;
+  }
+
+  [data-theme="sepia"] .bg-green-50 {
+    background-color: #e8ead5;
+  }
+
+  [data-theme="sepia"] .bg-emerald-50 {
+    background-color: #e4eacc;
+  }
+
+  [data-theme="sepia"] .bg-yellow-50 {
+    background-color: #fdf0c4;
+  }
+
+  [data-theme="sepia"] .bg-red-50 {
+    background-color: #f5e4d4;
+  }
+
+  [data-theme="sepia"] .bg-orange-50 {
+    background-color: #fae8d0;
+  }
+
+  /* ===================================================================
+     SEPIA THEME - TEXTOS
+     =================================================================== */
+
+  [data-theme="sepia"] .text-slate-800,
+  [data-theme="sepia"] .text-gray-800 {
+    color: #3b2a1a;
+  }
+
+  [data-theme="sepia"] .text-slate-600,
+  [data-theme="sepia"] .text-gray-600 {
+    color: #6b4c35;
+  }
+
+  [data-theme="sepia"] .text-slate-500,
+  [data-theme="sepia"] .text-gray-500 {
+    color: #8b6545;
+  }
+
+  [data-theme="sepia"] .text-blue-600 {
+    color: var(--text-accent);
+  }
+
+  [data-theme="sepia"] .text-purple-600 {
+    color: var(--text-accent-hover);
+  }
+
+  /* ===================================================================
+     SEPIA THEME - BORDES
+     =================================================================== */
+
+  [data-theme="sepia"] .border-slate-100,
+  [data-theme="sepia"] .border-slate-200,
+  [data-theme="sepia"] .border-gray-100,
+  [data-theme="sepia"] .border-gray-200 {
+    border-color: #c8a97e;
+  }
+
+  [data-theme="sepia"] .border-blue-200 {
+    border-color: #b09060;
+  }
+
+  /* ===================================================================
+     SEPIA THEME - GRADIENTES DE TEXTO (títulos)
+     =================================================================== */
+
+  [data-theme="sepia"] .bg-gradient-to-r.from-blue-600 {
+    background: linear-gradient(to right, #9a6310, #c47a20, #8b4513);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  [data-theme="sepia"] .bg-gradient-to-br.from-slate-50,
+  [data-theme="sepia"] .bg-gradient-to-br.from-white {
+    background: var(--bg-gradient-primary);
+  }
+
+  /* ===================================================================
+     SEPIA THEME - BOTONES
+     =================================================================== */
+
+  [data-theme="sepia"] .bg-gradient-to-r.from-indigo-600,
+  [data-theme="sepia"] .from-indigo-600.to-purple-600 {
+    background: linear-gradient(to right, #9a5c1a, #c47a20);
+  }
+
+  [data-theme="sepia"] .hover\:from-indigo-700:hover {
+    background: linear-gradient(to right, #7a4510, #a05a10);
+  }
+
+  /* ===================================================================
+     SEPIA THEME - BADGES / TAGS
+     =================================================================== */
+
+  [data-theme="sepia"] .bg-slate-100.text-slate-600 {
+    background-color: #dcc49a;
+    color: #4a3020;
+  }
+
+  /* ===================================================================
+     SEPIA THEME - FORMS
+     =================================================================== */
+
+  [data-theme="sepia"] input,
+  [data-theme="sepia"] textarea,
+  [data-theme="sepia"] select {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+  }
+
+  [data-theme="sepia"] input:focus,
+  [data-theme="sepia"] textarea:focus,
+  [data-theme="sepia"] select:focus {
+    outline-color: var(--text-accent);
+    border-color: var(--text-accent);
+  }
+
+  /* ===================================================================
+     SEPIA THEME - ENLACES
+     =================================================================== */
+
+  [data-theme="sepia"] a {
+    color: var(--text-accent);
+  }
+
+  [data-theme="sepia"] a:hover {
+    opacity: 0.8;
+  }
+
+  /* ===================================================================
+     SEPIA THEME - CARDS ESPECIALES
+     =================================================================== */
+
+  [data-theme="sepia"] .rounded-2xl.shadow-lg {
+    box-shadow: 0 4px 16px rgba(91, 60, 30, 0.15), 0 1px 4px rgba(91, 60, 30, 0.1);
+  }
+
+  [data-theme="sepia"] .rounded-2xl.shadow-lg:hover {
+    box-shadow: 0 8px 24px rgba(91, 60, 30, 0.25), 0 2px 8px rgba(91, 60, 30, 0.15);
+  }
+
+  [data-theme="sepia"] .bg-gradient-to-b.from-blue-500.to-purple-500 {
+    background: linear-gradient(to bottom, #c47a20, #8b4513);
+  }
+}
+
+/* ===================================================================
+   SEPIA THEME - SCROLLBAR
+   =================================================================== */
+
+[data-theme="sepia"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme="sepia"] ::-webkit-scrollbar-track {
+  background: #f0e6cf;
+}
+
+[data-theme="sepia"] ::-webkit-scrollbar-thumb {
+  background: #c8a97e;
+  border-radius: 4px;
+}
+
+[data-theme="sepia"] ::-webkit-scrollbar-thumb:hover {
+  background: #9a6310;
+}
