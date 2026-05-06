@@ -379,10 +379,6 @@ import BackButton from "@/ui/components/BackButton.astro";
     // Configurar manejo seguro del iframe
     const iframe = document.getElementById("game-frame");
     if (iframe) {
-      iframe.addEventListener("load", () => {
-        console.log("Iframe cargado de forma segura");
-      });
-
       iframe.addEventListener("error", (e) => {
         console.warn("Error en iframe, pero continuando de forma segura");
         e.preventDefault();

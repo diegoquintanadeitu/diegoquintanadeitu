@@ -25,14 +25,9 @@ interface ThemeResult {
 }
 
 const analyzeAccessibility = async (): Promise<void> => {
-  console.log("🔍 Iniciando análisis de accesibilidad del portfolio...\n");
-
   // Configurar puerto dinámicamente
   const port = process.env.PORT || process.env.ASTRO_PORT || "4321";
   const baseUrl = `http://localhost:${port}`;
-
-  console.log(`🌐 Usando servidor en: ${baseUrl}`);
-
   const browser: Browser = await chromium.launch();
   const context = await browser.newContext();
   const page: Page = await context.newPage();
@@ -42,10 +37,7 @@ const analyzeAccessibility = async (): Promise<void> => {
 
   try {
     for (const theme of themes) {
-      console.log(`\n🎨 === PROBANDO TEMA: ${theme.toUpperCase()} ===`);
-
       // Test homepage with theme
-      console.log(`📄 Analizando página principal (tema ${theme})...`);
       await page.goto(baseUrl);
       await page.waitForLoadState("networkidle");
 
@@ -68,23 +60,7 @@ const analyzeAccessibility = async (): Promise<void> => {
 
       const contrastIssues = await collectContrastIssues(page);
 
-      console.log(
-        `✅ Página principal (${theme}): ${homepageResults.violations.length} violaciones encontradas`,
-      );
-
-      console.log(
-        `🎯 Contraste (${theme}): ${contrastIssues.length} problemas encontrados`,
-      );
-
-      if (homepageResults.violations.length > 0) {
-        console.log(
-          `\n🚨 VIOLACIONES EN PÁGINA PRINCIPAL (${theme.toUpperCase()}):`,
-        );
-        displayViolations(homepageResults.violations);
-      }
-
       if (contrastIssues.length > 0) {
-        console.log(`\n🌓 PROBLEMAS DE CONTRASTE (${theme.toUpperCase()}):`);
         displayContrastIssues(contrastIssues);
       }
 
@@ -114,31 +90,6 @@ const analyzeAccessibility = async (): Promise<void> => {
   if (totalViolations > 0) {
     process.exit(1);
   }
-};
-
-const displayViolations = (violations: Result[]): void => {
-  violations.forEach((violation, index) => {
-    console.log(
-      `\n${index + 1}. ${violation.id} (Impacto: ${violation.impact})`,
-    );
-    console.log(`   📝 ${violation.description}`);
-    console.log(`   🎯 Elementos afectados: ${violation.nodes.length}`);
-
-    if (violation.helpUrl) {
-      console.log(`   📚 Más info: ${violation.helpUrl}`);
-    }
-
-    violation.nodes.slice(0, 3).forEach((node, nodeIndex) => {
-      console.log(`   • Elemento ${nodeIndex + 1}: ${node.target.join(", ")}`);
-      if (node.failureSummary) {
-        console.log(`     ❌ ${node.failureSummary.split("\\n")[0]}`);
-      }
-    });
-
-    if (violation.nodes.length > 3) {
-      console.log(`   ... y ${violation.nodes.length - 3} elementos más`);
-    }
-  });
 };
 
 const displayContrastIssues = (issues: ContrastIssue[]): void => {
