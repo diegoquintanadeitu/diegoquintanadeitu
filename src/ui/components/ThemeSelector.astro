@@ -97,13 +97,9 @@
 
     let isMenuOpen = false;
 
-    console.log("🚀 ThemeSelector inicializado");
-    console.log(`📋 Opciones encontradas: ${themeOptions.length}`);
-
     // Cargar tema guardado
     const rawTheme = localStorage.getItem("portfolio-theme");
     const savedTheme = normalizeTheme(rawTheme);
-    console.log(`💾 Tema guardado: ${rawTheme} -> ${savedTheme}`);
     setTheme(savedTheme);
 
     // Toggle del menú
