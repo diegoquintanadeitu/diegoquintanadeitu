@@ -26,10 +26,23 @@ const {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const rawTheme = localStorage.getItem("portfolio-theme");
+        const validThemes = ["dark", "light", "sepia"];
+        const theme =
+          rawTheme && validThemes.includes(rawTheme) ? rawTheme : "dark";
+
+        const root = document.documentElement;
+        root.classList.toggle("dark", theme === "dark");
+        root.classList.toggle("sepia", theme === "sepia");
+        root.setAttribute("data-theme", theme);
+      })();
+    </script>
   </head>
   <body class="m-0 w-full h-full">
     <slot />
-    {showFooter && <Footer showSpotify={showSpotify} />}
+    {showFooter && <Footer />}
     {showThemeSelector && <ThemeSelector />}
   </body>
 </html>

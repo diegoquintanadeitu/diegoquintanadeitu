@@ -29,23 +29,10 @@
     <!-- Menú desplegable -->
     <div
       id="theme-menu"
-      class="theme-selector__menu absolute top-[calc(100%+0.5rem)] right-0 bg-white dark:bg-slate-800 backdrop-blur-xl border border-black dark:border-white rounded-xl shadow-2xl p-2 min-w-[10rem] flex flex-col gap-1 opacity-0 invisible scale-95 -translate-y-2 origin-top-right transition-all duration-200 ease-in-out"
+      class="theme-selector__menu absolute top-[calc(100%+1rem)] right-0 bg-white dark:bg-slate-800 backdrop-blur-xl border border-black dark:border-white rounded-xl shadow-2xl p-2 min-w-[10rem] flex flex-col gap-1 opacity-0 invisible scale-95 -translate-y-2 origin-top-right transition-all duration-200 ease-in-out"
       role="menu"
       aria-labelledby="theme-toggle"
     >
-      <button
-        id="theme-light"
-        class="theme-selector__option flex items-center gap-3 w-full px-3 py-3 bg-transparent border-none rounded-lg text-left cursor-pointer select-none transition-all duration-150 ease-in-out hover:bg-blue-500 hover:text-blue-800 dark:hover:bg-sky-300 dark:hover:text-sky-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset"
-        data-theme="light"
-        role="menuitem"
-      >
-        <div
-          class="theme-selector__indicator w-4 h-4 rounded-full border border-black shrink-0 transition-transform duration-200 ease-in-out bg-gradient-to-br from-blue-400 to-emerald-400"
-        >
-        </div>
-        <span class="text-sm font-medium leading-tight">Tema Claro</span>
-      </button>
-
       <button
         id="theme-dark"
         class="theme-selector__option flex items-center gap-3 w-full px-3 py-3 bg-transparent border-none rounded-lg text-left cursor-pointer select-none transition-all duration-150 ease-in-out hover:bg-blue-500 hover:text-blue-800 dark:hover:bg-sky-300 dark:hover:text-sky-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset"
@@ -57,6 +44,18 @@
         >
         </div>
         <span class="text-sm font-medium leading-tight">Tema Oscuro</span>
+      </button>
+      <button
+        id="theme-light"
+        class="theme-selector__option flex items-center gap-3 w-full px-3 py-3 bg-transparent border-none rounded-lg text-left cursor-pointer select-none transition-all duration-150 ease-in-out hover:bg-blue-500 hover:text-blue-800 dark:hover:bg-sky-300 dark:hover:text-sky-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset"
+        data-theme="light"
+        role="menuitem"
+      >
+        <div
+          class="theme-selector__indicator w-4 h-4 rounded-full border border-black shrink-0 transition-transform duration-200 ease-in-out bg-gradient-to-br from-blue-400 to-emerald-400"
+        >
+        </div>
+        <span class="text-sm font-medium leading-tight">Tema Claro</span>
       </button>
 
       <button
@@ -78,10 +77,21 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     type themeType = "light" | "dark" | "sepia";
+    const validThemes = ["dark", "light", "sepia"] as const;
+    const defaultTheme: themeType = "dark";
+
+    const isValidTheme = (value: string | null): value is themeType =>
+      Boolean(value && validThemes.includes(value as themeType));
+
+    const normalizeTheme = (value: string | null): themeType =>
+      isValidTheme(value) ? value : defaultTheme;
+
     const themeToggle = document.getElementById("theme-toggle");
     const themeMenu = document.getElementById("theme-menu");
     const themeIcon = document.getElementById("theme-icon");
-    const themeOptions = document.querySelectorAll(".theme-selector__option");
+    const themeOptions = document.querySelectorAll<HTMLButtonElement>(
+      ".theme-selector__option",
+    );
     const body = document.body;
     const root = document.documentElement;
 
@@ -92,8 +102,7 @@
 
     // Cargar tema guardado
     const rawTheme = localStorage.getItem("portfolio-theme");
-    const savedTheme: themeType =
-      rawTheme === "dark" ? "dark" : rawTheme === "sepia" ? "sepia" : "light";
+    const savedTheme = normalizeTheme(rawTheme);
     console.log(`💾 Tema guardado: ${rawTheme} -> ${savedTheme}`);
     setTheme(savedTheme);
 
@@ -123,12 +132,12 @@
         e.stopPropagation();
 
         const target = e.currentTarget as HTMLButtonElement;
-        const theme = target.getAttribute("data-theme") as themeType;
+        const theme = normalizeTheme(target.getAttribute("data-theme"));
 
         console.log(`🎨 Click en tema: ${theme}`);
         console.log(`📍 Target:`, target);
 
-        if (theme === "light" || theme === "dark" || theme === "sepia") {
+        if (isValidTheme(target.getAttribute("data-theme"))) {
           setTheme(theme);
           closeMenu();
         } else {
@@ -199,12 +208,13 @@
             : "#1e40af";
 
       themeOptions.forEach((option) => {
-        option.classList.remove("is-active");
-        option.style.color = inactiveColor;
+        const button = option as HTMLButtonElement;
+        button.classList.remove("is-active");
+        button.style.color = inactiveColor;
 
-        if (option.getAttribute("data-theme") === theme) {
-          option.classList.add("is-active");
-          option.style.color = activeColor;
+        if (button.getAttribute("data-theme") === theme) {
+          button.classList.add("is-active");
+          button.style.color = activeColor;
         }
       });
     }

@@ -1,16 +1,8 @@
 ---
 import { api } from "@/services/api";
-import { getLastPlayedTrack } from "@/services/spotify";
-
-interface Props {
-  showSpotify?: boolean;
-}
-
-const { showSpotify = true } = Astro.props;
 
 // Obtener datos del perfil y Spotify (estático para GitHub Pages)
 const profile = await api.getProfile();
-const spotifyTrack = await getLastPlayedTrack();
 ---
 
 <footer
