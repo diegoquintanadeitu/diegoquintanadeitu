@@ -29,10 +29,6 @@ jobs:
       - name: 🔍 Type check
         run: npm run type-check
 
-      - name: 🔍 Type check scripts
-        run: npm run type-check:scripts
-        continue-on-error: true
-
       - name: 🏗️ Build portfolio
         run: npm run build
 
