@@ -3,6 +3,9 @@
   "type": "module",
   "version": "2025.06.13",
   "private": true,
+  "engines": {
+    "node": ">=22.15.1"
+  },
   "scripts": {
     "astro": "astro",
     "dev": "astro dev",
