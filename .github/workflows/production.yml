@@ -20,7 +20,7 @@ jobs:
   # 🚀 BUILD, TAG Y DEPLOY (solo en GitHub)
   deploy-and-release:
     name: 🚀 Build, Tag & Deploy
-    if: github.repository == 'diegoquintanadeitu/diegoquintanadeitu'
+    if: github.repository == 'diegoquintanadeitu/diegoquintanadeitu.github.io'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
