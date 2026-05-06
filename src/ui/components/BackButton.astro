@@ -5,11 +5,20 @@ interface Props {
 }
 
 const { class: className = "", variant = "primary" } = Astro.props;
+
+const variantClasses = {
+  primary:
+    "bg-gradient-to-br from-blue-500 to-blue-700 text-white border border-transparent hover:from-blue-700 hover:to-blue-800",
+  secondary:
+    "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:text-slate-700 dark-secondary",
+  violet:
+    "bg-gradient-to-br from-violet-500 to-violet-700 text-white border border-transparent hover:from-violet-600 hover:to-violet-800",
+};
 ---
 
 <a
-  href="/diegoquintanadeitu/"
-  class={`back-button back-button--${variant} btn-scale-animation-full ${className}`}
+  href="/"
+  class={`inline-flex items-center gap-2 px-6 py-3 rounded-lg shadow-md no-underline font-medium cursor-pointer select-none isolate transition-shadow duration-200 ease-in-out hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 max-sm:w-full max-sm:justify-center btn-scale-animation-full back-button ${variantClasses[variant]} ${className}`}
 >
   <svg
     width="16"
@@ -20,129 +29,22 @@ const { class: className = "", variant = "primary" } = Astro.props;
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="back-button__icon"
+    class="shrink-0 transition-transform duration-200 ease-in-out back-button__icon"
   >
     <path d="m15 18-6-6 6-6"></path>
   </svg>
-  <span class="back-button__text">Volver</span>
+  <span>Volver</span>
 </a>
 
 <style>
-  /* ===================================================================
-     BACK BUTTON COMPONENT - Scoped Styles
-     =================================================================== */
-
-  /* Base Component */
-  .back-button {
-    /* Layout */
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    /* Spacing */
-    padding: 0.75rem 1.5rem;
-
-    /* Visual */
-    border-radius: 0.5rem;
-    box-shadow:
-      0 4px 6px -1px rgb(0 0 0 / 0.1),
-      0 2px 4px -2px rgb(0 0 0 / 0.1);
-    text-decoration: none;
-    font-weight: 500;
-
-    /* Transitions - Better Performance */
-    transition:
-      transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-      box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-      background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* Accessibility */
-    cursor: pointer;
-    user-select: none;
-
-    /* Modern CSS */
-    isolation: isolate;
-  }
-
-  /* Hover & Focus States */
-  .back-button:hover {
-    box-shadow:
-      0 10px 15px -3px rgb(0 0 0 / 0.1),
-      0 4px 6px -4px rgb(0 0 0 / 0.1);
-  }
-
-  .back-button:focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    box-shadow:
-      0 0 0 2px var(--bg-primary),
-      0 0 0 4px #3b82f6;
-  }
-
-  /* Icon & Text Styling */
-  .back-button__icon {
-    flex-shrink: 0;
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .back-button:hover .back-button__icon {
-    transform: translateX(-2px);
-  }
-
-  .back-button__text {
-    font-weight: inherit;
-  }
-
-  /* ===================================================================
-     VARIANT STYLES - Light Theme
-     =================================================================== */
-
-  /* Primary Variant */
-  .back-button--primary {
-    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-    color: white;
-    border: 1px solid transparent;
-  }
-
-  .back-button--primary:hover {
-    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-  }
-
-  /* Secondary Variant */
-  .back-button--secondary {
-    background: #ffffff;
-    color: #475569;
-    border: 1px solid #e2e8f0;
-  }
-
-  .back-button--secondary:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
-    color: #334155;
-  }
-
-  /* Violet Variant */
-  .back-button--violet {
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-    color: white;
-    border: 1px solid transparent;
-  }
-
-  .back-button--violet:hover {
-    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-  }
-
-  /* ===================================================================
-     DARK THEME OVERRIDES
-     =================================================================== */
-
-  :global([data-theme="dark"]) .back-button--secondary {
+  /* Dark theme overrides for secondary variant (not expressible with Tailwind dark: prefix since theme is data-attribute based) */
+  :global([data-theme="dark"]) .back-button.dark-secondary {
     background: var(--bg-secondary);
     color: var(--text-primary);
     border-color: var(--border-color);
   }
 
-  :global([data-theme="dark"]) .back-button--secondary:hover {
+  :global([data-theme="dark"]) .back-button.dark-secondary:hover {
     background: var(--bg-accent);
     border-color: var(--text-secondary);
   }
@@ -153,60 +55,18 @@ const { class: className = "", variant = "primary" } = Astro.props;
       0 0 0 4px var(--text-accent);
   }
 
-  /* ===================================================================
-     RESPONSIVE DESIGN
-     =================================================================== */
-
-  @media (max-width: 640px) {
-    .back-button {
-      width: 100%;
-      justify-content: center;
-    }
+  /* Icon hover translation */
+  .back-button:hover .back-button__icon {
+    transform: translateX(-2px);
   }
-
-  @media (max-width: 480px) {
-    .back-button {
-      padding: 0.875rem 1.25rem;
-      font-size: 0.875rem;
-    }
-
-    .back-button__icon {
-      width: 14px;
-      height: 14px;
-    }
-  }
-
-  /* ===================================================================
-     REDUCED MOTION SUPPORT
-     =================================================================== */
 
   @media (prefers-reduced-motion: reduce) {
-    .back-button,
     .back-button__icon {
       transition: none;
     }
 
-    .back-button:hover {
-      transform: none;
-    }
-
     .back-button:hover .back-button__icon {
       transform: none;
-    }
-  }
-
-  /* ===================================================================
-     HIGH CONTRAST MODE SUPPORT
-     =================================================================== */
-
-  @media (prefers-contrast: high) {
-    .back-button {
-      border-width: 2px;
-    }
-
-    .back-button:focus {
-      outline: 3px solid;
-      outline-offset: 2px;
     }
   }
 </style>

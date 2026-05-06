@@ -1,0 +1,40 @@
+---
+interface Props {
+  class?: string;
+  contentClass?: string;
+  overlayClass?: string;
+  disableOverlay?: boolean;
+}
+
+const {
+  class: className = "",
+  contentClass = "",
+  overlayClass = "from-blue-500 via-transparent to-purple-500",
+  disableOverlay = false,
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    "group relative overflow-hidden rounded-2xl border border-black bg-white shadow-[0_10px_30px_rgba(15,23,42,0.10)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(15,23,42,0.14)] dark:border-white dark:bg-slate-900 dark:shadow-[0_16px_36px_rgba(2,6,23,0.42)] dark:hover:shadow-[0_20px_48px_rgba(2,6,23,0.5)]",
+    className,
+  ]}
+>
+  {
+    !disableOverlay && (
+      <>
+        <div
+          class:list={[
+            "absolute inset-0 bg-gradient-to-br opacity-50 transition-opacity duration-300 group-hover:opacity-70",
+            overlayClass,
+          ]}
+        />
+        <div class="absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:ring-white" />
+      </>
+    )
+  }
+
+  <div class:list={["relative", contentClass]}>
+    <slot />
+  </div>
+</div>

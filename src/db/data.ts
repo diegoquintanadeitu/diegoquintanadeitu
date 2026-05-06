@@ -1,5 +1,6 @@
 import type {
   Profile,
+  TechBadge,
   SkillCategories,
   TimelineItem,
   Project,
@@ -21,9 +22,19 @@ export const data = {
   profile: {
     name: "Diego Daniel Martin Quintana",
     role: "Desarrollador Full Stack",
+    techStack: [
+      { name: "TypeScript", color: "#3178c6", textColor: "#ffffff" },
+      { name: "React", color: "#20232a", textColor: "#61dafb" },
+      { name: "Next.js", color: "#000000", textColor: "#ffffff" },
+      { name: "Tailwind CSS", color: "#0f172a", textColor: "#38bdf8" },
+      { name: "AI ✦", color: "#7c3aed", textColor: "#ffffff" },
+    ] as TechBadge[],
     bio: [
-      "**8+ años de evolución tecnológica continua**. Mi trayectoria abarca desde Visual Basic 6 y C# hasta tecnologías modernas como **TypeScript, React y Astro**, adaptándome constantemente a las mejores prácticas del desarrollo actual.",
-      "Me especializo en **crear soluciones eficientes y escalables**, optimizando el rendimiento de aplicaciones y manteniendo un enfoque profesional en cada proyecto. Mi experiencia incluye tanto **desarrollo backend como frontend**, con dominio en bases de datos y **deployment moderno**.",
+      `8 años de experiencia en equipos de producto, desde startups hasta fintechs como Ualá, entregando features con calidad, en tiempo y dentro de un equipo ágil.
+Mi stack principal es TypeScript + React + Next.js, con experiencia en backend for frontend, bases de datos relacionales y deployment moderno. Actualmente expandiendo hacia AWS para tener dominio end-to-end del ciclo de vida de una aplicación en producción.`,
+      `Trabajo con IA como copiloto de desarrollo, práctica que acelera la entrega, mejora la calidad del código y me permite enfocarme en lo que genera valor.`,
+      `En proceso de formación en inglés técnico para colaborar con equipos regionales sin fricción.`,
+      `Busco proyectos remotos donde pueda contribuir desde el entendimiento del contexto y aportar valor desde el inicio. Abierto a oportunidades remotas en LATAM.`,
     ],
   } as Profile,
 
@@ -66,24 +77,26 @@ export const data = {
       title: "Web Developer",
       company: "Ualá",
       description:
-        "**3 años de crecimiento continuo** en Ualá, participando en **3 equipos diferentes** y evolucionando como profesional. Formé parte de equipos de desarrollo ágil, multidisciplinarios, donde colaboré en la creación de **aplicaciones web modernas y escalables**. Mi enfoque está en la implementación de soluciones eficientes utilizando **TypeScript + Next.js**, asegurando **alto rendimiento** y la **excelencia en UX**. He contribuido **significativamente** a la mejora de procesos **(CI/CD)** y la adopción de nuevas tecnologías.",
+        "Trabajé en equipos ágiles y multidisciplinarios desarrollando aplicaciones web con React en producción. Implementé pipelines de CI/CD con GitHub Actions, reduciendo el proceso de deploy de reuniones manuales de 15 minutos a una action automatizada de 5 minutos — y fui parte activa en la adopción de nuevas tecnologías dentro del equipo.",
       technologies: [
-        "TypeScript",
         "React",
         "Redux",
-        "Zustand",
-        "tailwind",
         "Vercel",
         "Next.js",
-        "Github actions",
+        "Zustand",
+        "TypeScript",
+        "Tailwind CSS",
+        "Github Actions",
       ],
       achievements: [
-        "**Implementación completa** de universal login con **Auth0** - mejorando la seguridad y UX",
-        "**Automatización total** de deploys con **GitHub Actions** - reduciendo tiempo de release",
-        "**Migración exitosa** de componentes de clase a funcional - modernizando la codebase",
-        "**Implementación estratégica** de pruebas unitarias con **Vitest** - aumentando confiabilidad",
-        "**Integración avanzada** del SDK de MercadoPago - funcionalidad de **suscripciones**",
-        "**Optimización crítica**: limpieza de dependencias y **reducción significativa de vulnerabilidades**",
+        "Integré **Auth0** con universal login — eliminando flujos de autenticación custom y mejorando seguridad y UX",
+        "Automaticé el pipeline de deploy con **GitHub Actions** — bajando el proceso de 15 minutos manuales a 5 minutos sin intervención humana",
+        "Migré componentes de clase a funcional en React, reduciendo complejidad y dejando la codebase lista para hooks modernos",
+        "Sumé pruebas unitarias con **Vitest**, elevando la calidad antes de cada release",
+        "Integré el SDK de **MercadoPago** para suscripciones recurrentes — habilitando un modelo de facturación que antes no existía en el producto",
+        "Audité y limpié dependencias del proyecto — eliminando vulnerabilidades detectadas por GitHub y reduciendo la superficie de ataque",
+        "Di charlas internas sobre design system y buenas prácticas — acelerando la adopción de estándares y reduciendo inconsistencias visuales entre equipos",
+        "Mentoreé desarrolladores, compartiendo criterio técnico y ayudando a subir el nivel general del equipo",
       ],
     },
     {
@@ -92,12 +105,12 @@ export const data = {
       company: "Globant",
       description:
         "**Transición exitosa** hacia tecnologías web modernas, **especialización avanzada** en JavaScript/TypeScript. Desarrollo de componentes del **design system** de importante aerolínea internacional en **React y React Native** - impactando millones de usuarios.",
-      technologies: ["JavaScript", "React Native", "React", "Node.js"],
+      technologies: ["React", "Node.js", "JavaScript", "React Native"],
       achievements: [
-        "**Liderazgo técnico**: presentación de charlas internas sobre nuevas tecnologías",
-        "**Migración exitosa** de productos legacy al design system - mejorando consistencia",
-        "**Mentoría efectiva** de desarrolladores junior - implementando mejores prácticas",
-        "**Comunicación estratégica** con equipos multidisciplinarios - asegurando calidad y consistencia en el **design system** de alcance internacional",
+        "**Liderazgo técnico**: presentación de charlas internas sobre hooks y mejores prácticas de React",
+        "**Migración exitosa** de productos legacy al design system, mejorando consistencia",
+        "**Mentoría efectiva** de desarrolladores junior, implementando mejores prácticas",
+        "**Comunicación estratégica** con equipos multidisciplinarios - asegurando calidad y consistencia en el **design system** a través de la colaboración con diseñadores, desarrolladores y stakeholders - mejorando la experiencia del usuario y la eficiencia del desarrollo",
       ],
     },
     {
@@ -105,12 +118,12 @@ export const data = {
       title: "Desarrollador de Aplicaciones Empresariales",
       company: "Equipo médico de emergencias Chaco SA",
       description:
-        "**Desarrollo empresarial robusto** en entorno Microsoft con **C# y .NET**, gestión avanzada de bases de datos **SQL Server** y **modernización crítica** de sistemas legacy en Visual Basic 6.",
+        "Desarrollé y mantuve aplicaciones internas con **C# y .NET** en un entorno Microsoft, gestionando bases de datos en **SQL Server** y migrando módulos críticos desde **Visual Basic 6** hacia una arquitectura más sostenible.",
       technologies: ["C#", ".NET", "SQL Server", "Windows Forms"],
       achievements: [
-        "**Modernización** de sistemas legacy y **automatización estratégica** de procesos críticos",
-        "**Implementación exitosa** de módulos integrados con **procesos de negocio clave**",
-        "**Desarrollo de funcionalidades innovadoras** - **mejorando significativamente** la eficiencia operativa",
+        "Migré módulos de **Visual Basic 6** a **C# .NET** — reduciendo deuda técnica y facilitando el mantenimiento del equipo",
+        "Automaticé procesos manuales internos con scripts y procedimientos almacenados en **SQL Server** — eliminando tareas repetitivas del personal operativo",
+        "Desarrollé nuevos módulos integrados al sistema de gestión existente, cubriendo necesidades específicas del negocio que no estaban contempladas en el software original",
       ],
     },
     {
@@ -118,7 +131,7 @@ export const data = {
       title: "Programador Junior",
       company: "INNEW",
       description:
-        "Inicio profesional desarrollando aplicaciones de gestión empresarial en Visual Basic 6, bases de datos Access y primeros pasos en SQL Server.",
+        "Primer rol profesional desarrollando y manteniendo aplicaciones de gestión empresarial con **Visual Basic 6** y **MS Access**, incorporando **SQL Server** para operaciones más complejas. Participé en el ciclo completo: desarrollo de nuevos módulos, soporte, corrección de bugs y capacitación a usuarios finales.",
       technologies: [
         "Visual Basic 6",
         "MS Access",
@@ -128,10 +141,11 @@ export const data = {
         "vuejs",
       ],
       achievements: [
-        "Desarrollo de módulos críticos para **gestión de inventarios**",
-        "Creación de reportes personalizados para **análisis de datos**",
-        "Manejo e implementación de **procedimientos almacenados** en SQL Server",
-        "Migración de datos mediante consultas, ante la eventual caida en la conexión de una replica en mssql, que se realizaba desde los servidores de las sucursales hacia el servidor central",
+        "Desarrollé un módulo nuevo integrado al sistema existente para cubrir una necesidad operativa que se gestionaba manualmente",
+        "Creé reportes con **Crystal Reports** para análisis de datos y seguimiento de gestión interna",
+        "Implementé y mantuve **procedimientos almacenados** en SQL Server para operaciones críticas del negocio",
+        "Resolví la sincronización de datos entre sucursales y servidor central ante caídas en la réplica MSSQL — aplicando migraciones manuales por consulta",
+        "Capacité a usuarios finales en el uso del sistema y brindé soporte continuo, reduciendo la dependencia del equipo técnico para operaciones cotidianas",
       ],
     },
   ] as TimelineItem[],
@@ -142,17 +156,17 @@ export const data = {
       description:
         "Sitio web moderno y responsivo construido con Astro, TypeScript y Tailwind CSS. Incluye sistema de versionado CalVer y CI/CD.",
       technologies: ["Astro", "TypeScript", "Tailwind CSS", "GitHub Actions"],
-      link: "https://github.com/diegoquintanadeitu/diegoquintanadeitu",
+      link: "https://github.com/diegoquintanadeitu/",
       year: 2025,
     },
   ] as Project[],
 
   education: [
     {
-      period: "2016 - 2025",
+      period: "2016 - Actualidad",
       title: "Autoformación Continua en Tecnologías Web",
       description:
-        "Desarrollo profesional autodidacta enfocado en tecnologías web modernas, mejores prácticas de desarrollo y arquitecturas escalables. Constante actualización en frameworks, herramientas y metodologías de la industria a través de cursos online, documentación oficial y proyectos prácticos.",
+        "Aprendizaje autodidacta progresivo: desde JavaScript vanilla hacia React y TypeScript, luego Next.js para full-stack. Dominio de herramientas modernas (**Vercel, GitHub Actions, Tailwind CSS, Astro**) a través de documentación oficial, cursos especializados y construcción de proyectos reales. Migración exitosa del stack legacy hacia arquitecturas actuales, aplicando nuevos conocimientos en roles profesionales y proyectos personales.",
     },
     {
       period: "2010 - 2018",

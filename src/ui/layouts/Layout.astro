@@ -5,44 +5,37 @@ import ThemeSelector from "@/ui/components/ThemeSelector.astro";
 
 interface Props {
   title: string;
-  showFooter?: boolean;
-  showSpotify?: boolean;
   showThemeSelector?: boolean;
 }
 
-const {
-  title,
-  showFooter = true,
-  showSpotify = true,
-  showThemeSelector = true,
-} = Astro.props;
+const { title, showThemeSelector = true } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="m-0 w-full h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="generator" content={Astro.generator} />
     <meta name="viewport" content="width=device-width" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/diegoquintanadeitu/favicon.svg"
-    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
-  </head>
-</html>
-<body>
-  <slot />
-  {showFooter && <Footer showSpotify={showSpotify} />}
-  {showThemeSelector && <ThemeSelector />}
-</body>
+    <script is:inline>
+      (() => {
+        const rawTheme = localStorage.getItem("portfolio-theme");
+        const validThemes = ["dark", "light", "sepia"];
+        const theme =
+          rawTheme && validThemes.includes(rawTheme) ? rawTheme : "dark";
 
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>
+        const root = document.documentElement;
+        root.classList.toggle("dark", theme === "dark");
+        root.classList.toggle("sepia", theme === "sepia");
+        root.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+  <body class="m-0 w-full h-full">
+    <slot />
+    <Footer />
+    {showThemeSelector && <ThemeSelector />}
+  </body>
+</html>

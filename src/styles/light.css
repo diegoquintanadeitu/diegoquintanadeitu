@@ -1,0 +1,93 @@
+/* ===================================================================
+   LIGHT THEME - VARIABLES Y ESTILOS
+   =================================================================== */
+
+:root {
+  /* ─── Colores Base ─── */
+  --bg-primary: #f5f7fb;
+  --bg-secondary: #ffffff;
+  --bg-accent: #eef4ff;
+
+  /* ─── Texto ─── */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #475569;
+  --text-accent: #1d4ed8;
+  --text-accent-hover: #1e40af;
+  --text-accent-rgb: 29, 78, 216;
+
+  /* ─── Superficies utilitarias ─── */
+  --surface-subtle: #f8fafc;
+  --surface-muted: #e2e8f0;
+  --surface-info: #dbeafe;
+  --surface-info-hover: #bfdbfe;
+  --surface-positive: #dcfce7;
+  --surface-warning: #fef3c7;
+  --surface-danger: #fee2e2;
+  --tag-bg: #e2e8f0;
+  --tag-text: #334155;
+
+  /* ─── Bordes y Sombras ─── */
+  --border-color: #cbd5e1;
+  --shadow-color: rgba(15, 23, 42, 0.12);
+
+  /* ─── Gradientes ─── */
+  --bg-gradient-primary: linear-gradient(135deg, #ffffff 0%, #f5f7fb 55%, #dbeafe 100%);
+  --bg-gradient-secondary: linear-gradient(90deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+/* ===================================================================
+   LIGHT THEME - ESTILOS ESPECÍFICOS
+   =================================================================== */
+
+/* Mejoras de contraste generales - WCAG 2.1 AA compliant */
+.bg-pink-50 {
+  --bg-pink-50: #fdf2f8;
+  --text-on-pink-50: #000000;
+  background-color: var(--bg-pink-50);
+  color: var(--text-on-pink-50);
+}
+
+.bg-pink-50 *,
+.bg-pink-50 .text-gray-600,
+.bg-pink-50 .text-slate-600,
+.bg-pink-50 span,
+.bg-pink-50 .text-sm {
+  color: var(--text-on-pink-50);
+}
+
+/* Mejoras específicas para elementos con border-blue-200 */
+.border-blue-200 {
+  --border-blue-improved: #3b82f6;
+  border-color: var(--border-blue-improved);
+}
+
+/* Estilos para elementos de entrada (forms) */
+input,
+textarea,
+select {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline-color: var(--text-accent);
+  border-color: var(--text-accent);
+}
+
+/* Enlaces */
+a {
+  color: var(--text-accent);
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* Botones */
+button {
+  transition: all 0.3s ease;
+}

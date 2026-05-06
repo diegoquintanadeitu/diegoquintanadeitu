@@ -24,14 +24,10 @@ jobs:
           cache: "npm"
 
       - name: 📥 Install dependencies
-        run: npm ci
+        run: npm ci --include=dev
 
       - name: 🔍 Type check
         run: npm run type-check
-
-      - name: 🔍 Type check scripts
-        run: npm run type-check:scripts
-        continue-on-error: true
 
       - name: 🏗️ Build portfolio
         run: npm run build

@@ -5,7 +5,9 @@
   "exclude": ["dist", "node_modules", "tailwind.config.js", "astro.config.mjs"],
   "compilerOptions": {
     /* Portfolio configuration */
-    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "types": ["node"],
+    "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
       "@/components/*": ["src/ui/components/*"],

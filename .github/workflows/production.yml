@@ -20,7 +20,7 @@ jobs:
   # 🚀 BUILD, TAG Y DEPLOY (solo en GitHub)
   deploy-and-release:
     name: 🚀 Build, Tag & Deploy
-    if: github.repository == 'diegoquintanadeitu/diegoquintanadeitu'
+    if: github.repository == 'diegoquintanadeitu/diegoquintanadeitu.github.io'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -39,7 +39,7 @@ jobs:
           cache: "npm"
 
       - name: 📥 Install dependencies
-        run: npm ci
+        run: npm ci --include=dev
 
       - name: 🔍 Type check
         run: npm run type-check
