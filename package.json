@@ -12,7 +12,7 @@
     "a11y:ci": "npx tsx src/scripts/accessibility-test.ts",
     "a11y:quick": "npx tsx src/scripts/accessibility-test.ts",
     "test:theme": "npx tsx src/scripts/theme-regression-test.ts",
-    "type-check": "tsc --noEmit --ignoreDeprecations",
+    "type-check": "tsc --noEmit",
     "type-check:all": "npm run type-check",
     "test:build": "npm run type-check:all && npm run build",
     "test:full": "npm run test:build && npm run preview & sleep 5 && npm run a11y:quick",
@@ -35,6 +35,6 @@
     "prettier-plugin-astro": "0.14.1",
     "ts-node": "10.9.2",
     "tsx": "4.20.5",
-    "typescript": "5.9.2"
+    "typescript": "^6.0.3"
   }
 }
