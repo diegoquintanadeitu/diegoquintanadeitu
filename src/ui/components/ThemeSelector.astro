@@ -122,7 +122,6 @@
 
     // Opciones de tema
     themeOptions.forEach((option, index) => {
-      console.log(`🔧 Configurando opción ${index}:`, option);
       option.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -136,9 +135,6 @@
         }
 
         const theme: themeType = rawTheme;
-
-        console.log(`🎨 Click en tema: ${theme}`);
-        console.log(`📍 Target:`, target);
 
         setTheme(theme);
         closeMenu();
@@ -154,21 +150,17 @@
     }
 
     function openMenu() {
-      console.log("📂 Abriendo menú");
       isMenuOpen = true;
       themeMenu?.classList.add("is-open");
       themeToggle?.setAttribute("aria-expanded", "true");
     }
 
     function closeMenu() {
-      console.log("📁 Cerrando menú");
       isMenuOpen = false;
       themeMenu?.classList.remove("is-open");
       themeToggle?.setAttribute("aria-expanded", "false");
     }
     function setTheme(theme: themeType) {
-      console.log(`🔄 Aplicando tema: ${theme}`);
-
       // Mantener el mismo estado de tema en html y body para Tailwind y CSS custom.
       root.classList.toggle("dark", theme === "dark");
       root.classList.toggle("sepia", theme === "sepia");
@@ -181,8 +173,6 @@
       // Actualizar UI
       updateIcon(theme);
       updateActiveOption(theme);
-
-      console.log(`✅ Tema ${theme} aplicado correctamente`);
     }
 
     function updateIcon(theme: themeType) {

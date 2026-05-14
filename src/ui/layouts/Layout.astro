@@ -5,21 +5,48 @@ import ThemeSelector from "@/ui/components/ThemeSelector.astro";
 
 interface Props {
   title: string;
+  description?: string;
   showThemeSelector?: boolean;
   showFooter?: boolean;
 }
 
-const { title, showThemeSelector = true, showFooter = true } = Astro.props;
+const {
+  title,
+  description,
+  showThemeSelector = true,
+  showFooter = true,
+} = Astro.props;
+
+const siteUrl = "https://diegoquintanadeitu.github.io";
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const ogDescription =
+  description ??
+  "Diego Daniel Martin Quintana, Desarrollador Full Stack especializado en TypeScript, React y Next.js";
 ---
 
 <!doctype html>
-<html lang="en" class="m-0 w-full h-full">
+<html lang="es" class="m-0 w-full h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <meta name="description" content={ogDescription} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:locale" content="es_AR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={ogDescription} />
     <script is:inline>
       (() => {
         const rawTheme = localStorage.getItem("portfolio-theme");

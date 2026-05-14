@@ -15,6 +15,7 @@
     "a11y:ci": "npx tsx src/scripts/accessibility-test.ts",
     "a11y:quick": "npx tsx src/scripts/accessibility-test.ts",
     "test:theme": "npx tsx src/scripts/theme-regression-test.ts",
+    "test:seo": "npx tsx src/scripts/seo-test.ts",
     "type-check": "tsc --noEmit",
     "type-check:all": "npm run type-check",
     "test:build": "npm run type-check:all && npm run build",
