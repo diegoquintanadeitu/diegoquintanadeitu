@@ -9,7 +9,21 @@ export default defineConfig({
   base: "/",
   output: "static",
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      {
+        name: "security-headers",
+        configureServer(server) {
+          server.middlewares.use((_req, res, next) => {
+            res.setHeader(
+              "Content-Security-Policy",
+              "frame-ancestors 'self' https://diegoquintana.ar https://*.diegoquintana.ar",
+            );
+            next();
+          });
+        },
+      },
+    ],
     resolve: {
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
