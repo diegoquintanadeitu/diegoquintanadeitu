@@ -25,7 +25,7 @@ const checkMeta = async (page: Page, url: string): Promise<SeoResult> => {
 
   // --- lang ---
   const lang = await page.evaluate(() =>
-    document.documentElement.getAttribute("lang")
+    document.documentElement.getAttribute("lang"),
   );
   checks.push({
     name: "html[lang] definido",
@@ -37,7 +37,9 @@ const checkMeta = async (page: Page, url: string): Promise<SeoResult> => {
     name: "html[lang] es español (es / es-*)",
     pass: Boolean(lang?.startsWith("es")),
     value: lang ?? undefined,
-    message: lang?.startsWith("es") ? undefined : `lang="${lang}" no es español`,
+    message: lang?.startsWith("es")
+      ? undefined
+      : `lang="${lang}" no es español`,
   });
 
   // --- title ---
@@ -64,7 +66,7 @@ const checkMeta = async (page: Page, url: string): Promise<SeoResult> => {
     () =>
       document
         .querySelector('meta[name="description"]')
-        ?.getAttribute("content") ?? ""
+        ?.getAttribute("content") ?? "",
   );
   checks.push({
     name: "meta description presente",
@@ -89,7 +91,7 @@ const checkMeta = async (page: Page, url: string): Promise<SeoResult> => {
   const canonical = await page.evaluate(
     () =>
       document.querySelector('link[rel="canonical"]')?.getAttribute("href") ??
-      ""
+      "",
   );
   checks.push({
     name: "canonical presente",
@@ -111,7 +113,7 @@ const checkMeta = async (page: Page, url: string): Promise<SeoResult> => {
         document
           .querySelector(`meta[property="${prop}"]`)
           ?.getAttribute("content") ?? "",
-      property
+      property,
     );
     checks.push({
       name: `${label} presente`,
@@ -124,9 +126,8 @@ const checkMeta = async (page: Page, url: string): Promise<SeoResult> => {
   // --- robots ---
   const robots = await page.evaluate(
     () =>
-      document
-        .querySelector('meta[name="robots"]')
-        ?.getAttribute("content") ?? ""
+      document.querySelector('meta[name="robots"]')?.getAttribute("content") ??
+      "",
   );
   checks.push({
     name: "meta robots presente",
@@ -142,21 +143,26 @@ const checkMeta = async (page: Page, url: string): Promise<SeoResult> => {
 
   // --- h1 ---
   const h1Count = await page.evaluate(
-    () => document.querySelectorAll("h1").length
+    () => document.querySelectorAll("h1").length,
   );
   checks.push({
     name: "exactamente 1 <h1>",
     pass: h1Count === 1,
     value: `${h1Count} h1`,
-    message: h1Count === 0 ? "No hay h1" : h1Count > 1 ? `${h1Count} h1 encontrados` : undefined,
+    message:
+      h1Count === 0
+        ? "No hay h1"
+        : h1Count > 1
+          ? `${h1Count} h1 encontrados`
+          : undefined,
   });
 
   // --- imágenes con alt ---
   const imagesWithoutAlt = await page.evaluate(
     () =>
       Array.from(document.querySelectorAll("img")).filter(
-        (img) => !img.getAttribute("alt") && img.getAttribute("alt") !== ""
-      ).length
+        (img) => !img.getAttribute("alt") && img.getAttribute("alt") !== "",
+      ).length,
   );
   checks.push({
     name: "todas las imágenes tienen alt",
@@ -219,9 +225,6 @@ const run = async (): Promise<void> => {
     if (allPassed) {
       console.log("🎉 Todos los checks SEO pasaron correctamente.\n");
     } else {
-      console.log(
-        "⚠️  Algunos checks fallaron. Revisá los detalles arriba.\n"
-      );
       process.exitCode = 1;
     }
   } finally {
