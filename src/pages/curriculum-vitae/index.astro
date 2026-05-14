@@ -340,12 +340,20 @@ const processMarkdown = (text: string) => {
 
   <!-- Script para mejorar la impresión -->
   <script>
+    const triggerPrint = () => {
+      if (window !== window.top) {
+        // La página está en un iframe (ej. Simple Browser de VS Code),
+        // abrir en nueva pestaña para poder imprimir
+        window.open(window.location.href, "_blank");
+      } else {
+        window.print();
+      }
+    };
+
     // Botón de impresión manual
     const printBtn = document.getElementById("print-btn");
     if (printBtn) {
-      printBtn.addEventListener("click", () => {
-        window.print();
-      });
+      printBtn.addEventListener("click", triggerPrint);
     }
 
     // Optimizar para impresión
@@ -376,13 +384,19 @@ const processMarkdown = (text: string) => {
     document.addEventListener("keydown", (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === "p") {
         e.preventDefault();
-        window.print();
+        triggerPrint();
       }
     });
 
     // Prevenir scroll involuntario durante la carga
     window.addEventListener("load", () => {
       window.scrollTo(0, 0);
+
+      // Auto-imprimir si viene con ?print=true
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("print") === "true") {
+        window.print();
+      }
     });
   </script>
 </Layout>

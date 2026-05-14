@@ -6,9 +6,10 @@ import ThemeSelector from "@/ui/components/ThemeSelector.astro";
 interface Props {
   title: string;
   showThemeSelector?: boolean;
+  showFooter?: boolean;
 }
 
-const { title, showThemeSelector = true } = Astro.props;
+const { title, showThemeSelector = true, showFooter = true } = Astro.props;
 ---
 
 <!doctype html>
@@ -35,7 +36,7 @@ const { title, showThemeSelector = true } = Astro.props;
   </head>
   <body class="m-0 w-full h-full">
     <slot />
-    <Footer />
+    {showFooter && <Footer />}
     {showThemeSelector && <ThemeSelector />}
   </body>
 </html>
