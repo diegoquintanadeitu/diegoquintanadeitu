@@ -27,6 +27,18 @@ const ogDescription =
 <!doctype html>
 <html lang="es" class="m-0 w-full h-full">
   <head>
+    <script is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-58P29XGK");
+    </script>
     <meta charset="UTF-8" />
     <meta name="generator" content={Astro.generator} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -62,6 +74,13 @@ const ogDescription =
     </script>
   </head>
   <body class="m-0 w-full h-full">
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-58P29XGK"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
     <a
       href="https://github.com/diegoquintanadeitu/diegoquintanadeitu.github.io"
       target="_blank"
