@@ -118,10 +118,9 @@ Mi stack principal es TypeScript + React + Next.js, con experiencia en backend f
       title: "Desarrollador de Aplicaciones Empresariales",
       company: "Equipo médico de emergencias Chaco SA",
       description:
-        "Desarrollé y mantuve aplicaciones internas con **C# y .NET** en un entorno Microsoft, gestionando bases de datos en **SQL Server** y migrando módulos críticos desde **Visual Basic 6** hacia una arquitectura más sostenible.",
+        "Desarrollé y mantuve aplicaciones internas con **C# y .NET** en un entorno Microsoft, gestionando bases de datos en **SQL Server** y migrando módulos críticos en post de su mejora continua.",
       technologies: ["C#", ".NET", "SQL Server", "Windows Forms"],
       achievements: [
-        "Migré módulos de **Visual Basic 6** a **C# .NET** — reduciendo deuda técnica y facilitando el mantenimiento del equipo",
         "Automaticé procesos manuales internos con scripts y procedimientos almacenados en **SQL Server** — eliminando tareas repetitivas del personal operativo",
         "Desarrollé nuevos módulos integrados al sistema de gestión existente, cubriendo necesidades específicas del negocio que no estaban contempladas en el software original",
       ],
@@ -137,8 +136,8 @@ Mi stack principal es TypeScript + React + Next.js, con experiencia en backend f
         "MS Access",
         "SQL Server",
         "Crystal Reports",
-        "Javascript",
-        "vuejs",
+        "JavaScript",
+        "Vue.js",
       ],
       achievements: [
         "Desarrollé un módulo nuevo integrado al sistema existente para cubrir una necesidad operativa que se gestionaba manualmente",
@@ -146,6 +145,7 @@ Mi stack principal es TypeScript + React + Next.js, con experiencia en backend f
         "Implementé y mantuve **procedimientos almacenados** en SQL Server para operaciones críticas del negocio",
         "Resolví la sincronización de datos entre sucursales y servidor central ante caídas en la réplica MSSQL — aplicando migraciones manuales por consulta",
         "Capacité a usuarios finales en el uso del sistema y brindé soporte continuo, reduciendo la dependencia del equipo técnico para operaciones cotidianas",
+        "Migré módulos de **Visual Basic 6** a **C# .NET + vue.js** — reduciendo deuda técnica y facilitando el mantenimiento a largo plazo",
       ],
     },
   ] as TimelineItem[],
