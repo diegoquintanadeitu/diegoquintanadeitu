@@ -41,7 +41,7 @@ _"play development, create tomorrow, craft experiences"_ ✨
 **desarrollado con copilot 🧠**
 
 <a href="https://diegoquintanadeitu.github.io">
-  <img src="./public/porfolio.png" />
+  <img src="./public/porfolio.webp" />
 </a>
 
 </div>
