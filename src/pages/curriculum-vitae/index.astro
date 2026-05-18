@@ -532,9 +532,12 @@ const processMarkdown = (text: string) => {
   </script>
 
   <script>
+    import BackButton from "@/ui/components/BackButton.astro";
+
     document.addEventListener("DOMContentLoaded", () => {
       const I18N: Record<string, Record<string, string>> = {
         es: {
+          backButton: "Volver",
           printCV: "Imprimir CV",
           technicalSkills: "Habilidades Técnicas",
           skillLanguages: "Lenguajes",
@@ -551,6 +554,7 @@ const processMarkdown = (text: string) => {
           techStack: "Stack técnico:",
         },
         en: {
+          backButton: "Back",
           printCV: "Print CV",
           technicalSkills: "Technical Skills",
           skillLanguages: "Languages",
