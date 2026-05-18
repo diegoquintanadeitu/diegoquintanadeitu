@@ -17,9 +17,13 @@ export interface Skill {
 }
 
 export interface SkillCategories {
-  technical: string[];
+  languages: string[];
   frameworks: string[];
-  tools: string[];
+  testing: string[];
+  devops: string[];
+  auth: string[];
+  databases: string[];
+  ai: string[];
   soft: Record<string, string>;
 }
 

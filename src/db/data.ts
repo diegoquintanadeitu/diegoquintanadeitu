@@ -21,7 +21,7 @@ export type ThemeColors = {
 export const data = {
   profile: {
     name: "Diego Daniel Martin Quintana",
-    role: "Desarrollador Full Stack",
+    role: "Senior Frontend Engineer",
     techStack: [
       { name: "TypeScript", color: "#3178c6", textColor: "#ffffff" },
       { name: "React", color: "#20232a", textColor: "#61dafb" },
@@ -33,24 +33,46 @@ export const data = {
       `8 años de experiencia en equipos de producto, desde startups hasta fintechs como Ualá, entregando features con calidad, en tiempo y dentro de un equipo ágil.
 Mi stack principal es TypeScript + React + Next.js, con experiencia en backend for frontend, bases de datos relacionales y deployment moderno. Actualmente expandiendo hacia AWS para tener dominio end-to-end del ciclo de vida de una aplicación en producción.`,
       `Trabajo con IA como copiloto de desarrollo, práctica que acelera la entrega, mejora la calidad del código y me permite enfocarme en lo que genera valor.`,
-      `En proceso de formación en inglés técnico para colaborar con equipos regionales sin fricción.`,
+      `Mentalidad orientada al producto, actúo con rapidez y me responsabilizo de todo el proceso, desde la experiencia de usuario (UX) hasta las integraciones y la infraestructura del backend.`,
       `Busco proyectos remotos donde pueda contribuir desde el entendimiento del contexto y aportar valor desde el inicio. Abierto a oportunidades remotas en LATAM.`,
     ],
   } as Profile,
 
   skillCategories: {
-    technical: [
-      "Git",
+    languages: [
+      "TypeScript",
+      "JavaScript",
       "HTML",
       "CSS",
-      "React",
-      "Vitest",
-      "TypeScript",
-      "Design System",
+      "C#",
       "SQL",
+      "Visual Basic",
     ],
-    frameworks: ["Astro", "Next.js", "Tailwind CSS"],
-    tools: ["npm", "Figma", "Vercel", "Postman", "VS Code + copilot"],
+    frameworks: [
+      "React",
+      "Next.js",
+      "Astro",
+      "Tailwind CSS",
+      "React Native",
+      "Redux",
+      "Zustand",
+      "Vue.js",
+      ".NET",
+      "Node.js",
+    ],
+    testing: ["Vitest", "Testing Library"],
+    devops: [
+      "GitHub Actions",
+      "Vercel",
+      "Git",
+      "npm",
+      "VS Code + Copilot",
+      "Figma",
+      "Postman",
+    ],
+    auth: ["Auth0", "MercadoPago SDK", "REST APIs"],
+    databases: ["SQL Server", "PostgreSQL", "MS Access", "Crystal Reports"],
+    ai: ["GitHub Copilot Agents", "Prompt Engineering", "AI Code Review"],
     soft: {
       Adaptabilidad:
         "Rápido aprendizaje de nuevas tecnologías y flexibilidad ante cambios tecnológicos",
@@ -74,7 +96,7 @@ Mi stack principal es TypeScript + React + Next.js, con experiencia en backend f
   timeline: [
     {
       period: "2022 - 2025",
-      title: "Web Developer",
+      title: "Senior Frontend Engineer",
       company: "Ualá",
       description:
         "Trabajé en equipos ágiles y multidisciplinarios desarrollando aplicaciones web con React en producción. Implementé pipelines de CI/CD con GitHub Actions, reduciendo el proceso de deploy de reuniones manuales de 15 minutos a una action automatizada de 5 minutos — y fui parte activa en la adopción de nuevas tecnologías dentro del equipo.",
@@ -101,7 +123,7 @@ Mi stack principal es TypeScript + React + Next.js, con experiencia en backend f
     },
     {
       period: "2020 - 2022",
-      title: "Frontend Developer",
+      title: "Semi Senior Frontend Engineer",
       company: "Globant",
       description:
         "**Transición exitosa** hacia tecnologías web modernas, **especialización avanzada** en JavaScript/TypeScript. Desarrollo de componentes del **design system** de importante aerolínea internacional en **React y React Native** - impactando millones de usuarios.",
@@ -115,7 +137,7 @@ Mi stack principal es TypeScript + React + Next.js, con experiencia en backend f
     },
     {
       period: "2018 - 2020",
-      title: "Desarrollador de Aplicaciones Empresariales",
+      title: "Semi Senior Full Stack Developer",
       company: "Equipo médico de emergencias Chaco SA",
       description:
         "Desarrollé y mantuve aplicaciones internas con **C# y .NET** en un entorno Microsoft, gestionando bases de datos en **SQL Server** y migrando módulos críticos en post de su mejora continua.",
@@ -127,7 +149,7 @@ Mi stack principal es TypeScript + React + Next.js, con experiencia en backend f
     },
     {
       period: "2017 - 2018",
-      title: "Programador Junior",
+      title: "Junior Full Stack Developer",
       company: "INNEW",
       description:
         "Primer rol profesional desarrollando y manteniendo aplicaciones de gestión empresarial con **Visual Basic 6** y **MS Access**, incorporando **SQL Server** para operaciones más complejas. Participé en el ciclo completo: desarrollo de nuevos módulos, soporte, corrección de bugs y capacitación a usuarios finales.",
