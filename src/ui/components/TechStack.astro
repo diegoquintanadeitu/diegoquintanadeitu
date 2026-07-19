@@ -25,11 +25,11 @@ const logos: Record<string, string> = {
   {
     stack.map((tech) => (
       <span
-        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold shadow-sm"
+        class="home-malvinas-font inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold shadow-sm"
         style={`background-color: ${tech.color}; color: ${tech.textColor};`}
       >
         <Fragment set:html={logos[tech.name] ?? ""} />
-        {tech.name}
+        {tech.name.toLocaleUpperCase()}
       </span>
     ))
   }

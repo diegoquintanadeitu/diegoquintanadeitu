@@ -9,6 +9,18 @@
 
 @plugin "@midudev/tailwind-animations";
 
+@font-face {
+  font-family: "Malvinas Sans";
+  src: url('/fonts/MalvinasSans-Regular.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+.home-malvinas-font {
+  font-family: "Malvinas Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 @layer utilities {
   .bg-theme-primary {
     background-color: var(--bg-primary);

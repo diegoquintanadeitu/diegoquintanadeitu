@@ -30,14 +30,14 @@ const profile = await api.getProfile();
         class="flex flex-col gap-3 p-5 bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-color)] shadow-sm md:p-0 md:bg-transparent md:rounded-none md:border-0 md:shadow-none col-start-1 col-end-3 md:col-end-2"
       >
         <h3
-          class="text-2xl font-bold text-[var(--text-primary)] m-0 max-md:text-[1.3rem] max-md:font-extrabold"
+          class="home-malvinas-font text-2xl font-bold text-[var(--text-primary)] m-0 max-md:text-[1.3rem] max-md:font-extrabold"
         >
-          {profile.name}
+          {profile.name.toLocaleUpperCase()}
         </h3>
         <p
-          class="text-[var(--text-secondary)] m-0 text-base max-md:text-[0.9rem] max-md:font-medium max-md:opacity-80"
+          class="home-malvinas-font text-[var(--text-secondary)] m-0 text-base max-md:text-[0.9rem] max-md:font-medium max-md:opacity-80"
         >
-          {profile.role}
+          {profile.role.toLocaleUpperCase()}
         </p>
         <div
           class="flex w-fit items-center gap-2 text-sm text-[var(--text-muted)] bg-[var(--bg-accent)] px-3 py-2 rounded-[20px] border border-[var(--border-color)] text-[0.8rem] font-semibold md:bg-transparent md:px-0 md:py-0 md:rounded-none md:border-0 md:text-sm"
@@ -46,7 +46,7 @@ const profile = await api.getProfile();
             class="status-dot w-2 h-2 bg-green-500 rounded-full max-md:w-1.5 max-md:h-1.5"
           >
           </div>
-          <span>Disponible</span>
+          <span class="home-malvinas-font">Disponible</span>
         </div>
       </div>
 
@@ -54,7 +54,9 @@ const profile = await api.getProfile();
       <div
         class="flex flex-col gap-4 bg-[var(--bg-secondary)] p-5 rounded-2xl border border-[var(--border-color)] shadow-sm md:p-0 md:bg-transparent md:rounded-none md:border-0 md:shadow-none col-start-1 md:col-start-2 col-end-3"
       >
-        <h4 class="text-lg font-semibold text-[var(--text-primary)] m-0">
+        <h4
+          class="home-malvinas-font text-lg font-semibold text-[var(--text-primary)] m-0"
+        >
           Contacto
         </h4>
         <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-1">
@@ -139,9 +141,9 @@ const profile = await api.getProfile();
         class="pt-6 border-t border-[var(--border-color)] text-center"
         style="grid-column: span 2; max-width: 600px; margin-left: auto; margin-right: auto;"
       >
-        <p class="text-[var(--text-muted)] text-sm m-0">
+        <p class="home-malvinas-font text-[var(--text-muted)] text-sm m-0">
           © {new Date().getFullYear()}
-          {profile.name}. Creado con <a
+          {profile.name.toLocaleUpperCase()}. Creado con <a
             href="https://astro.build"
             target="_blank"
             rel="noopener noreferrer"

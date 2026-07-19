@@ -38,12 +38,12 @@ const processMarkdown = (text: string) => {
           <!-- Columna izquierda: contenido de texto -->
           <div class='flex-1 text-left'>
             <h1
-              class='text-3xl text-wrap md:text-4xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent leading-tight pb-1 mb-2'
+              class='home-malvinas-font text-3xl text-wrap md:text-4xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent leading-tight pb-1 mb-2'
             >
-              {profile.name}
+              {profile.name.toLocaleUpperCase()}
             </h1>
 
-            <h3 class='text-md md:text-2xl text-slate-600 mb-4 md:mb-6 font-medium'>{profile.role}</p>
+            <h3 class='home-malvinas-font text-md md:text-2xl text-slate-600 mb-4 md:mb-6 font-medium'>{profile.role.toLocaleUpperCase()}</h3>
 
             <TechStack stack={profile.techStack} />
 
@@ -64,7 +64,7 @@ const processMarkdown = (text: string) => {
 
             <div class='flex flex-wrap justify-center md:justify-start gap-4 mt-8'>
           <!-- CV Button - Prioritario para recruiters -->
-          <div class='relative w-full sm:w-auto' id='cv-dropdown-wrapper'>
+          <div class='home-malvinas-font relative w-full sm:w-auto' id='cv-dropdown-wrapper'>
             <button
               id='cv-dropdown-btn'
               type='button'
@@ -230,19 +230,19 @@ const processMarkdown = (text: string) => {
                 <div class={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:ml-auto md:mr-8' : 'md:ml-8'} pl-12 md:pl-0`}>
                   <!-- Fecha con estilo moderno -->
                   <div class={`mb-1 ${index % 2 === 0 ? 'md:text-left md:ml-0' : 'md:text-right md:mr-0'} text-left`}>
-                    <span class='relative inline-block text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-blue-600 after:to-purple-600 after:transform after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300'>
+                    <span class='home-malvinas-font relative inline-block text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-blue-600 after:to-purple-600 after:transform after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300'>
                       {item.period}
                     </span>
                   </div>
                   
                   <!-- Card del contenido -->
                   <HoverCard class='rounded-2xl border border-slate-100' contentClass='p-6'>
-                    <h3 class='text-xl font-bold text-slate-800 mb-1'>
-                      {item.title}
+                    <h3 class='home-malvinas-font text-xl font-bold text-slate-800 mb-1'>
+                      {item.title.toLocaleUpperCase()}
                     </h3>
                     {item.company && (
-                      <p class='text-blue-600 font-medium text-sm mb-3'>
-                        {item.company}
+                      <p class='home-malvinas-font text-blue-600 font-medium text-sm mb-3'>
+                        {item.company.toLocaleUpperCase()}
                       </p>
                     )}
                     <p 
@@ -272,7 +272,7 @@ const processMarkdown = (text: string) => {
 
     <section class='py-16 px-4 bg-gradient-to-br from-slate-50 to-blue-50' style="display: none;">
       <div class='container mx-auto'>
-        <h2 class='text-4xl font-bold text-center mb-16 text-slate-800'>
+        <h2 class='home-malvinas-font text-4xl font-bold text-center mb-16 text-slate-800'>
           Proyectos
           <div
             class='w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full'
@@ -284,8 +284,8 @@ const processMarkdown = (text: string) => {
           {
             projects.map((project) => (
               <HoverCard class='rounded-2xl border border-slate-100' contentClass='p-6'>
-                  <h3 class='text-xl font-bold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors'>
-                    {project.title}
+                  <h3 class='home-malvinas-font text-xl font-bold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors'>
+                    {project.title.toLocaleUpperCase()}
                   </h3>
                   <p class='text-slate-600 mb-4 leading-relaxed'>
                     {project.description}
